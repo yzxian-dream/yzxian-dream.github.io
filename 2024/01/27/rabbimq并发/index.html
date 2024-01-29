@@ -6,18 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
-  <title>Archives: 2024/1 | LEO&#39;S NOTE</title>
+  <title>rabbimq并发 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Stay Hungry.Stay Foolish.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LEO&#39;S NOTE">
-<meta property="og:url" content="https://yao-zixian.gitee.io/archives/2024/01/index.html">
+  <meta name="description" content="关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rabbimq并发">
+<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="Stay Hungry.Stay Foolish.">
+<meta property="og:description" content="关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
 <meta property="og:locale">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png">
+<meta property="article:published_time" content="2024-01-27T14:34:13.000Z">
+<meta property="article:modified_time" content="2024-01-29T03:03:23.478Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -154,103 +159,205 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-rabbimq并发" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      rabbimq并发
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" class="archive-article-date">
+
+        
+        <a href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" class="archive-article-date">
   	<time datetime="2024-01-27T14:34:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/">rabbimq并发</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于rabbitmq消息堆积问题处理<br>消息堆积的主要原因有以下几种:<br>(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积<br>(2)消费者实例IO严重阻塞或者消费者所在服务器宕机<br>(3)消费者业务处理异常导致的消息堆积</p>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>消费端配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8990</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">admin</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">admin</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="attr">concurrency:</span> <span class="number">5</span> <span class="comment"># 消费端的监听个数(即@RabbitListener开启几个线程去处理数据。)</span></span><br><span class="line">        <span class="attr">max-concurrency:</span> <span class="number">10</span> <span class="comment"># 消费端开启处理q线程的数量，类似于worker</span></span><br><span class="line"><span class="string">）</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">10</span> <span class="comment">#每次线程取数据的数量</span></span><br><span class="line"><span class="comment">#??????</span></span><br><span class="line"><span class="attr">order-direct-exchange:</span> <span class="string">order-direct-ex</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c1??</span></span><br><span class="line"><span class="attr">order-direct-log-queue:</span> <span class="string">order-direct-log-queue</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c2??</span></span><br><span class="line"><span class="attr">order-direct-email-queue:</span> <span class="string">order-direct-email-queue</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c3</span></span><br><span class="line"><span class="attr">order-direct-weixin-queue:</span> <span class="string">order-direct-weixin-queue</span></span><br></pre></td></tr></table></figure>
 
+<p>上面的concurrency是在全局配置中的设置，会使所有的Listener都是5，下面是针对某一个单独设置的</p>
+<p>consumer1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RabbitListener(bindings = @QueueBinding(</span></span><br><span class="line"><span class="meta">        value = @Queue(name = &quot;$&#123;order-direct-email-queue&#125;&quot;, autoDelete = &quot;false&quot;),</span></span><br><span class="line"><span class="meta">        exchange = @Exchange(name = &quot;$&#123;order-direct-exchange&#125;&quot;,</span></span><br><span class="line"><span class="meta">                type = ExchangeTypes.DIRECT,</span></span><br><span class="line"><span class="meta">                ignoreDeclarationExceptions = &quot;true&quot;),</span></span><br><span class="line"><span class="meta">        key = &quot;email&quot;</span></span><br><span class="line"><span class="meta">),concurrency = &quot;5&quot;)</span></span><br><span class="line"><span class="comment">//（消费端的监听q的最大个数,即@RabbitListener开启几个线程去处理数据。)</span></span><br></pre></td></tr></table></figure>
+
+<p>producer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.yzx.springbootrabbitdirectproducer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.yzx.springbootrabbitdirectproducer.mq.OrderService;</span><br><span class="line"><span class="keyword">import</span> org.yzx.springbootrabbitdirectproducer.mq.UserService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SpringbootRabbitDirectOrderServiceApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                Thread.sleep(<span class="number">200</span>);</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            orderService.sendMessage(i);</span><br><span class="line"><span class="comment">//            userService.saveUser(1);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>如上测试就是对email consumer开启了5个线程（channel）去监听也就是处理生产者这边发来的消息，每个线程每次读取10个消息。</p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png" alt="image-20240127231209158"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png" alt="image-20240127231817733"></p>
+<p>项目中大部分使用@RabbitmqListener注解的方式处理业务代码中MQ的消费,这个注解用于监听指定的队列,如果containerFactory未指定,默认使用SimpleRabbitListenerContainerFactory实例对象创建一个消息监听容器(SimpleMessageListenerContainer)<br>默认情况下,rabbitmq的消费者为单线程串行消费,这也是队列的特性,我们可以看看SimpleMessageListenerContainer的源码,从图中可以看到设置并发消费属性concurrentConsumers&#x3D;1,从字面意义也可以分析出该字段是设置并发消费者的数量,默认为一个监听器设置一个消费者.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private volatile int concurrentConsumers = 1;</span><br></pre></td></tr></table></figure>
+
+<p>rabbitmq容器启动的时候根据设置的concurrentConsumers创建N个BlockingQueueConsumer(N个消费者队列)</p>
+<p>以rabbitmq接收端最核心的类SimpleMessageListenerContainer作为切入点，做源码解析。<br>容器启动时，会启动SimpleMessageListenerContainer的start方法（在其父类中）；<br>start方法中 调用this.doStart()–&gt;调用this.initializeConsumers()-&gt;调用this.createBlockingQueueConsumer();</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected void doStart() &#123;</span><br><span class="line">       </span><br><span class="line">              int newConsumers = this.initializeConsumers();</span><br><span class="line">               </span><br><span class="line">              BlockingQueueConsumer consumer = (BlockingQueueConsumer)var4.next();</span><br><span class="line">              SimpleMessageListenerContainer.AsyncMessageProcessingConsumer processor = new SimpleMessageListenerContainer.AsyncMessageProcessingConsumer(consumer);</span><br><span class="line">              processors.add(processor);</span><br><span class="line">              this.getTaskExecutor().execute(processor);</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">protected int initializeConsumers() &#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        synchronized(this.consumersMonitor) &#123;</span><br><span class="line">            if (this.consumers == null) &#123;</span><br><span class="line">                this.cancellationLock.reset();</span><br><span class="line">                this.consumers = new HashSet(this.concurrentConsumers);</span><br><span class="line"></span><br><span class="line">                for(int i = 0; i &lt; this.concurrentConsumers; ++i) &#123;</span><br><span class="line">                    BlockingQueueConsumer consumer = this.createBlockingQueueConsumer();</span><br><span class="line">                    this.consumers.add(consumer);</span><br><span class="line">                    ++count;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来再看看他继承的抽象类AbstractMessageListenerContainer的构造函数,代码中prefetchCount为设置并发消费的另一个关键属性,prefetchCount指一个消费者每次一次性从broker里面取出的待消费的消息个数,默认值prefetchCount&#x3D;250</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">AbstractMessageListenerContainer</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.proxy = <span class="built_in">this</span>.delegate;</span><br><span class="line">        <span class="built_in">this</span>.shutdownTimeout = <span class="number">5000L</span>;</span><br><span class="line">        <span class="built_in">this</span>.transactionAttribute = <span class="keyword">new</span> <span class="title class_">DefaultTransactionAttribute</span>();</span><br><span class="line">        <span class="built_in">this</span>.taskExecutor = <span class="keyword">new</span> <span class="title class_">SimpleAsyncTaskExecutor</span>();</span><br><span class="line">        <span class="built_in">this</span>.recoveryBackOff = <span class="keyword">new</span> <span class="title class_">FixedBackOff</span>(<span class="number">5000L</span>, <span class="number">9223372036854775807L</span>);</span><br><span class="line">        <span class="built_in">this</span>.messagePropertiesConverter = <span class="keyword">new</span> <span class="title class_">DefaultMessagePropertiesConverter</span>();</span><br><span class="line">        <span class="built_in">this</span>.missingQueuesFatal = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.possibleAuthenticationFailureFatal = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.autoDeclare = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.mismatchedQueuesFatal = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">this</span>.failedDeclarationRetryInterval = <span class="number">5000L</span>;</span><br><span class="line">        <span class="built_in">this</span>.autoStartup = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.phase = <span class="number">2147483647</span>;</span><br><span class="line">        <span class="built_in">this</span>.active = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">this</span>.running = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">this</span>.lifecycleMonitor = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">        <span class="built_in">this</span>.queueNames = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>();</span><br><span class="line">        <span class="built_in">this</span>.errorHandler = <span class="keyword">new</span> <span class="title class_">ConditionalRejectingErrorHandler</span>();</span><br><span class="line">        <span class="built_in">this</span>.exposeListenerChannel = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.acknowledgeMode = AcknowledgeMode.AUTO;</span><br><span class="line">        <span class="built_in">this</span>.deBatchingEnabled = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.adviceChain = <span class="keyword">new</span> <span class="title class_">Advice</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="built_in">this</span>.defaultRequeueRejected = <span class="literal">true</span>;</span><br><span class="line">        **<span class="built_in">this</span>.prefetchCount = <span class="number">250</span>;**</span><br><span class="line">        <span class="built_in">this</span>.lastReceive = System.currentTimeMillis();</span><br><span class="line">        <span class="built_in">this</span>.statefulRetryFatalWithNullMessageId = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.exclusiveConsumerExceptionLogger = <span class="keyword">new</span> <span class="title class_">AbstractMessageListenerContainer</span>.DefaultExclusiveConsumerLogger();</span><br><span class="line">        <span class="built_in">this</span>.lookupKeyQualifier = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="built_in">this</span>.forceCloseChannel = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上面我们已经根据concurrentConsumer的值设置了N个消费者队列,从下面代码中最后一行可以看出消费者队列中维护了一个<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97&spm=1001.2101.3001.7020">阻塞队列</a>,其中阻塞队列的大小就由prefetchCount决定.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public BlockingQueueConsumer(ConnectionFactory connectionFactory, MessagePropertiesConverter messagePropertiesConverter, ActiveObjectCounter&lt;BlockingQueueConsumer&gt; activeObjectCounter, AcknowledgeMode acknowledgeMode, boolean transactional, int prefetchCount, boolean defaultRequeueRejected, Map&lt;String, Object&gt; consumerArgs, boolean noLocal, boolean exclusive, String... queues) &#123;</span><br><span class="line">        this.cancelled = new AtomicBoolean(false);</span><br><span class="line">        this.consumerArgs = new HashMap();</span><br><span class="line">        this.deliveryTags = new LinkedHashSet();</span><br><span class="line">        this.consumerTags = new ConcurrentHashMap();</span><br><span class="line">        this.missingQueues = Collections.synchronizedSet(new HashSet());</span><br><span class="line">        this.retryDeclarationInterval = 60000L;</span><br><span class="line">        this.failedDeclarationRetryInterval = 5000L;</span><br><span class="line">        this.declarationRetries = 3;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">        this.messagePropertiesConverter = messagePropertiesConverter;</span><br><span class="line">        this.activeObjectCounter = activeObjectCounter;</span><br><span class="line">        this.acknowledgeMode = acknowledgeMode;</span><br><span class="line">        this.transactional = transactional;</span><br><span class="line">        this.prefetchCount = prefetchCount;</span><br><span class="line">        this.defaultRequeueRejected = defaultRequeueRejected;</span><br><span class="line">        if (consumerArgs != null &amp;&amp; consumerArgs.size() &gt; 0) &#123;</span><br><span class="line">            this.consumerArgs.putAll(consumerArgs);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        this.noLocal = noLocal;</span><br><span class="line">        this.exclusive = exclusive;</span><br><span class="line">        this.queues = (String[])Arrays.copyOf(queues, queues.length);</span><br><span class="line">        </span><br><span class="line">        this.queue = new LinkedBlockingQueue(prefetchCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据队列的特性可知,如果阻塞队列中一个消息阻塞了,那么所有消息将会被阻塞,如果使用默认设置,concurrentConsumer&#x3D;1,prefetchCount&#x3D;250,那么当消费者队列中有一个消息由于某种原因阻塞了,那么该消息的后续消息同样不能被消费.为了防止这种情况的发生,我们可以增大concurrentConsumer的设置,使多个消费者可以并发消费.而prefetchCount该如何设置呢?假设conrrentConsumer&#x3D;2,prefetchCount采用默认值,rabbitmq容器会初始化两个并发的消费者,每个消费者的阻塞队列大小为250,rabbitmq的机制是将消息投递给consumer1,先为consumer1投递满250个message,再往consumer2投递250个message,如果consumer1的message一直小于250个,consumer2一直处于空闲状态,那么并发消费退化为单消费者.<br>下面再介绍下concurrentConsumer的设置,两种方式,一种是单个固定的值,如concurrentConsumer&#x3D;4,另一种是concurrentConsumer&#x3D;1-4.前面的不需要多说,重点是后面的设置,源码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public void setConcurrency(String concurrency) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            int separatorIndex = concurrency.indexOf(45);</span><br><span class="line">            if (separatorIndex != -1) &#123;</span><br><span class="line">                this.setConcurrentConsumers(Integer.parseInt(concurrency.substring(0, separatorIndex)));</span><br><span class="line">                this.setMaxConcurrentConsumers(Integer.parseInt(concurrency.substring(separatorIndex + 1, concurrency.length())));</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                this.setConcurrentConsumers(Integer.parseInt(concurrency));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; catch (NumberFormatException var3) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Invalid concurrency value [&quot; + concurrency + &quot;]: only single fixed integer (e.g. \&quot;5\&quot;) and minimum-maximum combo (e.g. \&quot;3-5\&quot;) supported.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>concurrency即为我们设置的参数,45为’-’的ascii码,容器首先设置了一个并发消费者,然后设置了最大并发消者.maxConcurrentConsumer用于处理在极端情况下,可以实例化的最大的消费者数量,可以对比理解成线程池的核心线程数与最大线程数,在每次消费之初都会判断maxConcurrentConsumers是否为空,如果非空会判断是否对消费者进行弹性扩容,其中consecutiveMessages与consecutiveIdles变量控制是需要新增&#x2F;减少消费者的标志位,对应的参考值分别为consecutiveActiveTrigger和consecutiveIdleTrigger,两个变量的默认值为10</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (consecutiveMessages++ &gt; SimpleMessageListenerContainer.this.consecutiveActiveTrigger) &#123;</span><br><span class="line">	SimpleMessageListenerContainer.this.considerAddingAConsumer();</span><br><span class="line">    consecutiveMessages = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (consecutiveIdles++ &gt; SimpleMessageListenerContainer.this.consecutiveIdleTrigger) &#123;</span><br><span class="line">    SimpleMessageListenerContainer.this.considerStoppingAConsumer(this.consumer);</span><br><span class="line">    consecutiveIdles = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当单个消费者连续接受的消息数量达到10个的时候,开始调用considerAddingAConsumer,判断时间是否满足要求对并发消费者进行扩容.反之就是减少消费者数量.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private void considerAddingAConsumer() &#123;</span><br><span class="line">        synchronized(this.consumersMonitor) &#123;</span><br><span class="line">            if (this.consumers != null &amp;&amp; this.maxConcurrentConsumers != null &amp;&amp; this.consumers.size() &lt; this.maxConcurrentConsumers) &#123;</span><br><span class="line">                long now = System.currentTimeMillis();</span><br><span class="line">                if (this.lastConsumerStarted + this.startConsumerMinInterval &lt; now) &#123;</span><br><span class="line">                    this.addAndStartConsumers(1);</span><br><span class="line">                    this.lastConsumerStarted = now;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果设置conrrency&#x3D;1-4这种形式(弹性扩容),那么当有消息阻塞的时候,单个消费者不会连续接受10个消息,也就不会调considerAddingAConsumer函数,也就无法实现并发消费者的目的.当时通知中心项目中出现问题时就只有两个消费者(两台服务器的Listener).</p>
+<p>最后总结下rabbitmq并发消费的两个参数prefetchCount和concurrentConsumers<br>concurrentConsumers是设置并发消费者的个数,可以进行初始化-最大值动态调整,并发消费者可以提高消息的消费能力,防止消息的堆积<br>prefechCount是每个消费者一次性从broker中取出的消息个数,提高这个参数并不能对消息实现并发消费,仅仅是减少了网络传输的时间</p>
+<p>最优的prefetchCount设置可以参考这篇</p>
+<p><a target="_blank" rel="noopener" href="https://www.51cto.com/article/717280.html">https://www.51cto.com/article/717280.html</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/26/rabbitmq/" class="archive-article-date">
-  	<time datetime="2024-01-26T09:58:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/01/26/rabbitmq/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">rabbitmq</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/26/rabbitmq/">rabbitmq</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/25/hexo-gitee%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2024-01-25T13:34:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/25/hexo-gitee%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">hexo+gitee搭建博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -273,8 +380,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
