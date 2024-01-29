@@ -6,23 +6,47 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
-  <title>rabbimq并发 | LEO&#39;S NOTE</title>
+  <title>Notification项目 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
+  <meta name="description" content="Overview Interact with UI for customer configuration of each alert or subscrption Provide asynchronous multi-channel notification service for other V1 Apps">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rabbimq并发">
-<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/index.html">
+<meta property="og:title" content="Notification项目">
+<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
+<meta property="og:description" content="Overview Interact with UI for customer configuration of each alert or subscrption Provide asynchronous multi-channel notification service for other V1 Apps">
 <meta property="og:locale">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png">
-<meta property="article:published_time" content="2024-01-27T14:34:13.000Z">
-<meta property="article:modified_time" content="2024-01-29T03:12:02.717Z">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129111755742.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308171510771.png">
+<meta property="og:image" content="https://docs.trendmicro.com/media/54441b3c-8be9-4b10-9c47-bf40a612b39d/images/global-settings.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112624199.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129162349298.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112707306.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112831100.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112929182.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129114057639.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129114112274.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129134409820.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129134725531.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129135154383.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129162006725.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308151210329.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152536219.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230920172019443.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152704966.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152730083.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152359943.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308170947143.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230309173043057.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230309172738106.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129165851287.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129171036659.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129170357144.png">
+<meta property="article:published_time" content="2024-01-29T03:13:53.000Z">
+<meta property="article:modified_time" content="2024-01-29T09:25:02.760Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
+<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129111755742.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -159,76 +183,275 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-rabbimq并发" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Notification项目" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      rabbimq并发
+      Notification项目
     </h1>
   
 
         
-        <a href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2024-01-27T14:34:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-27</time>
+        <a href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
+  	<time datetime="2024-01-29T03:13:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于rabbitmq消息堆积问题处理<br>消息堆积的主要原因有以下几种:<br>(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积<br>(2)消费者实例IO严重阻塞或者消费者所在服务器宕机<br>(3)消费者业务处理异常导致的消息堆积</p>
+        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ol>
+<li>Interact with UI for customer configuration of each alert or subscrption</li>
+<li>Provide asynchronous multi-channel notification service for other V1 Apps</li>
+</ol>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129111755742.png" alt="image-20240129111755742"></p>
 <span id="more"></span>
 
-<p>消费端配置文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8990</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">admin</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">admin</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="attr">concurrency:</span> <span class="number">5</span> <span class="comment"># 消费端的监听个数(即@RabbitListener开启几个线程去处理数据。)</span></span><br><span class="line">        <span class="attr">max-concurrency:</span> <span class="number">10</span> <span class="comment"># 消费端开启处理q线程的数量，类似于worker</span></span><br><span class="line"><span class="string">）</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">10</span> <span class="comment">#每次线程取数据的数量</span></span><br><span class="line"><span class="comment">#??????</span></span><br><span class="line"><span class="attr">order-direct-exchange:</span> <span class="string">order-direct-ex</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c1??</span></span><br><span class="line"><span class="attr">order-direct-log-queue:</span> <span class="string">order-direct-log-queue</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c2??</span></span><br><span class="line"><span class="attr">order-direct-email-queue:</span> <span class="string">order-direct-email-queue</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c3</span></span><br><span class="line"><span class="attr">order-direct-weixin-queue:</span> <span class="string">order-direct-weixin-queue</span></span><br></pre></td></tr></table></figure>
+<h1 id="Project-architecture-drawing"><a href="#Project-architecture-drawing" class="headerlink" title="Project architecture drawing"></a>Project architecture drawing</h1><p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308171510771.png" alt="image-20230308171510771"></p>
+<h1 id="Project-feature"><a href="#Project-feature" class="headerlink" title="Project feature"></a>Project feature</h1><p>Send notifications from alerts and subscriptions to recipients by email, webhook, and mobile app.</p>
+<p>The <strong>Notifications</strong> screen (<strong>Administration</strong> → <strong>Notifications</strong>) allows you to configure alerts and subscriptions to send notifications to the appropriate recipients using email, webhook, and the Trend Vision One mobile app.</p>
+<p>The following table outlines the sections available in the <strong>Notifications</strong> screen.</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alerts</td>
+<td>When Trend Vision One triggers an alert, the alert generates a notification. Configure each alert and manage the notification channels individually.</td>
+</tr>
+<tr>
+<td>Subscriptions</td>
+<td>Trend Vision One generates certain notifications and reports on a regular schedule. Configure each subscription and manage the notification channels individually.</td>
+</tr>
+<tr>
+<td>General Settings</td>
+<td>Open the <strong>General Settings</strong> panel by clicking the gear icon (<img src="https://docs.trendmicro.com/media/54441b3c-8be9-4b10-9c47-bf40a612b39d/images/global-settings.png" alt="global-settings.png">).The <strong>General Settings</strong> panel provides the following global settings that affect alert and subscription notifications:<br>     <strong>Subject prefix</strong>: Enable to include a custom prefix on all notification emails. Specify the prefix you want to use in the <strong>Prefix</strong> field.<br>                   <strong>Note</strong>：The prefix appears in the email subject exactly as typed, with no additional formatting or characters added.For example, if you type [TM] in the <strong>Prefix</strong> field, the subject line appears as: [TM]Email Subject<br>      <strong>Language settings</strong>: Select the language for alert and subscription notifications.</td>
+</tr>
+<tr>
+<td>Webhook List</td>
+<td>Manage webhooks to receive notifications from Trend Vision One by clicking <strong>Webhook List</strong>.</td>
+</tr>
+</tbody></table>
+<h1 id="Notification-UI-Panel"><a href="#Notification-UI-Panel" class="headerlink" title="Notification UI Panel"></a>Notification UI Panel</h1><h2 id="event-configuration"><a href="#event-configuration" class="headerlink" title="event configuration"></a>event configuration</h2><ul>
+<li><strong>Related TrendMicro V1 plateform services or app integrated in notification</strong></li>
+</ul>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112624199.png" alt="image-20240129112624199"></p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129162349298.png" alt="image-20240129162349298"></p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112707306.png" alt="image-20240129112707306"></p>
+<h2 id="webhook-configuration"><a href="#webhook-configuration" class="headerlink" title="webhook configuration"></a><strong>webhook configuration</strong></h2><p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112831100.png" alt="image-20240129112831100"></p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129112929182.png" alt="image-20240129112929182"></p>
+<h2 id="BellNotification"><a href="#BellNotification" class="headerlink" title="BellNotification"></a>BellNotification</h2><p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129114057639.png" alt="image-20240129114057639"></p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129114112274.png" alt="image-20240129114112274"></p>
+<h1 id="Notification-Technology-stack"><a href="#Notification-Technology-stack" class="headerlink" title="Notification Technology stack"></a>Notification Technology stack</h1><h2 id="infra"><a href="#infra" class="headerlink" title="infra"></a><strong>infra</strong></h2><p>MySQL, Redis, MongoDB(AWS DocumentDB, Azure CosmosDB)</p>
+<p>Rabbitmq (a third party task queue) </p>
+<h2 id="Grafana："><a href="#Grafana：" class="headerlink" title="Grafana："></a>Grafana：</h2><p>通过promethus监控+Grafana数据可视化</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129134409820.png" alt="image-20240129134409820"></p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129134725531.png" alt="image-20240129134725531"></p>
+<h2 id="ES-search-by-Kibana"><a href="#ES-search-by-Kibana" class="headerlink" title="ES search by Kibana:"></a>ES search by Kibana:</h2><p>serviceName: uic, componentName：nc-v2</p>
+<p>other key words: createNotificationHelper, EmailChannel, SendEmailProcess, SendWebhookProcess, ….</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129135154383.png" alt="image-20240129135154383"></p>
+<h2 id="The-integrated-app"><a href="#The-integrated-app" class="headerlink" title="The integrated app"></a>The integrated app</h2><ul>
+<li><strong>provide eventId、name and description bind every app or service which integrate in Notification</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operations Dashboard - At-risk users&#x2F;devices</th>
+<th>0301</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operations Dashboard - Weekly digest</td>
+<td>0302</td>
+</tr>
+<tr>
+<td>Workbench - Workbench alerts</td>
+<td>0401</td>
+</tr>
+<tr>
+<td>Search - Watchlist</td>
+<td>0501</td>
+</tr>
+<tr>
+<td>Unusual Product Status - Third-Party Integration, Service Gateway Management, Service Gateway Management 2.0, Product Connector, Mobile Security, Network Inventory</td>
+<td>0801</td>
+</tr>
+<tr>
+<td>Zero Trust Secure Access - Risk control rule match</td>
+<td>0901</td>
+</tr>
+<tr>
+<td>Zero Trust Secure Access - Private Access Connector status</td>
+<td>0902</td>
+</tr>
+<tr>
+<td>Zero Trust Secure Access - SASE Secure Web Gateway</td>
+<td>0903</td>
+</tr>
+<tr>
+<td>Zero Trust Secure Access - Intenet Access control rule detection</td>
+<td>0904</td>
+</tr>
+<tr>
+<td>License Expiration</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>Response Management - Response Task</td>
+<td>1101</td>
+</tr>
+<tr>
+<td>Automation Center - API Changelog</td>
+<td>1201</td>
+</tr>
+<tr>
+<td>Sercurity Playbooks</td>
+<td>1301</td>
+</tr>
+<tr>
+<td>Sercurity Playbooks-Automated Response</td>
+<td>1302</td>
+</tr>
+<tr>
+<td>Phish Insight - Summary email</td>
+<td>1401</td>
+</tr>
+<tr>
+<td>Phish Insight - Follow up email</td>
+<td>1402</td>
+</tr>
+<tr>
+<td>Foundation-IAM</td>
+<td>1501</td>
+</tr>
+<tr>
+<td>Case Log Management - Assign Owner</td>
+<td>1601</td>
+</tr>
+<tr>
+<td>Reports - Notification</td>
+<td>1701</td>
+</tr>
+</tbody></table>
+<h2 id="1-Business-logic"><a href="#1-Business-logic" class="headerlink" title="1. Business logic"></a>1. Business logic</h2><p>notification主要进行两部分交互，一部分是ui,客户可以通过ui来对各个event进行配置。集成了若干alerts和subscription,可以对email,webhook,mobile进行配置，ui上还有小铃铛，小铃铛的数据是记录在nc-v2 mongodb中,后端定义数据ttl是7天，7天后所有到期的数据会自动清理掉，前端只能看，不能操作，每次给客户展示的是7天前至今的数据。</p>
+<p>schedule job：定期检查用户在各个event上的配置情况，接lifecycle实时purge无效company。</p>
+<p>dynamic schedule job: 根据用户在当前event上配置的frequency值周期性的去对应的app api取出taskList，完成notification的发送业务。</p>
+<p>公司的public api changelog 定期发送（每月一次），这个后端sever写在operation portal 上，会定期update 发送</p>
+<p>email channel business site 通过ses来发信，在adda上就是Office 365 的smtp.</p>
+<p>webhook内部集成了slack,teams,并且支持配置自己的第三方webhook.</p>
+<p>向公司的mobile团队发送消息，最后tregger到用户的mobile端.</p>
+<p>通过websocket向用户ui端进行实时消息推送，并根据用户的RBAC权限来做filter。</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129162006725.png" alt="image-20240129162006725"></p>
+<h3 id="Email-flow"><a href="#Email-flow" class="headerlink" title="Email flow"></a>Email flow</h3><p>包括整个产品的apichange log也是从这里发送</p>
+<p>This is 2 ways to assemble email content:</p>
+<ol>
+<li>Notification maintains the email templates and full fill the template with the eventData provided in the API call. e.g. &#x2F;internal&#x2F;uic&#x2F;v3&#x2F;notifications</li>
+<li>Notification recevie the full content of the email directly from the API call. e.g. &#x2F;internal&#x2F;uic&#x2F;v3&#x2F;notifications&#x2F;emails&#x2F;sendEmails</li>
+</ol>
+<p>After assembling, we use AWS Simple Email Service (SES) to send email for us. It can be done easily with an API call when we assemble the email correctly. </p>
+<h2 id="2-Email-Deliver-Status-Tracking"><a href="#2-Email-Deliver-Status-Tracking" class="headerlink" title="2. Email Deliver Status Tracking"></a>2. Email Deliver Status Tracking</h2><p>We track email deliver status using ses monitoring ability. </p>
+<h3 id="2-1-Design"><a href="#2-1-Design" class="headerlink" title="2.1 Design"></a>2.1 Design</h3><p>The flow is shown in the follow picture，and contains these steps:</p>
+<ol>
+<li>nc-v2 calls SES to send email and specifying a configuration set</li>
+<li>ses delivers the email to customer’s email server</li>
+<li>email server return deliver status of the email to SES</li>
+<li>SES convey the deliver status to a SNS topic</li>
+<li>SNS triggers a lambda function and writes the deliver status to nc-v2 DB</li>
+</ol>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308151210329.png" alt="image-20230308151210329"></p>
+<h4 id="2-1-1-Create-a-ses-configuration-set"><a href="#2-1-1-Create-a-ses-configuration-set" class="headerlink" title="2.1.1 Create a ses configuration set"></a>2.1.1 Create a ses configuration set</h4><p>配置集是可应用于已验证身份的规则组。经过验证的身份是您用于通过 Amazon SES 发送电子邮件的域、子域或电子邮件地址。当您将配置集应用于电子邮件时，该配置集中的所有规则都将应用于该电子邮件。</p>
+<p>您可以使用配置集将以下类型的规则应用于您的电子邮件发送，并且可以包含这些类型中的一种、两种或两者都不包含：</p>
+<ul>
+<li><em>事件目的地</em>– 允许您发布电子邮件发送指标，包括您发送的每封电子邮件的发送次数、送达次数、打开次数、点击次数、退回次数和对其他 AWS 产品的投诉次数。例如，您可以将电子邮件指标发送到 Amazon Kinesis Data Firehose 目的地，然后使用 Amazon Kinesis Data Analytics 对其进行分析。或者，您可以向 Amazon SNS 发送退回邮件和投诉信息，并在这些事件发生时立即收到通知。</li>
+</ul>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152536219.png" alt="image-20230308152536219"></p>
+<h4 id="2-1-2-Add-a-destination-for-the-set"><a href="#2-1-2-Add-a-destination-for-the-set" class="headerlink" title="2.1.2 Add a destination for the set"></a>2.1.2 Add a destination for the set</h4><ol>
+<li>Add a destination for the set, check the following event: Hard bounces, Clicks, Complaints, Deliveries, Delivery delays, Opens, Rejects, Rendering failures</li>
+<li>Select SNS as destination, and create a sns topic. e.g. ses_prod_topic</li>
+<li>Add the Lambda function to SNS topic subcription,Use lambda to write the mail sending status recorded by sns into the database, and create logs to write into kinesis</li>
+</ol>
+<h2 id="3-Email-User-Behaviour-Tracking"><a href="#3-Email-User-Behaviour-Tracking" class="headerlink" title="3. Email User Behaviour Tracking"></a>3. Email User Behaviour Tracking</h2><p>We track behaviour when user opens an email or clicks a link in email.</p>
+<p>AWS会去埋点 用的是AWS自己的URL，可能会被用户的firewall拦截，所以最后就没用aws ses 自带的</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230920172019443.png" alt="image-20230920172019443"></p>
+<h3 id="3-1-Design"><a href="#3-1-Design" class="headerlink" title="3.1 Design"></a>3.1 Design</h3><blockquote>
+<p>To track user opening an email, we plant a 1 pixel picture from download center at the end of the email content. When user opens the email, the picture is automately downloaded and a new access log will be created in download center’s access log bucket. And we use a lambda to monitor the created access log and convert it to a UBT log and send it to slog.</p>
+</blockquote>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152704966.png" alt="image-20230308152704966"></p>
+<blockquote>
+<p>To track user clicking a link in email, we add additional query parameters at the end of each url link in the email. When user clicks the link and goes to uic portal pendo will record the url, thus we can have statistics on how many user click the links in email.</p>
+</blockquote>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152730083.png" alt="image-20230308152730083"></p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152359943.png" alt="image-20230308152359943"></p>
+<p><strong>To track open event:</strong></p>
+<p>Add the below html at the end of the email template.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=``&quot;&#123;&#123;.DownloadCenter&#125;&#125;/e-track.png?linkedfrom=email&amp;cid=&#123;&#123;.CustomerId&#125;&#125;&amp;eventId=&#123;&#123;.EventId&#125;&#125;&amp;messageId=&#123;&#123;.MessageId&#125;&#125;&quot;` `style=``&quot;display: none; width: 1px; height: 1px;&quot;``&gt;</span><br></pre></td></tr></table></figure>
 
-<p>上面的concurrency是在全局配置中的设置，会使所有的Listener都是5，下面是针对某一个单独设置的</p>
-<p>consumer1</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RabbitListener(bindings = @QueueBinding(</span></span><br><span class="line"><span class="meta">        value = @Queue(name = &quot;$&#123;order-direct-email-queue&#125;&quot;, autoDelete = &quot;false&quot;),</span></span><br><span class="line"><span class="meta">        exchange = @Exchange(name = &quot;$&#123;order-direct-exchange&#125;&quot;,</span></span><br><span class="line"><span class="meta">                type = ExchangeTypes.DIRECT,</span></span><br><span class="line"><span class="meta">                ignoreDeclarationExceptions = &quot;true&quot;),</span></span><br><span class="line"><span class="meta">        key = &quot;email&quot;</span></span><br><span class="line"><span class="meta">),concurrency = &quot;5&quot;)</span></span><br><span class="line"><span class="comment">//（消费端的监听q的最大个数,即@RabbitListener开启几个线程去处理数据。)</span></span><br></pre></td></tr></table></figure>
+<p>placeholders explained:</p>
+<p><strong>DownloadCenter</strong>: keep it as a placeholder explicitly as <code>&#123;&#123;.DownloadCenter&#125;&#125;</code> , notification will help you replace it when sending the email</p>
+<p><strong>CustomerId:</strong> replace it with customer id </p>
+<p><strong>EventId:</strong> replace it with eventId assigned by notifications. see <a target="_blank" rel="noopener" href="https://wiki.jarvis.trendmicro.com/display/SG/Events">Events</a></p>
+<p><strong>MessageId:</strong> replace it with a randomly generated UUID</p>
+<p><strong>To track click event</strong></p>
+<p>Add the following query parameters behind each url link in email template. Also replace the placeholders accordingly.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?linkedfrom=email&amp;eventId=&#123;&#123;.EventId&#125;&#125;&amp;messageId=&#123;&#123;.MessageId&#125;&#125;</span><br></pre></td></tr></table></figure>
 
-<p>producer</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.yzx.springbootrabbitdirectproducer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.yzx.springbootrabbitdirectproducer.mq.OrderService;</span><br><span class="line"><span class="keyword">import</span> org.yzx.springbootrabbitdirectproducer.mq.UserService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SpringbootRabbitDirectOrderServiceApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                Thread.sleep(<span class="number">200</span>);</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            orderService.sendMessage(i);</span><br><span class="line"><span class="comment">//            userService.saveUser(1);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>如上测试就是对email consumer开启了5个线程（channel）去监听也就是处理生产者这边发来的消息，每个线程每次读取10个消息。</p>
-<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png" alt="image-20240127231209158"></p>
-<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png" alt="image-20240127231817733"></p>
-<p>项目中大部分使用@RabbitmqListener注解的方式处理业务代码中MQ的消费,这个注解用于监听指定的队列,如果containerFactory未指定,默认使用SimpleRabbitListenerContainerFactory实例对象创建一个消息监听容器(SimpleMessageListenerContainer)<br>默认情况下,rabbitmq的消费者为单线程串行消费,这也是队列的特性,我们可以看看SimpleMessageListenerContainer的源码,从图中可以看到设置并发消费属性concurrentConsumers&#x3D;1,从字面意义也可以分析出该字段是设置并发消费者的数量,默认为一个监听器设置一个消费者.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private volatile int concurrentConsumers = 1;</span><br></pre></td></tr></table></figure>
-
-<p>rabbitmq容器启动的时候根据设置的concurrentConsumers创建N个BlockingQueueConsumer(N个消费者队列)</p>
-<p>以rabbitmq接收端最核心的类SimpleMessageListenerContainer作为切入点，做源码解析。<br>容器启动时，会启动SimpleMessageListenerContainer的start方法（在其父类中）；<br>start方法中 调用this.doStart()–&gt;调用this.initializeConsumers()-&gt;调用this.createBlockingQueueConsumer();</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected void doStart() &#123;</span><br><span class="line">       </span><br><span class="line">              int newConsumers = this.initializeConsumers();</span><br><span class="line">               </span><br><span class="line">              BlockingQueueConsumer consumer = (BlockingQueueConsumer)var4.next();</span><br><span class="line">              SimpleMessageListenerContainer.AsyncMessageProcessingConsumer processor = new SimpleMessageListenerContainer.AsyncMessageProcessingConsumer(consumer);</span><br><span class="line">              processors.add(processor);</span><br><span class="line">              this.getTaskExecutor().execute(processor);</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>Here is a complete example of “Operations Dashboard - At-risk users&#x2F;devices” email template for your reference.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>If you want to change the alert email recipient or stop receiving email notifications, contact your administrator or go to ``&quot;Notifications&quot;` `on the Trend Micro Vision One console: <span class="tag">&lt;<span class="name">a</span> <span class="attr">style</span>=``&quot;<span class="attr">text-decoration:none</span>;&quot;` `<span class="attr">class</span>``=``&quot;<span class="attr">ulink</span>&quot;` `<span class="attr">href</span>=``&quot;&#123;&#123; <span class="attr">.Portal</span> &#125;&#125;/#/<span class="attr">admin</span>/<span class="attr">notification</span>?<span class="attr">alert_type</span>=<span class="string">301&amp;linkedfrom</span>=<span class="string">email&amp;eventId</span>=<span class="string">0301&amp;messageId</span>=<span class="string">&#123;&#123;.MessageId&#125;&#125;</span>&quot;` `<span class="attr">target</span>=``&quot;<span class="attr">_blank</span>&quot;``&gt;</span>&#123;&#123; .Portal &#125;&#125;/#/admin/notification<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span>` </span><br><span class="line">`<span class="tag">&lt;<span class="name">p</span>&gt;</span>If you have questions or need advice regarding any alert, contact Trend Micro: <span class="tag">&lt;<span class="name">a</span> <span class="attr">style</span>=``&quot;<span class="attr">text-decoration:none</span>;&quot;` `<span class="attr">class</span>``=``&quot;<span class="attr">ulink</span>&quot;` `<span class="attr">href</span>=``&quot;<span class="attr">https:</span>//<span class="attr">success.trendmicro.com</span>/<span class="attr">contact-support</span>?<span class="attr">linkedfrom</span>=<span class="string">email&amp;eventId</span>=<span class="string">0301&amp;messageId</span>=<span class="string">&#123;&#123;.MessageId&#125;&#125;</span>&quot;` `<span class="attr">target</span>=``&quot;<span class="attr">_blank</span>&quot;``&gt;</span>https://success.trendmicro.com/contact-support<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span>` `<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=``&quot;&#123;&#123;<span class="attr">.DownloadCenter</span>&#125;&#125;/<span class="attr">e-track.png</span>?<span class="attr">linkedfrom</span>=<span class="string">email&amp;cid</span>=<span class="string">&#123;&#123;.CustomerId&#125;&#125;&amp;eventId</span>=<span class="string">0301&amp;messageId</span>=<span class="string">&#123;&#123;.MessageId&#125;&#125;</span>&quot;` `<span class="attr">style</span>=``&quot;<span class="attr">display:</span> <span class="attr">none</span>; <span class="attr">width:</span> <span class="attr">1px</span>; <span class="attr">height:</span> <span class="attr">1px</span>;&quot;``&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">protected int initializeConsumers() &#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        synchronized(this.consumersMonitor) &#123;</span><br><span class="line">            if (this.consumers == null) &#123;</span><br><span class="line">                this.cancellationLock.reset();</span><br><span class="line">                this.consumers = new HashSet(this.concurrentConsumers);</span><br><span class="line"></span><br><span class="line">                for(int i = 0; i &lt; this.concurrentConsumers; ++i) &#123;</span><br><span class="line">                    BlockingQueueConsumer consumer = this.createBlockingQueueConsumer();</span><br><span class="line">                    this.consumers.add(consumer);</span><br><span class="line">                    ++count;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>ses 发送限制<a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/ses/latest/dg/quotas.html">https://docs.aws.amazon.com/zh_cn/ses/latest/dg/quotas.html</a><br>前端对群发限制是一次20个recipients</p>
+<p>后端最多每50个人一次</p>
+<p>Ses sendemail api也是要求不能超过50个</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308170947143.png" alt="image-20230308170947143"></p>
+<h2 id="4-WebHooks"><a href="#4-WebHooks" class="headerlink" title="4. WebHooks"></a>4. WebHooks</h2><h3 id="1-UI"><a href="#1-UI" class="headerlink" title="1. UI"></a>1. UI</h3><p>Figma: <a target="_blank" rel="noopener" href="https://www.figma.com/file/JUXjIZjynEm0IGmUlxKlXw/Administration---Alert-Notifications?node-id=4115:30668">https://www.figma.com/file/JUXjIZjynEm0IGmUlxKlXw/Administration---Alert-Notifications?node-id=4115%3A30668</a></p>
+<h3 id="2-Design"><a href="#2-Design" class="headerlink" title="2. Design"></a>2. Design</h3><h4 id="2-1-User-customized-webhook-setting"><a href="#2-1-User-customized-webhook-setting" class="headerlink" title="2.1. User-customized webhook setting"></a>2.1. User-customized webhook setting</h4><p>User can customize the webhook request header and body when creating a webhook,</p>
+<p>For body customization, we provide three place holders for user:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Place holder</th>
+<th align="left">Description</th>
+<th align="left">Value example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$title$</td>
+<td align="left">similar to the email subject</td>
+<td align="left">Zero Trust Secure Access | 3 New Secure Access Rule Alerts(subject)</td>
+</tr>
+<tr>
+<td align="left">$type$</td>
+<td align="left">Indicates that the webhook comes from one of the notification event of Vision One</td>
+<td align="left">Trend Micro Vision One | Zero Trust Secure Access(event type)</td>
+</tr>
+<tr>
+<td align="left">$payload$</td>
+<td align="left">the processed json string sent from each notification event</td>
+<td align="left">(message_json) 展开源码</td>
+</tr>
+</tbody></table>
+<p>Also a template of body is provided for reference:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">   <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$title$&quot;</span><span class="punctuation">,</span> </span><br><span class="line">   <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$type$&quot;</span><span class="punctuation">,</span> </span><br><span class="line">   <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">     <span class="attr">&quot;event&quot;</span><span class="punctuation">:</span><span class="string">&quot;$payload$&quot;</span> </span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>接下来再看看他继承的抽象类AbstractMessageListenerContainer的构造函数,代码中prefetchCount为设置并发消费的另一个关键属性,prefetchCount指一个消费者每次一次性从broker里面取出的待消费的消息个数,默认值prefetchCount&#x3D;250</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">AbstractMessageListenerContainer</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.proxy = <span class="built_in">this</span>.delegate;</span><br><span class="line">        <span class="built_in">this</span>.shutdownTimeout = <span class="number">5000L</span>;</span><br><span class="line">        <span class="built_in">this</span>.transactionAttribute = <span class="keyword">new</span> <span class="title class_">DefaultTransactionAttribute</span>();</span><br><span class="line">        <span class="built_in">this</span>.taskExecutor = <span class="keyword">new</span> <span class="title class_">SimpleAsyncTaskExecutor</span>();</span><br><span class="line">        <span class="built_in">this</span>.recoveryBackOff = <span class="keyword">new</span> <span class="title class_">FixedBackOff</span>(<span class="number">5000L</span>, <span class="number">9223372036854775807L</span>);</span><br><span class="line">        <span class="built_in">this</span>.messagePropertiesConverter = <span class="keyword">new</span> <span class="title class_">DefaultMessagePropertiesConverter</span>();</span><br><span class="line">        <span class="built_in">this</span>.missingQueuesFatal = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.possibleAuthenticationFailureFatal = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.autoDeclare = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.mismatchedQueuesFatal = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">this</span>.failedDeclarationRetryInterval = <span class="number">5000L</span>;</span><br><span class="line">        <span class="built_in">this</span>.autoStartup = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.phase = <span class="number">2147483647</span>;</span><br><span class="line">        <span class="built_in">this</span>.active = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">this</span>.running = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">this</span>.lifecycleMonitor = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">        <span class="built_in">this</span>.queueNames = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>();</span><br><span class="line">        <span class="built_in">this</span>.errorHandler = <span class="keyword">new</span> <span class="title class_">ConditionalRejectingErrorHandler</span>();</span><br><span class="line">        <span class="built_in">this</span>.exposeListenerChannel = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.acknowledgeMode = AcknowledgeMode.AUTO;</span><br><span class="line">        <span class="built_in">this</span>.deBatchingEnabled = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.adviceChain = <span class="keyword">new</span> <span class="title class_">Advice</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="built_in">this</span>.defaultRequeueRejected = <span class="literal">true</span>;</span><br><span class="line">        **<span class="built_in">this</span>.prefetchCount = <span class="number">250</span>;**</span><br><span class="line">        <span class="built_in">this</span>.lastReceive = System.currentTimeMillis();</span><br><span class="line">        <span class="built_in">this</span>.statefulRetryFatalWithNullMessageId = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">this</span>.exclusiveConsumerExceptionLogger = <span class="keyword">new</span> <span class="title class_">AbstractMessageListenerContainer</span>.DefaultExclusiveConsumerLogger();</span><br><span class="line">        <span class="built_in">this</span>.lookupKeyQualifier = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="built_in">this</span>.forceCloseChannel = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>对于配置不在绑定在我们ui上的app上的webhook,通过这只api来发送自定义的webhook内容，具体的发送format就是在创建webhook时的配置。对于绑定在notifiction ui上app上的第三方webhook（除slack，teams）,是先去模版里load title,type,data的 内容，在replacehold到占位符中发送出去。</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230309173043057.png" alt="image-20230309173043057"></p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230309172738106.png" alt="image-20230309172738106"></p>
+<h4 id="2-2-Built-in-webhook-Setting"><a href="#2-2-Built-in-webhook-Setting" class="headerlink" title="2.2. Built-in webhook Setting"></a>2.2. Built-in webhook Setting</h4><p>We have built-in webhook setting for Teams and Slack, which is identified by webhook url.</p>
+<p>Instead of using json string as payload, We use html and markdown format to make the webhook payload presented to user looks similar to email content.</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129165851287.png" alt="image-20240129165851287"></p>
+<h2 id="5-Mobile"><a href="#5-Mobile" class="headerlink" title="5. Mobile"></a>5. Mobile</h2><p>在调用通用接口createNotification发信时，对于mobile channel，先把各个app 发送的alert 数据by account的写进mongodb中，由于这是第一次进来的数据，肯定是未读的，所以记录一个字段unread :true,带进mongodb，ttl两周，记录unread数，存入redis,再用户后面一条一条读或成批读的时候，会根据更新unread 为false, 用户在list mobile notification的时候，这个时候要显示未读数量，后端首先会获得当前account的record，根据unread的状态判断该条notification用户是否已读。以此来记录unread数量，并存入redis中保存。这个时候，各个app的alert信息还在往这个account 的mobile里送，新送的消息还是未读的，但是需要先拉一把redis里存的之前的用户未读数（因为用户可能有读过的了），sync一下总的unread数在再存入redis中。</p>
+<center class="half">
+    <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129171036659.png" width="300">
+    <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129170357144.png" width="300">
+</center>
 
-<p>上面我们已经根据concurrentConsumer的值设置了N个消费者队列,从下面代码中最后一行可以看出消费者队列中维护了一个<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97&spm=1001.2101.3001.7020">阻塞队列</a>,其中阻塞队列的大小就由prefetchCount决定.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public BlockingQueueConsumer(ConnectionFactory connectionFactory, MessagePropertiesConverter messagePropertiesConverter, ActiveObjectCounter&lt;BlockingQueueConsumer&gt; activeObjectCounter, AcknowledgeMode acknowledgeMode, boolean transactional, int prefetchCount, boolean defaultRequeueRejected, Map&lt;String, Object&gt; consumerArgs, boolean noLocal, boolean exclusive, String... queues) &#123;</span><br><span class="line">        this.cancelled = new AtomicBoolean(false);</span><br><span class="line">        this.consumerArgs = new HashMap();</span><br><span class="line">        this.deliveryTags = new LinkedHashSet();</span><br><span class="line">        this.consumerTags = new ConcurrentHashMap();</span><br><span class="line">        this.missingQueues = Collections.synchronizedSet(new HashSet());</span><br><span class="line">        this.retryDeclarationInterval = 60000L;</span><br><span class="line">        this.failedDeclarationRetryInterval = 5000L;</span><br><span class="line">        this.declarationRetries = 3;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">        this.messagePropertiesConverter = messagePropertiesConverter;</span><br><span class="line">        this.activeObjectCounter = activeObjectCounter;</span><br><span class="line">        this.acknowledgeMode = acknowledgeMode;</span><br><span class="line">        this.transactional = transactional;</span><br><span class="line">        this.prefetchCount = prefetchCount;</span><br><span class="line">        this.defaultRequeueRejected = defaultRequeueRejected;</span><br><span class="line">        if (consumerArgs != null &amp;&amp; consumerArgs.size() &gt; 0) &#123;</span><br><span class="line">            this.consumerArgs.putAll(consumerArgs);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        this.noLocal = noLocal;</span><br><span class="line">        this.exclusive = exclusive;</span><br><span class="line">        this.queues = (String[])Arrays.copyOf(queues, queues.length);</span><br><span class="line">        </span><br><span class="line">        this.queue = new LinkedBlockingQueue(prefetchCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>根据队列的特性可知,如果阻塞队列中一个消息阻塞了,那么所有消息将会被阻塞,如果使用默认设置,concurrentConsumer&#x3D;1,prefetchCount&#x3D;250,那么当消费者队列中有一个消息由于某种原因阻塞了,那么该消息的后续消息同样不能被消费.为了防止这种情况的发生,我们可以增大concurrentConsumer的设置,使多个消费者可以并发消费.而prefetchCount该如何设置呢?假设conrrentConsumer&#x3D;2,prefetchCount采用默认值,rabbitmq容器会初始化两个并发的消费者,每个消费者的阻塞队列大小为250,rabbitmq的机制是将消息投递给consumer1,先为consumer1投递满250个message,再往consumer2投递250个message,如果consumer1的message一直小于250个,consumer2一直处于空闲状态,那么并发消费退化为单消费者.<br>下面再介绍下concurrentConsumer的设置,两种方式,一种是单个固定的值,如concurrentConsumer&#x3D;4,另一种是concurrentConsumer&#x3D;1-4.前面的不需要多说,重点是后面的设置,源码如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public void setConcurrency(String concurrency) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            int separatorIndex = concurrency.indexOf(45);</span><br><span class="line">            if (separatorIndex != -1) &#123;</span><br><span class="line">                this.setConcurrentConsumers(Integer.parseInt(concurrency.substring(0, separatorIndex)));</span><br><span class="line">                this.setMaxConcurrentConsumers(Integer.parseInt(concurrency.substring(separatorIndex + 1, concurrency.length())));</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                this.setConcurrentConsumers(Integer.parseInt(concurrency));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; catch (NumberFormatException var3) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Invalid concurrency value [&quot; + concurrency + &quot;]: only single fixed integer (e.g. \&quot;5\&quot;) and minimum-maximum combo (e.g. \&quot;3-5\&quot;) supported.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>concurrency即为我们设置的参数,45为’-’的ascii码,容器首先设置了一个并发消费者,然后设置了最大并发消者.maxConcurrentConsumer用于处理在极端情况下,可以实例化的最大的消费者数量,可以对比理解成线程池的核心线程数与最大线程数,在每次消费之初都会判断maxConcurrentConsumers是否为空,如果非空会判断是否对消费者进行弹性扩容,其中consecutiveMessages与consecutiveIdles变量控制是需要新增&#x2F;减少消费者的标志位,对应的参考值分别为consecutiveActiveTrigger和consecutiveIdleTrigger,两个变量的默认值为10</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (consecutiveMessages++ &gt; SimpleMessageListenerContainer.this.consecutiveActiveTrigger) &#123;</span><br><span class="line">	SimpleMessageListenerContainer.this.considerAddingAConsumer();</span><br><span class="line">    consecutiveMessages = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (consecutiveIdles++ &gt; SimpleMessageListenerContainer.this.consecutiveIdleTrigger) &#123;</span><br><span class="line">    SimpleMessageListenerContainer.this.considerStoppingAConsumer(this.consumer);</span><br><span class="line">    consecutiveIdles = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当单个消费者连续接受的消息数量达到10个的时候,开始调用considerAddingAConsumer,判断时间是否满足要求对并发消费者进行扩容.反之就是减少消费者数量.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private void considerAddingAConsumer() &#123;</span><br><span class="line">        synchronized(this.consumersMonitor) &#123;</span><br><span class="line">            if (this.consumers != null &amp;&amp; this.maxConcurrentConsumers != null &amp;&amp; this.consumers.size() &lt; this.maxConcurrentConsumers) &#123;</span><br><span class="line">                long now = System.currentTimeMillis();</span><br><span class="line">                if (this.lastConsumerStarted + this.startConsumerMinInterval &lt; now) &#123;</span><br><span class="line">                    this.addAndStartConsumers(1);</span><br><span class="line">                    this.lastConsumerStarted = now;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>如果设置conrrency&#x3D;1-4这种形式(弹性扩容),那么当有消息阻塞的时候,单个消费者不会连续接受10个消息,也就不会调considerAddingAConsumer函数,也就无法实现并发消费者的目的.当时通知中心项目中出现问题时就只有两个消费者(两台服务器的Listener).</p>
-<p>最后总结下rabbitmq并发消费的两个参数prefetchCount和concurrentConsumers<br>concurrentConsumers是设置并发消费者的个数,可以进行初始化-最大值动态调整,并发消费者可以提高消息的消费能力,防止消息的堆积<br>prefechCount是每个消费者一次性从broker中取出的消息个数,提高这个参数并不能对消息实现并发消费,仅仅是减少了网络传输的时间</p>
-<p>最优的prefetchCount设置可以参考这篇</p>
-<p><a target="_blank" rel="noopener" href="https://www.51cto.com/article/717280.html">https://www.51cto.com/article/717280.html</a></p>
 
       
 
@@ -308,7 +531,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -322,18 +545,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Notification项目
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/01/26/rabbitmq/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">rabbitmq</div>
+    <a href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">rabbimq并发</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -352,6 +566,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Overview"><span class="toc-number">1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Project-architecture-drawing"><span class="toc-number">2.</span> <span class="toc-text">Project architecture drawing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Project-feature"><span class="toc-number">3.</span> <span class="toc-text">Project feature</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Notification-UI-Panel"><span class="toc-number">4.</span> <span class="toc-text">Notification UI Panel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#event-configuration"><span class="toc-number">4.1.</span> <span class="toc-text">event configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webhook-configuration"><span class="toc-number">4.2.</span> <span class="toc-text">webhook configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BellNotification"><span class="toc-number">4.3.</span> <span class="toc-text">BellNotification</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Notification-Technology-stack"><span class="toc-number">5.</span> <span class="toc-text">Notification Technology stack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#infra"><span class="toc-number">5.1.</span> <span class="toc-text">infra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">Grafana：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-search-by-Kibana"><span class="toc-number">5.3.</span> <span class="toc-text">ES search by Kibana:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-integrated-app"><span class="toc-number">5.4.</span> <span class="toc-text">The integrated app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Business-logic"><span class="toc-number">5.5.</span> <span class="toc-text">1. Business logic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Email-flow"><span class="toc-number">5.5.1.</span> <span class="toc-text">Email flow</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Email-Deliver-Status-Tracking"><span class="toc-number">5.6.</span> <span class="toc-text">2. Email Deliver Status Tracking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Design"><span class="toc-number">5.6.1.</span> <span class="toc-text">2.1 Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-Create-a-ses-configuration-set"><span class="toc-number">5.6.1.1.</span> <span class="toc-text">2.1.1 Create a ses configuration set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Add-a-destination-for-the-set"><span class="toc-number">5.6.1.2.</span> <span class="toc-text">2.1.2 Add a destination for the set</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Email-User-Behaviour-Tracking"><span class="toc-number">5.7.</span> <span class="toc-text">3. Email User Behaviour Tracking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Design"><span class="toc-number">5.7.1.</span> <span class="toc-text">3.1 Design</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-WebHooks"><span class="toc-number">5.8.</span> <span class="toc-text">4. WebHooks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-UI"><span class="toc-number">5.8.1.</span> <span class="toc-text">1. UI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Design"><span class="toc-number">5.8.2.</span> <span class="toc-text">2. Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-User-customized-webhook-setting"><span class="toc-number">5.8.2.1.</span> <span class="toc-text">2.1. User-customized webhook setting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Built-in-webhook-Setting"><span class="toc-number">5.8.2.2.</span> <span class="toc-text">2.2. Built-in webhook Setting</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Mobile"><span class="toc-number">5.9.</span> <span class="toc-text">5. Mobile</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
