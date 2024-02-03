@@ -6,26 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
-  <title>APIKEY项目 | LEO&#39;S NOTE</title>
+  <title>项目问题总结 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OverviewLegacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user. The new API Key will be attached to role rather than user and man">
+  <meta name="description" content="Ring bell &amp; Websocket1 Ring bell notificationsring bell notifications are to send real time notifications to users that are currently login to V1 console. 1.1 DesginThe design is simple:  store ri">
 <meta property="og:type" content="article">
-<meta property="og:title" content="APIKEY项目">
-<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:title" content="项目问题总结">
+<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="OverviewLegacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user. The new API Key will be attached to role rather than user and man">
+<meta property="og:description" content="Ring bell &amp; Websocket1 Ring bell notificationsring bell notifications are to send real time notifications to users that are currently login to V1 console. 1.1 DesginThe design is simple:  store ri">
 <meta property="og:locale">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173038297.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173752348.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100337034.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100536270.png">
-<meta property="article:published_time" content="2024-01-29T09:28:38.000Z">
-<meta property="article:modified_time" content="2024-01-30T02:26:56.172Z">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20230309160951253.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130124900369.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130124921351.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20230310150702573.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130134004027.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130134115528.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130145211087.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130151138077.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130151225353.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240202125433464.png">
+<meta property="article:published_time" content="2024-01-30T04:37:17.000Z">
+<meta property="article:modified_time" content="2024-02-03T09:23:10.956Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png">
+<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20230309160951253.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -162,42 +167,150 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-APIKEY项目" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-项目问题总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      APIKEY项目
+      项目问题总结
     </h1>
   
 
         
-        <a href="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2024-01-29T09:28:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-29</time>
+        <a href="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2024-01-30T04:37:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Legacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user.</p>
-<p>The new API Key will be attached to role rather than user and managed by SP Foundation service.</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png" alt="image-20240129173647446"></p>
+        <h1 id="Ring-bell-Websocket"><a href="#Ring-bell-Websocket" class="headerlink" title="Ring bell &amp; Websocket"></a>Ring bell &amp; Websocket</h1><h2 id="1-Ring-bell-notifications"><a href="#1-Ring-bell-notifications" class="headerlink" title="1 Ring bell notifications"></a>1 Ring bell notifications</h2><p>ring bell notifications are to send real time notifications to users that are currently login to V1 console.</p>
+<h3 id="1-1-Desgin"><a href="#1-1-Desgin" class="headerlink" title="1.1 Desgin"></a>1.1 Desgin</h3><p>The design is simple:</p>
+<ul>
+<li><p>store ring bell notification in mongoDB when it creates, and the ttl of each notification is 14 days.</p>
+</li>
+<li><p>get all notification from DB that is meant to be seen by the current login account via RBAC</p>
+</li>
+<li><p>Websocket is used to send ring bell message to a login account.</p>
+</li>
+</ul>
 <span id="more"></span>
 
-<h1 id="UI-panel"><a href="#UI-panel" class="headerlink" title="UI panel"></a>UI panel</h1><p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173038297.png" alt="image-20240129173038297"></p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173752348.png" alt="image-20240129173752348"></p>
-<h1 id="infra"><a href="#infra" class="headerlink" title="infra"></a>infra</h1><p>mysql、redis、springboot</p>
-<h1 id="ES-search-by-Kibana"><a href="#ES-search-by-Kibana" class="headerlink" title="ES search by Kibana:"></a>ES search by Kibana:</h1><p>serviceName: uic, componentName：apikey</p>
-<p>other key words: category 31,activity 01 to load audit log </p>
-<h1 id="Project-feature"><a href="#Project-feature" class="headerlink" title="Project feature"></a>Project feature</h1><p>Trend Vision one公共API密钥(jwt)在用户管理中由psd管理。token是关联到用户的用户令牌。在V1基础上，API密钥将附加到角色而不是用户，并由uic控制台管理。Vision one后台将为V1基础客户维护API密钥<br>APIKeys 微服务提供了一个集中位置来创建和管理 API 密钥，可用于访问Trend Vision One Open API 或第三方应用程序集成</p>
-<p>实现批量增删，条件过滤，分页查询，通过etag进行版本控制，避免资源更新时发生冲突。</p>
-<p>目前该app已经</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100337034.png" alt="image-20240130100337034"></p>
-<p>目前该app提供的五只api均已作为open api提供给客户进行交互式使用。</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100536270.png" alt="image-20240130100536270"></p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20230309160951253.png" alt="image-20230309160951253"></p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130124900369.png" alt="image-20240130124900369"></p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130124921351.png" alt="image-20240130124921351"></p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20230310150702573.png" alt="image-20230310150702573"></p>
+<p>Websocket向前端发送消息的两种方式，一种是发向小🔔，两种type ,但实际通过websocket发送的是未读数，只有当点小铃铛的时候前端才会调用一个接口去load这段时间的保存在mongodb中的未读的content内容和上次load的时间。这支api会load这个companyId下的所有消息（7天内的，ttl是7天）。</p>
+<ul>
+<li>0 - Informative (To be displayed under Bell’s “Informative” page)</li>
+<li>1 - Tasks (To be displayed under Bell’s “Tasks” page)</li>
+</ul>
+<p>另一种是common type，就是直接通过webscket REDIS pubsub发向ui</p>
+<h2 id="2-Websocket-优化"><a href="#2-Websocket-优化" class="headerlink" title="2 Websocket 优化"></a>2 Websocket 优化</h2><p>websocket is used to ensure the real-time delivery of ring bell notifications. Websocket connection is established by a http request from user’s browser to nc-v2 when login.</p>
+<p>When a ring bell notification is created, nc-v2 send a websocket message to browser and notify the user of there being a unread message in bell.</p>
+<h3 id="2-1-Desgin"><a href="#2-1-Desgin" class="headerlink" title="2.1 Desgin"></a>2.1 Desgin</h3><p><strong>Architecture:</strong></p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130134004027.png" alt="image-20240130134004027"></p>
+<p><strong>data structure in each pod:</strong></p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130134115528.png" alt="image-20240130134115528"></p>
+<p>当用户在第一次登录的时候会call unread count api,我们会把webscoket url返回给前端，前端再去建立websocket连接。WebSocket是真正的全双工方式，建立连接后客户端与服务器端是完全平等的，可以互相主动请求。而HTTP长连接基于HTTP，是传统的客户端对服务器发起请求的模式。</p>
+<p>This API returns the unread count of ring bell notifcations and the url to esatablish the websocket connection.</p>
+<p>After calling the API, UI will attempt to esatablish a new websocket connection to nc-v2. The websocket connection is disconnected when the tab is closed or refreshed.</p>
+<h2 id="3-Websocket-Enhancement"><a href="#3-Websocket-Enhancement" class="headerlink" title="3 Websocket Enhancement"></a>3 Websocket Enhancement</h2><h3 id="2-1-Background"><a href="#2-1-Background" class="headerlink" title="2.1 Background"></a>2.1 Background</h3><p>Currently, nc-v2 uses only one redis pub&#x2F;sub channel to publish and subscribe websocket messages of all connections. However, Pub&#x2F;Sub clients have a default hard limit of 32 megabytes and a soft limit of 8 megabytes per 60 seconds. There is a high chance nc-v2 would exceed this limit if websockets are used more frequently in the future. </p>
+<h3 id="2-2-Design"><a href="#2-2-Design" class="headerlink" title="2.2 Design"></a>2.2 Design</h3><p>Divide the pub&#x2F;sub channel to customer level, the websocket connections which belong to the same customer shares one pub&#x2F;sub channel.</p>
+<p>And every time a send websocket message request is triggered, nc-v2 only publish message to one channel according to the targeted customer of the request.</p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130145211087.png" alt="image-20240130145211087"></p>
+<h1 id="SES-Throttling-error"><a href="#SES-Throttling-error" class="headerlink" title="SES Throttling error"></a>SES Throttling error</h1><p>原因是由于某个时间段某个app通过notification的发信量急剧增多导致超过了ses quota。</p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130151138077.png" alt="image-20240130151138077"></p>
+<p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240130151225353.png" alt="image-20240130151225353"></p>
+<p>优化：对每个service的做send email count limit ,确保不会由于某一个app的发送量过大占用了其他app的发信。</p>
+<p>rabbitmq保证消息的的幂</p>
+<p>​                                        </p>
+<h1 id="RabbitMq的消息堆积"><a href="#RabbitMq的消息堆积" class="headerlink" title="RabbitMq的消息堆积"></a>RabbitMq的消息堆积</h1><p>线上出现过消息堆积导致的cpu使用率飙升的情况</p>
+<p>RabbitMQ 是一种消息中间件，用于在应用程序之间传递消息。当消息堆积过多时，可能会导致 CPU 飙升的原因有以下几点：</p>
+<ol>
+<li><p>消息过多导致消息队列堆积：当消息的产生速度大于消费者的处理速度时，消息会积累在消息队列中。如果消息堆积过多，RabbitMQ 需要不断地进行消息的存储、检索和传递操作，这会导致 CPU 使用率升高。</p>
+</li>
+<li><p>消费者无法及时处理消息：消费者处理消息的速度不足以追赶消息的产生速度，导致消息不断积累在队列中。这可能是由于消费者出现瓶颈，无法处理足够多的消息，或者消费者的处理逻辑复杂，导致消费过程耗费过多的 CPU 资源。</p>
+</li>
+<li><p>消息重试导致额外的 CPU 开销：当消息处理失败时，消费者可能会进行消息的重试操作，尝试再次处理消息。如果重试频率较高，会导致消息在队列中频繁流转、被重复消费，这会增加额外的 CPU 开销。</p>
+</li>
+<li><p>过多的连接以及网络IO：当消息堆积过多时，可能会引发大量的连接请求和网络数据传输。这会增加网络 IO 的负载，并占用 CPU 资源。</p>
+</li>
+</ol>
+<h3 id="预防措施"><a href="#预防措施" class="headerlink" title="预防措施"></a>预防措施</h3><p>生产者</p>
+<blockquote>
+<p>减少发布频率,考虑使用队列最大长度限制</p>
+</blockquote>
+<p>消费者</p>
+<blockquote>
+<p>增加消费者的处理能力   &#x2F;&#x2F;优化代码；使用JDK的队列缓存数据，多线程去处理（若考虑顺序问题，就采用单例线程）<br>默认情况下，rabbitmq消费者为单线程串行消费（org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer类的concurrentConsumers与txSize（对应prefetchCount）都是1），设置并发消费两个关键属性concurrentConsumers和prefetchCount。concurrentConsumers：设置的是对每个listener在初始化的时候设置的并发消费者的个数；prefetchCount：每次从broker里面取的待消费的消息的个数。</p>
+</blockquote>
+<blockquote>
+<p>配置方法：修改application.properties：<br>spring.rabbitmq.listener.concurrency&#x3D;m<br>spring.rabbitmq.listener.prefetch&#x3D;n</p>
+</blockquote>
+<blockquote>
+<p>prefetchCount(prefetch)<br>    The number of messages to accept from the broker in one socket frame. The higher this is the faster the messages can be delivered, but the higher the risk of non-sequential processing. Ignored if the acknowledgeMode<br>    is NONE. This will be increased, if necessary, to match the txSize</p>
+<p>concurrentConsumers(concurrency)<br>    The number of concurrent consumers to initially start for each listener.</p>
+</blockquote>
+<p>concurrentConsumers默认值为1，prefechCount默认值为250，可以通过调整这两个参数来加速consumer端的消费。</p>
+<p>concurrentConsumers是设置并发消费者的个数,可以进行初始化-最大值动态调整,并发消费者可以提高消息的消费能力,防止消息的堆积<br>prefechCount是每个消费者一次性从broker中取出的消息个数,提高这个参数并不能对消息实现并发消费,仅仅是减少了网络传输的时间</p>
+<h1 id="RabbitMq消息发送可靠发送"><a href="#RabbitMq消息发送可靠发送" class="headerlink" title="RabbitMq消息发送可靠发送"></a>RabbitMq消息发送可靠发送</h1><p><img src="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240202125433464.png" alt="image-20240202125433464"></p>
+<p>rabbitmq的自动ack机制的问题</p>
+<ul>
+<li>潜在的消息丢失：如果消费者在处理消息时发生错误或崩溃，而且没有手动ack确认消息，那么消息可能会丢失。</li>
+<li>消费者无法控制消息处理速度：自动ack机制会导致消费者无法控制消息的处理速度，可能会导致消息堆积或者处理过慢。</li>
+<li>难以进行消息重传：由于消息在自动ack模式下会立即被确认，消费者无法进行消息的重传，导致消息丢失或重复处理的问题</li>
+</ul>
+<h3 id="解决方法：开启手动ack机制和重试机制"><a href="#解决方法：开启手动ack机制和重试机制" class="headerlink" title="解决方法：开启手动ack机制和重试机制"></a>解决方法：开启手动ack机制和重试机制</h3><p><strong>首先开启rabbitmq持久化机制</strong></p>
+<p><strong>确保消息成功发送：一方面需要确认publish—&gt;exchange—-&gt;queue的ack,当确保进消息进queue后，api立即响应response,后面的流程由消费端继续进行逻辑处理，这样来解决线上高并发大数据量的请求而导致的api延迟的问题。</strong></p>
+<p><strong>确保消息成功被消费：另一方面要开启消费端手动ack的confirm机制 queue—&gt;consumer来保证消息的可靠性发送，并建立retry机制以及死信队列来将发送失败的邮件信息持久化后延迟发送。</strong></p>
+<h3 id="Publisher-Acknowledgements机制"><a href="#Publisher-Acknowledgements机制" class="headerlink" title="Publisher Acknowledgements机制"></a>Publisher Acknowledgements机制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># rabbitmq</span><br><span class="line">spring.rabbitmq.host=localhost</span><br><span class="line">spring.rabbitmq.port=5672</span><br><span class="line">spring.rabbitmq.username=guest</span><br><span class="line">spring.rabbitmq.password=guest</span><br><span class="line"># 开启confirms回调 P -&gt; Exchange</span><br><span class="line">spring.rabbitmq.publisher-confirm-type=correlated</span><br><span class="line"># 开启returnedMessage回调 Exchange -&gt; Queue</span><br><span class="line">spring.rabbitmq.publisher-returns=true</span><br><span class="line"># 设置手动确认(ack) Queue -&gt; C</span><br><span class="line">spring.rabbitmq.listener.simple.acknowledge-mode=manual</span><br><span class="line">spring.rabbitmq.listener.simple.prefetch=100</span><br><span class="line">spring.rabbitmq.listener.simple.retry.enabled=true 是否开启消费者重试（为false时重试不生效）</span><br><span class="line">spring.rabbitmq.listener.simple.retry.max-attempts=3  最大重试次数（包含本身消费的1次）</span><br><span class="line">spring.rabbitmq.listener.simple.retry.initial-interval=5000 重试间隔时间（单位毫秒）</span><br><span class="line">spring.rabbitmq.listener.simple.default-requeue-rejected=false 重试次数超过上面的设置之后是否丢弃（false不丢弃时需要写相应代码将该消息加入死信队列）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>开启confirms回调 P -&gt; Exchange是配置消息到达交换器的确认回调，第二行则是配置消息到达队列的回调。</p>
+<p>spring.rabbitmq.publisher-confirm-type&#x3D;correlated  （属性的配置有三个取值）</p>
+<ol>
+<li>none：表示禁用发布确认模式，默认即此。</li>
+<li>correlated：表示成功发布消息到交换器后会触发的回调方法。</li>
+<li>simple：类似 correlated，并且支持 <code>waitForConfirms()</code> 和 <code>waitForConfirmsOrDie()</code> 方法的调用。</li>
+</ol>
+<p>开启returnedMessage回调 Exchange -&gt; Queue</p>
+<p>spring.rabbitmq.publisher-returns&#x3D;true</p>
+<p>接下来要开启两个监听，具体配置如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitConfig</span> <span class="keyword">implements</span> <span class="title class_">RabbitTemplate</span>.ConfirmCallback, RabbitTemplate.ReturnsCallback &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">BUSINESS_EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;business-exchange&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEAD_LETTER_EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;dead-letter-exchange&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">BUSINESS_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;business-queue&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEAD_LETTER_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;dead-letter-queue&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ROUTING_KEY</span> <span class="operator">=</span> <span class="string">&quot;routing-key&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明业务交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> DirectExchange <span class="title function_">businessExchange</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(BUSINESS_EXCHANGE_NAME);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 声明死信交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> DirectExchange <span class="title function_">deadLetterExchange</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(DEAD_LETTER_EXCHANGE_NAME);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 声明业务队列</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">businessQueue</span><span class="params">()</span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; args = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">2</span>);</span><br><span class="line">        <span class="comment">// 设置业务队列的死信交换机</span></span><br><span class="line">        args.put(<span class="string">&quot;x-dead-letter-exchange&quot;</span>, DEAD_LETTER_EXCHANGE_NAME);</span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(BUSINESS_QUEUE_NAME).withArguments(args).build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 声明死信队列</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">deadLetterQueue</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(DEAD_LETTER_QUEUE_NAME);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将业务队列绑定到业务交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindBusinessQueue</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(businessQueue()).to(businessExchange()).with(ROUTING_KEY);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将死信队列绑定到死信交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindDeadLetterQueue</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(deadLetterQueue()).to(deadLetterExchange()).with(ROUTING_KEY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initRabbitTemplate</span><span class="params">()</span> &#123;</span><br><span class="line">        rabbitTemplate.setConfirmCallback(<span class="built_in">this</span>);</span><br><span class="line">        rabbitTemplate.setReturnsCallback(<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">confirm</span><span class="params">(CorrelationData correlationData, <span class="type">boolean</span> ack, String cause)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (ack) &#123;</span><br><span class="line">            logger.info(<span class="string">&quot;&#123;&#125;:消息成功到达交换器&quot;</span>,correlationData.getId());</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            logger.error(<span class="string">&quot;&#123;&#125;:消息发送失败&quot;</span>, correlationData.getId());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">returnedMessage</span><span class="params">(ReturnedMessage returned)</span> &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;&#123;&#125;:消息未成功路由到队列&quot;</span>,returned.getMessage().getMessageProperties().getMessageId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>声明了一个业务队列、一个业务交换机、一个死信队列、一个死信交换机。其中声明业务队列时的 x-dead-letter-exchange 参数指定队列的死信交换机，当信息被判定为死信时就会被Broker自动转发给配置的死信交换机.</li>
+<li>定义配置类，实现 <code>RabbitTemplate.ConfirmCallback</code> 和 <code>RabbitTemplate.ReturnsCallback</code> 两个接口，这两个接口，前者的回调用来确定消息到达交换器，后者则会在消息路由到队列失败时被调用。</li>
+<li>定义 initRabbitTemplate 方法并添加 @PostConstruct 注解，在该方法中为 rabbitTemplate 分别配置这两个 Callback。</li>
+</ol>
+<p>生产消息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">TestService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MsgLogMapper msgLogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ServerResponse <span class="title function_">send</span><span class="params">(Mail mail)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">msgId</span> <span class="operator">=</span> RandomUtil.UUID32();</span><br><span class="line">        mail.setMsgId(msgId);</span><br><span class="line"></span><br><span class="line">        <span class="type">MsgLog</span> <span class="variable">msgLog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MsgLog</span>(msgId, mail, RabbitConfig.TEST_EXCHANGE_NAME, RabbitConfig.TEST_ROUTING_KEY_NAME);</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="type">CorrelationData</span> <span class="variable">correlationData</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorrelationData</span>(msgId);</span><br><span class="line">        rabbitTemplate.convertAndSend(RabbitConfig.BUSINESS_EXCHANGE_NAME, RabbitConfig.ROUTING_KEY, MessageHelper.objToMsg(mail), correlationData);<span class="comment">// 发送消息</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ServerResponse.success(ResponseCode.MAIL_SEND_SUCCESS.getMsg());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="consumer-Acknowledgeement机制"><a href="#consumer-Acknowledgeement机制" class="headerlink" title="consumer Acknowledgeement机制"></a>consumer Acknowledgeement机制</h3><p>在消费者端设置重试次数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MailConsumer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重试次数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">retryCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;dead-queue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(Message message, Channel channel, Map map)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;收到进入死信队列消息：&quot;</span> + message.toString());</span><br><span class="line">        System.out.println(<span class="string">&quot;消息入库，后续补偿&quot;</span>);</span><br><span class="line">        <span class="comment">//确认消息,防止出现消息堆积的情况</span></span><br><span class="line">        channel.basicAck(message.getMessageProperties().getDeliveryTag(), <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;order-queue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processOrder</span><span class="params">(Message message, Channel channel, Map map)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;收到订单队列消息：&quot;</span> + message.toString());</span><br><span class="line">            <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//确认消息</span></span><br><span class="line">            channel.basicAck(message.getMessageProperties().getDeliveryTag(), <span class="literal">false</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            retryCount++;</span><br><span class="line">            <span class="comment">//重新抛出异常  触发重试机制</span></span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//重试次数达到限制</span></span><br><span class="line">            <span class="keyword">if</span> (retryCount == <span class="number">3</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;处理订单消息异常，nack消息到死信队列&quot;</span>);</span><br><span class="line">                <span class="comment">//不重新入队，发送到死信队列</span></span><br><span class="line">                channel.basicNack(message.getMessageProperties().getDeliveryTag(), <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>channel.basicAck(deliveryTag, multiple);</p>
+<p>consumer处理成功后，通知broker删除队列中的消息，如果设置multiple&#x3D;true，表示支持批量确认机制以减少网络流量。</p>
+<p>channel.basicNack(deliveryTag, multiple, requeue);</p>
+<p>consumer处理失败后，例如：有值为5,6,7,8 deliveryTag的投递。</p>
+<p>如果channel.basicNack(8, true, true);表示deliveryTag&#x3D;8之前未确认的消息都处理失败且将这些消息重新放回队列中。</p>
+<ul>
+<li><p>deliveryTag：long - 消息投递的唯一标识，作用域为当前channel</p>
+</li>
+<li><p>multiple：boolean - 是否启用批量确认机制</p>
+</li>
+<li><p>requeue：boolean - 消息处理失败是重新放回队列还是直接丢弃</p>
+</li>
+</ul>
+<p><code>ResendMsg</code>定时任务重新投递发送失败的消息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ResendMsg</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MsgLogService msgLogService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最大投递次数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_TRY_COUNT</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 每30s拉取投递失败的消息, 重新投递</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Scheduled(cron = &quot;0/30 * * * * ?&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">resend</span><span class="params">()</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;开始执行定时任务(重新投递消息)&quot;</span>);</span><br><span class="line"></span><br><span class="line">        List&lt;MsgLog&gt; msgLogs = msgLogService.selectTimeoutMsg();</span><br><span class="line">        msgLogs.forEach(msgLog -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">msgId</span> <span class="operator">=</span> msgLog.getMsgId();</span><br><span class="line">            <span class="keyword">if</span> (msgLog.getTryCount() &gt;= MAX_TRY_COUNT) &#123;</span><br><span class="line">                msgLogService.updateStatus(msgId, Constant.MsgLogStatus.DELIVER_FAIL);</span><br><span class="line">                log.info(<span class="string">&quot;超过最大重试次数, 消息投递失败, msgId: &#123;&#125;&quot;</span>, msgId);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                msgLogService.updateTryCount(msgId, msgLog.getNextTryTime());<span class="comment">// 投递次数+1</span></span><br><span class="line"></span><br><span class="line">                <span class="type">CorrelationData</span> <span class="variable">correlationData</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorrelationData</span>(msgId);</span><br><span class="line">                rabbitTemplate.convertAndSend(msgLog.getExchange(), msgLog.getRoutingKey(), MessageHelper.objToMsg(msgLog.getMsg()), correlationData);<span class="comment">// 重新投递</span></span><br><span class="line"></span><br><span class="line">                log.info(<span class="string">&quot;第 &quot;</span> + (msgLog.getTryCount() + <span class="number">1</span>) + <span class="string">&quot; 次重新投递消息&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;定时任务执行结束(重新投递消息)&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明: 每一条消息都和<code>exchange routingKey</code>绑定, 所有消息重投共用这一个定时任务即可</p>
+</blockquote>
 
       
 
@@ -277,7 +390,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +404,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          service platform项目
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Notification项目</div>
+    <a href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">service platform项目</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -321,6 +425,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ring-bell-Websocket"><span class="toc-number">1.</span> <span class="toc-text">Ring bell &amp; Websocket</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Ring-bell-notifications"><span class="toc-number">1.1.</span> <span class="toc-text">1 Ring bell notifications</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Desgin"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 Desgin</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Websocket-%E4%BC%98%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">2 Websocket 优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Desgin"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Desgin</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Websocket-Enhancement"><span class="toc-number">1.3.</span> <span class="toc-text">3 Websocket Enhancement</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Background"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1 Background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Design"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.2 Design</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SES-Throttling-error"><span class="toc-number">2.</span> <span class="toc-text">SES Throttling error</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RabbitMq%E7%9A%84%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF"><span class="toc-number">3.</span> <span class="toc-text">RabbitMq的消息堆积</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E9%98%B2%E6%8E%AA%E6%96%BD"><span class="toc-number">3.0.1.</span> <span class="toc-text">预防措施</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RabbitMq%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%8F%AF%E9%9D%A0%E5%8F%91%E9%80%81"><span class="toc-number">4.</span> <span class="toc-text">RabbitMq消息发送可靠发送</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A%E5%BC%80%E5%90%AF%E6%89%8B%E5%8A%A8ack%E6%9C%BA%E5%88%B6%E5%92%8C%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="toc-number">4.0.1.</span> <span class="toc-text">解决方法：开启手动ack机制和重试机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Publisher-Acknowledgements%E6%9C%BA%E5%88%B6"><span class="toc-number">4.0.2.</span> <span class="toc-text">Publisher Acknowledgements机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#consumer-Acknowledgeement%E6%9C%BA%E5%88%B6"><span class="toc-number">4.0.3.</span> <span class="toc-text">consumer Acknowledgeement机制</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>

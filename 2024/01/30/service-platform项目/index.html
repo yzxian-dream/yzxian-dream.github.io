@@ -6,26 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
-  <title>APIKEY项目 | LEO&#39;S NOTE</title>
+  <title>service platform项目 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OverviewLegacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user. The new API Key will be attached to role rather than user and man">
+  <meta name="description" content="介绍 Service Platform是VisionOne的服务级中间件，它提供统一的入口点、认证方法和API节流，帮助对跨站点或跨云API调用的API和隧道服务进行认证和转换。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="APIKEY项目">
-<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:title" content="service platform项目">
+<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="OverviewLegacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user. The new API Key will be attached to role rather than user and man">
+<meta property="og:description" content="介绍 Service Platform是VisionOne的服务级中间件，它提供统一的入口点、认证方法和API节流，帮助对跨站点或跨云API调用的API和隧道服务进行认证和转换。">
 <meta property="og:locale">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173038297.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173752348.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100337034.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100536270.png">
-<meta property="article:published_time" content="2024-01-29T09:28:38.000Z">
-<meta property="article:modified_time" content="2024-01-30T02:26:56.172Z">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130105545744.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130111246625.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130112059827.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130113032620.png">
+<meta property="article:published_time" content="2024-01-30T02:40:20.000Z">
+<meta property="article:modified_time" content="2024-01-30T03:42:10.424Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png">
+<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130105545744.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -162,42 +161,96 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-APIKEY项目" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-service-platform项目" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      APIKEY项目
+      service platform项目
     </h1>
   
 
         
-        <a href="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2024-01-29T09:28:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-29</time>
+        <a href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
+  	<time datetime="2024-01-30T02:40:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Legacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user.</p>
-<p>The new API Key will be attached to role rather than user and managed by SP Foundation service.</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png" alt="image-20240129173647446"></p>
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p> Service Platform是VisionOne的服务级中间件，它提供统一的入口点、认证方法和API节流，帮助对跨站点或跨云API调用的API和隧道服务进行认证和转换。</p>
+<p><img src="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130105545744.png" alt="image-20240130105545744"></p>
 <span id="more"></span>
 
-<h1 id="UI-panel"><a href="#UI-panel" class="headerlink" title="UI panel"></a>UI panel</h1><p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173038297.png" alt="image-20240129173038297"></p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173752348.png" alt="image-20240129173752348"></p>
-<h1 id="infra"><a href="#infra" class="headerlink" title="infra"></a>infra</h1><p>mysql、redis、springboot</p>
-<h1 id="ES-search-by-Kibana"><a href="#ES-search-by-Kibana" class="headerlink" title="ES search by Kibana:"></a>ES search by Kibana:</h1><p>serviceName: uic, componentName：apikey</p>
-<p>other key words: category 31,activity 01 to load audit log </p>
-<h1 id="Project-feature"><a href="#Project-feature" class="headerlink" title="Project feature"></a>Project feature</h1><p>Trend Vision one公共API密钥(jwt)在用户管理中由psd管理。token是关联到用户的用户令牌。在V1基础上，API密钥将附加到角色而不是用户，并由uic控制台管理。Vision one后台将为V1基础客户维护API密钥<br>APIKeys 微服务提供了一个集中位置来创建和管理 API 密钥，可用于访问Trend Vision One Open API 或第三方应用程序集成</p>
-<p>实现批量增删，条件过滤，分页查询，通过etag进行版本控制，避免资源更新时发生冲突。</p>
-<p>目前该app已经</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100337034.png" alt="image-20240130100337034"></p>
-<p>目前该app提供的五只api均已作为open api提供给客户进行交互式使用。</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100536270.png" alt="image-20240130100536270"></p>
+<p>Inbound is a submodule which is responsible to process request, and dispatch to Outbound.</p>
+<ul>
+<li><strong>in-bound</strong>: For in-bound API calls to Service Platform, Service Platform requires per tenant API key for authentication.</li>
+<li><strong>out-bound</strong>: For out-bound API calls from Service Platform, Service Platform can conform to API consumers’ trust models (trust all, per tenant API key or per role API key).</li>
+</ul>
+<p>外部的api请求打到app service,需要一下请求url format。 SVP_FQDN&#x2F;internal&#x2F;v1&#x2F;direct&#x2F;appX&#x2F;Path</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a: Retrive the app FQDN based on the product code appX</span><br><span class="line">b: Generate the authentication header (usually JWT token) for the app</span><br><span class="line">c: Attach some additional headers to indicate the customer or RBAC infomation</span><br><span class="line">d: Forward the request to the app server APP_FQDN/Path</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Common Resources for App The JWT token for app to authenticate itself to the SVP to request APIs The JWT pem file for the app to verify the requests from the SVP, the JWT token and pem are provided offline.</li>
+</ul>
+<h4 id="Detailed-or-Advanced-Parts"><a href="#Detailed-or-Advanced-Parts" class="headerlink" title="Detailed or Advanced Parts"></a>Detailed or Advanced Parts</h4><h6 id="Interaction-with-SVP"><a href="#Interaction-with-SVP" class="headerlink" title="Interaction with SVP"></a>Interaction with SVP</h6><p>The apps send and receive data from SVP.</p>
+<h6 id="SVP-→-App"><a href="#SVP-→-App" class="headerlink" title="SVP → App"></a>SVP → App</h6><ul>
+<li>The requests from SVP to app contains additional headers that SVP attaches, see the SVP headers.</li>
+<li>The app should verify the JWT token in the request header by the .pem file provided by UIC team.</li>
+<li>An example of the decoded token from SVP to the App is as following:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;cid&quot;: &quot;...&quot;,</span><br><span class="line">  &quot;cpid&quot;: &quot;aei&quot;,</span><br><span class="line">  &quot;ppid&quot;: &quot;svp&quot;,</span><br><span class="line">  &quot;it&quot;: 1608637916,</span><br><span class="line">  &quot;uid&quot;: &quot;&quot;,</span><br><span class="line">  &quot;pl&quot;: &quot;&quot;,</span><br><span class="line">  &quot;et&quot;: 1611229915</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cpid: consumer id, should be the product code of the app</li>
+<li>ppid: producer id, should be the product code of SVP (svp)</li>
+</ul>
+<h6 id="App-→-SVP"><a href="#App-→-SVP" class="headerlink" title="App → SVP"></a>App → SVP</h6><p>When the app wants to requst the APIs of UIC or other apps, it must also authenticate itself to the SVP. <a target="_blank" rel="noopener" href="https://wiki.jarvis.trendmicro.com/display/SG/SP+Users">Guidline</a> <strong>Example</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PATH: `$&#123;SVP_FQDN&#125;/internal/v1/direct/$&#123;appX&#125;/Path`</span><br><span class="line"></span><br><span class="line">authorization:&#x27;Bearer ...&#x27;</span><br><span class="line">x-task-id:&#x27;...&#x27;</span><br><span class="line">x-trace-id:&#x27;...&#x27;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h4 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h4><h6 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h6><ul>
+<li>Cache</li>
+<li>Publish&#x2F;Subscribe</li>
+</ul>
+<h6 id="rabbitmq"><a href="#rabbitmq" class="headerlink" title="rabbitmq"></a>rabbitmq</h6><p><img src="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130111246625.png" alt="image-20240130111246625"></p>
+<ul>
+<li><strong>in-bound</strong>: When requesting to access sp, inbound will process the request, store the information in rabbitmq, and subscribe the redis channelId at the same time</li>
+<li><strong>Out-bound</strong>: Extract information from rabbitmq, forward the request to appX, and post the response to redis after receiving the response</li>
+</ul>
+<blockquote>
+<p>‘{“taskId”:”…”,”traceId”:”…”,”channelId”:”…”,”method”:”POST”,”url”:”&#x2F;internal&#x2F;sws&#x2F;v1&#x2F;inbound&#x2F;product&#x2F;query”,”headers”:{“x-svp-site”:”us”},”body”:{“cid”:”…”,”requestId”:”…”},”options”:{“token”:{“iss”:”Service Platform”,”cid”:”…”,”cpid”:”svp”,”ppid”:”svp_admin”,”it”:1607044182,”et”:1622596182}}}’</p>
+</blockquote>
+<h2 id="问题及背景"><a href="#问题及背景" class="headerlink" title="问题及背景"></a>问题及背景</h2><p>SP 架构将流量的入站和出站分开。RabbitMQ 和 Redis 用于入站和出站之间的通信。所有请求数据都将保存在 SP 中，直到得到响应。但对于大多数API，除了认证和设置简单的header外，SP仅通过。这些简单的功能可以通过网关轻松实现。 </p>
+<p>Kong框架是一个开源的强大网关。它被用在nginx中。而且更重要的是，它是流代理，所以效率很高。它利用插件来提供灵活性。为了让我们的平台更加稳定、高效、简单，利用Kong来做代理将是一个更好的解决方案。</p>
+<p>目前的SP存在以下问题。</p>
+<ul>
+<li><p>处理简单的代理路由：我们需要为每个应用程序出站维护代码和独立的pod，即使只是通过API。</p>
+</li>
+<li><p>上传文件（大容量）支持：SP会将所有数据块进行拼接，这可能会消耗大量内存。</p>
+</li>
+<li><p>支持大容量的请求&#x2F;响应正文：与上传文件类似，在响应之前，入站和出站都会将所有请求数据保留在内存中。所以OOM经常发生。</p>
+</li>
+<li><p>MQ依赖：入站和出站通信使用MQ和redis。潜在的错误处理不当可能会导致一些与基础设施相关的错误。例如，RabbitMQ 在部署期间断开连接。</p>
+</li>
+<li><p>节流：目前我们没有灵活的机制来控制流量。</p>
+</li>
+</ul>
+<p>Kong插件参考： https: <a target="_blank" rel="noopener" href="https://docs.konghq.com/hub/">&#x2F;&#x2F;docs.konghq.com&#x2F;hub&#x2F;</a></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>利用 Kong 网关路由 API，将直通 API 直接路由到后端应用程序，将其他 API 路由到 svp 后端（第一阶段我们将保留 svp 流程）。</p>
+<p>利用 Kong 身份验证相关插件来验证直通 API 并添加 Oauth 标头。</p>
+<p>利用 Kong 评级限制插件来限制流量。</p>
+<p>利用 Kong prometheus 插件提供指标。</p>
+<p>Kong</p>
+<p>Kong是一款基于Nginx_Lua模块写的高可用，由于Kong是基于Nginx的，所以可以水平扩展多个Kong服务器，通过前置的负载均衡配置把请求均匀地分发到各个Server，来应对大批量的网络请求。</p>
+<p><img src="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130112059827.png" alt="image-20240130112059827"></p>
+<h4 id="Kong主要有三个组件："><a href="#Kong主要有三个组件：" class="headerlink" title="Kong主要有三个组件："></a>Kong主要有三个组件：</h4><p>Kong Server ：基于nginx的服务器，用来接收API请求。 </p>
+<p>Apache Cassandra&#x2F;PostgreSQL ：用来存储操作数据。 Kong dashboard：官方推荐UI管理工具，当然，也可以使用 restfull 方式 管理admin api。</p>
+<p>Kong采用插件机制进行功能定制，插件集（可以是0或N个）在API请求响应循环的生命周期中被执行。插件使用Lua编写，目前已有几个基础功能：HTTP基本认证、密钥认证、CORS（Cross-Origin Resource Sharing，跨域资源共享）、TCP、UDP、文件日志、API请求限流、请求转发以及Nginx监控。</p>
+<p>通过插件实现了web-acl, jwttoken-auth,ratelimit等功能定制。</p>
+<p><img src="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130113032620.png" alt="image-20240130113032620"></p>
 
       
 
@@ -277,7 +330,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +344,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          service platform项目
+          项目问题总结
         
       </div>
     </a>
   
   
-    <a href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Notification项目</div>
+    <a href="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">APIKEY项目</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -321,6 +374,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Detailed-or-Advanced-Parts"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">Detailed or Advanced Parts</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Interaction-with-SVP"><span class="toc-number">1.0.0.1.0.1.</span> <span class="toc-text">Interaction with SVP</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SVP-%E2%86%92-App"><span class="toc-number">1.0.0.1.0.2.</span> <span class="toc-text">SVP → App</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#App-%E2%86%92-SVP"><span class="toc-number">1.0.0.1.0.3.</span> <span class="toc-text">App → SVP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Component"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">Component</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#redis"><span class="toc-number">1.0.0.2.0.1.</span> <span class="toc-text">redis</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#rabbitmq"><span class="toc-number">1.0.0.2.0.2.</span> <span class="toc-text">rabbitmq</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%8F%8A%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">问题及背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.</span> <span class="toc-text">解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Kong%E4%B8%BB%E8%A6%81%E6%9C%89%E4%B8%89%E4%B8%AA%E7%BB%84%E4%BB%B6%EF%BC%9A"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Kong主要有三个组件：</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
