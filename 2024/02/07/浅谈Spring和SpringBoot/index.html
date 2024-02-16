@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
-  <title>LEO&#39;S NOTE</title>
+  <title>浅谈Spring和SpringBoot | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Stay Hungry.Stay Foolish.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LEO&#39;S NOTE">
-<meta property="og:url" content="https://yao-zixian.gitee.io/index.html">
+  <meta name="description" content="SpringSpring是Java EE领域的企业级开发框架，能帮助企业实现复杂的网站后端服务，spring两个重要的特性极大的降低了企业级开发的复杂度。 第一个IoC控制反转，它不是什么新技术，而是一种设计思想，有了它之后，项目里复杂的对象管理工作就摆脱了，传统开发中，我们需要在对象内部通过new的方式创建别的对象，这就相当于建立了对象之间的某种依赖，而且这种工作是由程序员自己去维护的，但是自从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Spring和SpringBoot">
+<meta property="og:url" content="https://yao-zixian.gitee.io/2024/02/07/%E6%B5%85%E8%B0%88Spring%E5%92%8CSpringBoot/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="Stay Hungry.Stay Foolish.">
+<meta property="og:description" content="SpringSpring是Java EE领域的企业级开发框架，能帮助企业实现复杂的网站后端服务，spring两个重要的特性极大的降低了企业级开发的复杂度。 第一个IoC控制反转，它不是什么新技术，而是一种设计思想，有了它之后，项目里复杂的对象管理工作就摆脱了，传统开发中，我们需要在对象内部通过new的方式创建别的对象，这就相当于建立了对象之间的某种依赖，而且这种工作是由程序员自己去维护的，但是自从">
 <meta property="og:locale">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/02/07/%E6%B5%85%E8%B0%88Spring%E5%92%8CSpringBoot/image-20240216110857730.png">
+<meta property="article:published_time" content="2024-02-07T05:59:47.000Z">
+<meta property="article:modified_time" content="2024-02-16T07:57:28.157Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/02/07/%E6%B5%85%E8%B0%88Spring%E5%92%8CSpringBoot/image-20240216110857730.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -154,16 +158,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-浅谈Spring和SpringBoot" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-浅谈Spring和SpringBoot" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/02/07/%E6%B5%85%E8%B0%88Spring%E5%92%8CSpringBoot/">浅谈Spring和SpringBoot</a>
+    <h1 class="article-title" itemprop="name">
+      浅谈Spring和SpringBoot
     </h1>
   
 
@@ -178,277 +180,72 @@
       
         <h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><p>Spring是Java EE领域的企业级开发框架，能帮助企业实现复杂的网站后端服务，spring两个重要的特性极大的降低了企业级开发的复杂度。</p>
 <p>第一个IoC控制反转，它不是什么新技术，而是一种设计思想，有了它之后，项目里复杂的对象管理工作就摆脱了，传统开发中，我们需要在对象内部通过new的方式创建别的对象，这就相当于建立了对象之间的某种依赖，而且这种工作是由程序员自己去维护的，但是自从有了IoC之后，你只需要将你设计好的对象交给第三方的IoC容器去管理就可以了，而不是在你的对象里直接创建的方式来完成，IoC的出现非常方便的来帮我们根据配置文件来创建以及组装对象之间的依赖关系，这就是所谓的xml配bean。</p>
-        
-      
+<span id="more"></span>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">XML配bean是指在Spring框架中使用XML文件来配置bean对象。在XML文件中，可以定义bean的id、class、scope、属性、依赖关系等信息。</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserService&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserDao&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br><span class="line"></span><br><span class="line">在这个示例中，我们定义了两个bean对象，分别是userService和userDao。其中，userService依赖于userDao，通过property标签来设置依赖关系。</span><br></pre></td></tr></table></figure>
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/02/07/%E6%B5%85%E8%B0%88Spring%E5%92%8CSpringBoot/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-项目问题总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">项目问题总结</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2024-01-30T04:37:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Ring-bell-Websocket"><a href="#Ring-bell-Websocket" class="headerlink" title="Ring bell &amp; Websocket"></a>Ring bell &amp; Websocket</h1><h2 id="1-Ring-bell-notifications"><a href="#1-Ring-bell-notifications" class="headerlink" title="1 Ring bell notifications"></a>1 Ring bell notifications</h2><p>ring bell notifications are to send real time notifications to users that are currently login to V1 console.</p>
-<h3 id="1-1-Desgin"><a href="#1-1-Desgin" class="headerlink" title="1.1 Desgin"></a>1.1 Desgin</h3><p>The design is simple:</p>
+<p>另一个就是AOP面向切面编程，这其实是一个实现代码解耦的利器，因为你可以在不改变原代码功能流程的基础上加入新功能，这其实就是扩展性的表现，它的基本原理就是动态代理技术，跟设计模式里的代理模式的思想是一样的</p>
+<p>但是通过spring来开发项目有一个致命的痛点，随着项目越来越复杂、庞大，就需要引入很多配置文件，太多的配置文件非常繁杂，有时候又比较难以理解，容易配置出错，对于spring或springmvc光xml配Bean这一步就很复杂</p>
+<h2 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h2><p>这时候就出现了SpringBoot,它不是为了取代Spring，而是在Spring的基础上让开发者更加方便、简化地使用Spring。第一大简化就是将原先Spring里的复杂的XML Bean的配置给砍掉了，这也是springBoot根本的核心思想：开箱即用，约定大于配置（CoC:Convention over Configuration）,意思是开发人员仅需要规定应用中不符合约定的那部分，定制化一下（yaml）就行，而绝大部分约定俗成的东西由SpringBoot已经帮你配置好了,不需要再像原来Spring和SpringMVC那样需要配置各种复杂的xml配bean,由此以来，springboot无论去集成什么都变得非常容易，比如集成数据库、缓存、权限、web容器、监控、消息队列都非常方便，因为都有对应的springBoot组件就已经自己帮你全自动的去进行配置了，所以开发模式自此也发送很大的变化，在没有springboot以前，用spring开发一个web项目需要一下几个步骤</p>
+<p>配置maven依赖</p>
+<p>配置web.xml,加载Spring或SpringMVC</p>
+<p>配置数据库连接、配置Spring事务</p>
+<p>配置加载文件的读取，开启注解</p>
+<p>配置日志文件…</p>
+<p>配完后，部署tomcat进行调试</p>
+<p>而使用SpringBoot后，只需要建立一个Springboot的工程，配置好maven依赖，基本上就可以直接启动了，都由springboot帮你自动配置了，以前的xml里的复杂配置Springboot全部帮你规避掉了</p>
+<p>springboot的优势</p>
 <ul>
-<li><p>store ring bell notification in mongoDB when it creates, and the ttl of each notification is 14 days.</p>
+<li>在开发方面，有各种各样的Starter开箱即用的组件,方便集成各种常用的框架和中间件，比如JPA,redis,mq</li>
+<li>在配置方面，原先复杂的xml配bean直接摈弃掉了，所有的bean全部都是自动配置，自动注入</li>
+<li>在部署方面，因为spring boot本身就内嵌了tomcat容器，不用开发者在额外去配tomcat容器了，非常便捷，项目启动和部署都是非常容易</li>
+</ul>
+<p>那何为 Starter 呢？你可以理解为一个可拔插式的插件（组件）。或者理解为场景启动器。通过 Starter，能够简化以前繁杂的配置，无需过多的配置和依赖，它会帮你合并依赖，并且将其统一集成到一个 Starter 中，我们只需在 Maven 或 Gradle 中引入 Starter 依赖即可。starter的出现也从本质上颠覆了传统的java EE项目的代码复用方式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有了以上几点的优势，使用spring boot可以使开发者更加倾向于业务代码的编写，而不需要花费大量的时间在配置和环境搭建上。</p>
+<h2 id="spring和spring-mvc、springboot之间的区别"><a href="#spring和spring-mvc、springboot之间的区别" class="headerlink" title="spring和spring mvc、springboot之间的区别"></a>spring和spring mvc、springboot之间的区别</h2><h3 id="spring和springmvc"><a href="#spring和springmvc" class="headerlink" title="spring和springmvc"></a>spring和springmvc</h3><p>实际上springmvc和spring没有可比性，springmvc只是spring里的一个小模块module而已，它并不是一个单独的project（框架），只不过它用的比较多，所以把它拿出来了。<br>springmvc归属于spring；</p>
+<ul>
+<li><p>spring是一个一站式的轻量级的java开发框架，核心是控制反转（IOC）和面向切面（AOP）,针对于开发的web层（springmvc）、业务层（IoC）、持久层（jdbcTemplate）等都提供了多种配置解决方案；spring是一个完整的全栈的框架，能解决前后端交互的开发模式下的几乎所有问题。</p>
 </li>
-<li><p>get all notification from DB that is meant to be seen by the current login account via RBAC</p>
-</li>
-<li><p>Websocket is used to send ring bell message to a login account.</p>
+<li><p>springMvc是spring基础之上的一个MVC框架，主要处理web开发的路径映射和视图渲染，属于spring框架中web层开发的一部分；</p>
 </li>
 </ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-service-platform项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/">service platform项目</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2024-01-30T02:40:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p> Service Platform是VisionOne的服务级中间件，它提供统一的入口点、认证方法和API节流，帮助对跨站点或跨云API调用的API和隧道服务进行认证和转换。</p>
-<p><img src="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130105545744.png" alt="image-20240130105545744"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-APIKEY项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/">APIKEY项目</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2024-01-29T09:28:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Legacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user.</p>
-<p>The new API Key will be attached to role rather than user and managed by SP Foundation service.</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png" alt="image-20240129173647446"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Notification项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/">Notification项目</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2024-01-29T03:13:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ol>
-<li>Interact with UI for customer configuration of each alert or subscrption</li>
-<li>Provide asynchronous multi-channel notification service for other V1 Apps</li>
+<h3 id="spring和springboot"><a href="#spring和springboot" class="headerlink" title="spring和springboot"></a>spring和springboot</h3><p>1.springmvc所需要的xml,config等配置相对比较繁琐；</p>
+<p>2.springboot框架相对于springmvc来说，更加专注于开发微服务后台接口，不开发前端视图，同时遵循约定大于配置，简化了插件配置流程，极大的减轻程序员的负担，在当时SSM框架的年代，想要集成Spring、Springmvc、Mybatis,需要大量的配置文件。而使用了springboot后，不需要配置xml,大大简化了配置流程</p>
+<blockquote>
+<p>关于约定大于配置，它的意思是对工具的实现进行约定，而无需编写配置文件，只有当期望的行为和约定不同时才需要显示的配置，如下是一个spring boot项目，项目目录中resources代表了资源文件夹，java是存放项目代码的地方，test是存放测试文件的地方，编译之后的类都存放在target文件下，在配置文件上，springboot的配置文件默认为application的文件，即使不在配置文件中编写任何的配置，项目也能跑起来，因为所有的配置文件都已经按照约定值存放了，比如web的端口server.port默认就是8080，如果需要配置为其他端口运行项目，就可以显示的在配置文件里配置server.port为其他来覆盖掉约定。</p>
+</blockquote>
+<p><img src="/2024/02/07/%E6%B5%85%E8%B0%88Spring%E5%92%8CSpringBoot/image-20240216110857730.png" alt="image-20240216110857730"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>spring框架就像一个家族，是一个基石，是其他框架的底层支撑，有众多的衍生产品比如boot、security、jpa等等。但他们的基础都是spring的IOC和AOP等，IoC提供了依赖注入的容器，AOP解决了面向切面编程，然后在此两者的基础上实现了其他衍生产品的高级功能；</li>
+<li>springmvc主要解决WEB层面开发的问题，是一个机遇servelet的一个mvc框架，通过xml配置，统一开发前端视图和后端逻辑；</li>
+<li>由于spring的配置复杂，各种xml、javaconfig、servelet处理起来比较繁琐，为了简化开发者的使用，从而创造性地推出了springboot框架，默认优于配置，简化了springmvc的配置流程；但区别于springmvc的是，springboot专注于单体微服务接口开发，和前端解耦，虽然spring boot也可以做成和springmvc一样前后台一起开发，但这就有点不符合spring boot框架的设计初衷课了。springboot更像是以一个脚手架，把所有的东西整合到一起，使开发更加方便。</li>
 </ol>
-<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129111755742.png" alt="image-20240129111755742"></p>
-        
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -457,16 +254,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/02/07/%E6%B5%85%E8%B0%88Spring%E5%92%8CSpringBoot/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">项目问题总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -481,204 +337,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-rabbimq并发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/">rabbimq并发</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2024-01-27T14:34:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于rabbitmq消息堆积问题处理<br>消息堆积的主要原因有以下几种:<br>(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积<br>(2)消费者实例IO严重阻塞或者消费者所在服务器宕机<br>(3)消费者业务处理异常导致的消息堆积</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring"><span class="toc-number">1.</span> <span class="toc-text">Spring</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot"><span class="toc-number">2.</span> <span class="toc-text">SpringBoot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spring%E5%92%8Cspring-mvc%E3%80%81springboot%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">spring和spring mvc、springboot之间的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spring%E5%92%8Cspringmvc"><span class="toc-number">3.1.</span> <span class="toc-text">spring和springmvc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spring%E5%92%8Cspringboot"><span class="toc-number">3.2.</span> <span class="toc-text">spring和springboot</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-rabbitmq" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/26/rabbitmq/">rabbitmq</a>
-    </h1>
   
 
-        
-        <a href="/2024/01/26/rabbitmq/" class="archive-article-date">
-  	<time datetime="2024-01-26T09:58:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>消息</strong>指的是两个应用间传递的数据。数据的类型有很多种形式，可能只包含文本字符串，也可能包含嵌入对象。</p>
-<p><strong>“消息队列(Message Queue)”是在消息的传输过程中保存消息的容器，本质上是一个队列，FIFO先进先出</strong>。在消息队列中，通常有生产者和消费者两个角色。生产者只负责发送数据到消息队列，谁从消息队列中取出数据处理，他不管。消费者只负责从消息队列中取出数据处理，他不管这是谁发送的数据。</p>
-<p>常见的比如rabbitmq, rocketmq, kafka，nodejs里的bull, go的asynq,都是比较好用的消息队列。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/26/rabbitmq/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo-gitee搭建博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/25/hexo-gitee%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">hexo+gitee搭建博客</a>
-    </h1>
   
 
-        
-        <a href="/2024/01/25/hexo-gitee%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2024-01-25T13:34:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://youimg1.c-ctrip.com/target/100r10000000pycel4E0E.jpg" alt="风景"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/25/hexo-gitee%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
+
   
 
 
@@ -701,8 +385,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
