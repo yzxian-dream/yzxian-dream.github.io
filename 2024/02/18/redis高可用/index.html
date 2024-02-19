@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218170953928.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218171854710.png">
 <meta property="article:published_time" content="2024-02-18T01:40:00.000Z">
-<meta property="article:modified_time" content="2024-02-19T05:04:48.925Z">
+<meta property="article:modified_time" content="2024-02-19T08:27:56.375Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
 
 <span id="more"></span>
 
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>为了防止单点redis奔溃导致mysql面临的大流量请求问题，redis需要一个其高可用性，比如使用主从模式，主节点负责写数据和同步数据到从节点，从节点负责度数据，做好数据同步，读写分离提高性能，主节点崩溃，从节点顶上去，还能实现高可用。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>为了防止单点redis崩溃宕机导致mysql面临的大流量请求问题，redis需要其高可用性，比如使用主从模式，主节点负责写数据和同步数据到从节点，从节点负责度数据，做好数据同步，读写分离提高性能，主节点崩溃，从节点顶上去，还能实现高可用。</p>
 <p>主节点会把数据写成RDB文件，发送给从节点，从节点加载完RDB文件以保证和主节点数据一致，如果主节点有数据写入，删除，修改命令，也会把这些命令挨个同步到从节点，通过这样的方式同步数据叫做命令传播，如果从节点掉线，为了把之前的数据补给从节点且不想把主节点全部数据同步给从节点，浪费时间，影响性能，实际只需要把从节点挂掉的那个时刻往后的数据同步一下就行。所以主从节点使用由表及里，也叫做复制偏移量，最开始从0开始，随着数据的复制和同步，一起更新，后面只需要比较各自的这个偏移量，就能知道缺失了哪些数据，这样的数据同步策略效率比较高。</p>
 <p>虽然有了主从复制，但主节点要是挂了，还是需要程序员来手动选择从节点升级为主节点来提供写入服务，不够智能。这是哨兵机制就出现了，就是用来管理，统筹协调主从redis节点。（哨兵实际上也是redis）。为了及时获得和更新主从节点的信息，哨兵每隔10s就要用info命令去问候一下主节点，主节点会响应哨兵它有哪些从节点，为了更加及时知道大家是否掉线，哨兵每隔1s都要用ping命令检测一下所有节点，如果主节点在设置的时间里没有收到回复，当前哨兵就会判断主节点主观下线了，但达到设置数量的sentinel认为主节点下线，那就认定为主节点为客观下线，那么就该进行故障转移了。选出新的主节点，让其他从节点从新的主节点同步数据，旧的主节点变为从节点。</p>
 <p>新节点选择标准</p>
