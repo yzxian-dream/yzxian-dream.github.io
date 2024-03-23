@@ -6,26 +6,52 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
-  <title>APIKEY项目 | LEO&#39;S NOTE</title>
+  <title>redis相关知识 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OverviewLegacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user. The new API Key will be attached to role rather than user and man">
-<meta property="og:type" content="article">
-<meta property="og:title" content="APIKEY项目">
-<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="redis相关知识">
+<meta property="og:url" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="OverviewLegacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user. The new API Key will be attached to role rather than user and man">
 <meta property="og:locale">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173038297.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173752348.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100337034.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100536270.png">
-<meta property="article:published_time" content="2024-01-29T09:28:38.000Z">
-<meta property="article:modified_time" content="2024-03-16T02:40:53.608Z">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212820119.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213542889.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213334923.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213905923.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214356656.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214802191.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215817013.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220921979.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220951901.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314220501107.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221159284.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221509720.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221300145.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221447415.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317182820056-0671306.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184325073-0672208.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184551396-0672354.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221419357.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221846943.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222454847.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222543741.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222656718-0685629.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222844502.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223117810.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223603812.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317224007246.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230108940.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230356923.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317231442988.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png">
+<meta property="article:published_time" content="2024-03-13T13:07:17.000Z">
+<meta property="article:modified_time" content="2024-03-23T13:55:40.076Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png">
+<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -162,42 +188,96 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-APIKEY项目" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-redis相关知识" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      APIKEY项目
+      redis相关知识
     </h1>
   
 
         
-        <a href="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2024-01-29T09:28:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-29</time>
+        <a href="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="archive-article-date">
+  	<time datetime="2024-03-13T13:07:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Legacy V1 public API Token (Account Token) are managed by psd in user management. The token is account token attached to user.</p>
-<p>The new API Key will be attached to role rather than user and managed by SP Foundation service.</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173647446.png" alt="image-20240129173647446"></p>
+        <p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png" alt="image-20240313212434752"></p>
 <span id="more"></span>
 
-<h1 id="UI-panel"><a href="#UI-panel" class="headerlink" title="UI panel"></a>UI panel</h1><p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173038297.png" alt="image-20240129173038297"></p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240129173752348.png" alt="image-20240129173752348"></p>
-<h1 id="infra"><a href="#infra" class="headerlink" title="infra"></a>infra</h1><p>mysql、redis、springboot</p>
-<h1 id="ES-search-by-Kibana"><a href="#ES-search-by-Kibana" class="headerlink" title="ES search by Kibana:"></a>ES search by Kibana:</h1><p>serviceName: uic, componentName：apikey</p>
-<p>other key words: category 31,activity 01 to load audit log </p>
-<h1 id="Project-feature"><a href="#Project-feature" class="headerlink" title="Project feature"></a>Project feature</h1><p>Trend Vision one公共API密钥(jwt)在用户管理中由psd管理。token是关联到用户的用户令牌。在V1基础上，API密钥将附加到角色role而不是用户，并由uic控制台管理。Vision one后台将为V1基础客户维护API密钥<br>APIKeys 微服务提供了一个集中位置来创建和管理 API 密钥，可用于访问Trend Vision One Open API 或第三方应用程序集成，当用户访问公司的open api的时候，会去校验当前apikey是否存在role，存在的role是否有对应的permission。</p>
-<p>项目之处实现了数据迁移，把之前的旧的可用apikey迁移过来，实现批量增删，条件过滤，分页查询，通过etag进行版本控制，避免资源更新时发生冲突。目前这几只api也已经是公司的openapi，提供给客户第三方集成使用</p>
-<p>目前该app已经</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100337034.png" alt="image-20240130100337034"></p>
-<p>目前该app提供的五只api均已作为open api提供给客户进行交互式使用。</p>
-<p><img src="/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/image-20240130100536270.png" alt="image-20240130100536270"></p>
+<h1 id="redis缓存"><a href="#redis缓存" class="headerlink" title="redis缓存"></a>redis缓存</h1><h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><p>1.采用缓存空值</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212820119.png" alt="image-20240313212820119"></p>
+<p>2.采用布隆过滤器</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213542889.png" alt="image-20240313213542889"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213334923.png" alt="image-20240313213334923"></p>
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213905923.png" alt="image-20240313213905923"></p>
+<p>对于这两种解决方式，第一种更注重数据一致性，比如涉及到钱等要求强一致的，用方案一，对于要求性能高，响应快的的用方案2，不能保证数据的绝对一致。</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214356656.png" alt="image-20240313214356656"></p>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214802191.png" alt="image-20240313214802191"></p>
+<h2 id="双写一致性"><a href="#双写一致性" class="headerlink" title="双写一致性"></a>双写一致性</h2><p>一定要先设置前提，比如一致性要求高还是允许延迟一致</p>
+<h3 id="强一致前提"><a href="#强一致前提" class="headerlink" title="强一致前提"></a>强一致前提</h3><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215817013.png" alt="image-20240313215817013"></p>
+<p>1.不管是先删除缓存还是先修改数据库都会出现数据不一致问题</p>
+<p>2.删除两次缓存，在数据库修改完后，在删除一次缓存，就是为了防止脏数据的出现</p>
+<p>3.对于mysql集群，需要延时一会让主节点把数据同步到从节点，但是延时多少不好控制，在延时的过程中依然会有脏数据产生的风险</p>
+<p>以上都不能做完完全的强一致</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png" alt="image-20240313215627304"></p>
+<p>要保证强一致可以采用分布式锁，redis存的都是读多写少的数据，读操作上加读锁，写操作上加写锁，通过redission实现读写锁这样可以保证一致性，但是性能差</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png" alt="image-20240313220610386"></p>
+<h3 id="最终一致前提"><a href="#最终一致前提" class="headerlink" title="最终一致前提"></a>最终一致前提</h3><p>大部分情况下允许短暂的不一致，可以采用异步通知</p>
+<p>1.使用mq中间件，更新数据之后，通知缓存删除，需要保证mq的可靠性</p>
+<p>2.利用canal中间件，不需要修改业务代码，伪装成mysql的一个从节点，canal通过读取binlog日志数据更新缓存，对代码无侵入</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220921979.png" alt="image-20240313220921979"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220951901.png" alt="image-20240313220951901"></p>
+<h2 id="redis持久化"><a href="#redis持久化" class="headerlink" title="redis持久化"></a>redis持久化</h2><p>RDB和AOF</p>
+<h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314220501107.png" alt="image-20240314220501107"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221159284.png" alt="image-20240314221159284"></p>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221509720.png" alt="image-20240314221509720"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221300145.png" alt="image-20240314221300145"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221447415.png" alt="image-20240314221447415"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317182820056-0671306.png" alt="image-20240317182820056"></p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>RDB是一个快照文件，它是把redis内存存储到数据写到磁盘上，当redis实例宕机恢复数据的时候，方便从RDB的快照文件中恢复数据。</p>
+<p>AOF的含义是追加文件，当redis操作写命令的时候，都会存储这个文件中，当redis实例宕机恢复数据的时候，会从这个文件中再次执行一遍命令来恢复数据</p>
+<p>RDB因为是二进制文件，在保存的时候体积也是比较小的，它的恢复速度更快，但是它有可能会丢数据，我们通常在项目中会使用AOF来恢复数据，虽然AOF恢复速度慢一些，但是它丢数据的风险要小的多，在AOF文件中可以设置刷盘策略，一般设置成每秒批量写入一次命令</p>
+<h2 id="redis数据过期删除策略"><a href="#redis数据过期删除策略" class="headerlink" title="redis数据过期删除策略"></a>redis数据过期删除策略</h2><p>redis的key在过期后按照不同的规则删除key就是过期策略</p>
+<h3 id="惰性删除"><a href="#惰性删除" class="headerlink" title="惰性删除"></a>惰性删除</h3><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184325073-0672208.png" alt="image-20240317184325073"></p>
+<h3 id="定期删除"><a href="#定期删除" class="headerlink" title="定期删除"></a>定期删除</h3><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184551396-0672354.png" alt="image-20240317184551396"></p>
+<h2 id="redis数据淘汰策略"><a href="#redis数据淘汰策略" class="headerlink" title="redis数据淘汰策略"></a>redis数据淘汰策略</h2><p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221419357.png" alt="image-20240317221419357"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221846943.png" alt="image-20240317221846943"></p>
+<h2 id="redis分布式锁"><a href="#redis分布式锁" class="headerlink" title="redis分布式锁"></a>redis分布式锁</h2><h3 id="本地锁的问题"><a href="#本地锁的问题" class="headerlink" title="本地锁的问题"></a>本地锁的问题</h3><p>分布式锁使用场景：集群情况下的定时任务、抢单、幂等性场景</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222454847.png" alt="image-20240317222454847"></p>
+<p>对于单体项目可以使用jvm本地锁synchronized，它只能解决一个jvm下线程的互斥，解决不了多个jvm下线程的互斥</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222543741.png" alt="image-20240317222543741"></p>
+<p>但是对于集群项目，下面的不同jvm下使用synchronized，两个线程1还是会发生脏读，锁不生效</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222656718-0685629.png" alt="image-20240317222656718"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222844502.png" alt="image-20240317222844502"></p>
+<p>需要使用外部锁，也就是分布式锁</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223117810.png" alt="image-20240317223117810"></p>
+<h3 id="分布式锁实现方式"><a href="#分布式锁实现方式" class="headerlink" title="分布式锁实现方式"></a>分布式锁实现方式</h3><p>nx ex写成一条指令保证原子性，加过期时间怕某个线程执行过程中服务宕机导致死锁的问题</p>
+<p>在redisson中需要手动加锁，并且可以控制锁的失效时间和等待时间，当锁住的一个业务还没有执行完成的时候，在redisson中引入了一个看门狗机制，就是说每隔一段时间就检查当前业务是否还持有锁，如果持有就增加加锁的持有时间，当业务执行完成之后需要使用释放锁就可以了</p>
+<p>还有一个好处就是，在高并发下，一个业务有可能会执行很快，先客户1持有锁的时候，客户2来了以后并不会马上拒绝，它会自选不断尝试获取锁，如果客户1释放之后，客户2就可以马上持有锁，性能也得到了提升。</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223603812.png" alt="image-20240317223603812"></p>
+<blockquote>
+<p>releaseTime就是过期时间，假设是30s,那看门狗就会每10s延长一次key的过期时间，当任务执行完成后会手动释放锁并通知对应线程的看门狗不需要在做监听，因为这个key已经被删除了。</p>
+<p>如果有第二个线程来加锁，会被while循环来不断尝试去加锁，如果在很短的时间内线程1释放了锁，线程2就可以获得锁执行任务，当然这个while有个阈值，当到达一定的等待时间，会直接结束，线程2获取锁失败。加入这个等待机制（重试机制）的好处就是在高并发的情况下，可以很大程度的增加redis分布式锁的使用性能</p>
+</blockquote>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317224007246.png" alt="image-20240317224007246"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">redisLock</span><span class="params">()</span> <span class="keyword">throw</span> InterruptedException&#123;</span><br><span class="line">		<span class="comment">//获取锁（重入锁），执行锁的名称</span></span><br><span class="line">		<span class="type">RLock</span> <span class="variable">lock</span> <span class="operator">=</span> redissionClient.getLock(<span class="string">&quot;taskLock&quot;</span>);</span><br><span class="line">  <span class="comment">//尝试获取锁，参数分别为获取锁的最大等待时间（期间会重试），锁的自动释放时间，时间单位</span></span><br><span class="line">  <span class="comment">//如果有这个30，就没有这个watchdog了，redission认为你可以控制当前锁的失效时间，就不会开启监听续期了，没有30这个参数，就会开启看门狗模式</span></span><br><span class="line">  	<span class="type">boolean</span> <span class="variable">isLock</span> <span class="operator">=</span> lock.tryLock(<span class="number">10</span>,<span class="number">30</span>,TimeUnit.SECONDS);</span><br><span class="line">  <span class="comment">//判断是否获取成功,加锁、设置过期时间等操作都是基于lua脚本完成，可以保证redis命令执行的原子性。</span></span><br><span class="line">  <span class="keyword">if</span>(isLock)&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;执行业务&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">      <span class="comment">//释放锁</span></span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="redission可重入锁"><a href="#redission可重入锁" class="headerlink" title="redission可重入锁"></a>redission可重入锁</h3><p>redission支持对同一个线程获取可重入锁</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230108940.png" alt="image-20240317230108940"></p>
+<h3 id="redis分布式锁主从一致性"><a href="#redis分布式锁主从一致性" class="headerlink" title="redis分布式锁主从一致性"></a>redis分布式锁主从一致性</h3><p>当一个线程去redis主节点获取锁时，把数据写入主节点中，正常情况下主节点需要把数据同步至从节点，但此时还没来得及同步数据，主节点宕机，哨兵机制会选取出新的主节点，此时另一个线程来尝试从新的主节点获取锁，由于之前的锁数据没有同步过来，导致新的线程也能够加锁成功。两个线程同时持有了同一把锁，这也就丧失了锁的基本特性了，没有了锁的互斥性了，业务就可能出现脏数据的情况</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230356923.png" alt="image-20240317230356923"></p>
+<p>redis锁是高可用有限思想，zookeeper是强一致性思想</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317231442988.png" alt="image-20240317231442988"></p>
+<p>使用redission实现的分布式锁，底层是setnx和lua脚步（保证原子性）</p>
+<p>在redission的分布式锁种，提供了一个watchdog，一个线程获取锁成功后，watchdog会给持有锁的线程续期（默认是每隔10s续期一次），从而合理控制锁的有效时长</p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png" alt="image-20240323215425946"></p>
 
       
 
@@ -277,7 +357,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/29/APIKEY%E9%A1%B9%E7%9B%AE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +371,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/03/20/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          service platform项目
+          动态代理
         
       </div>
     </a>
   
   
-    <a href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Notification项目</div>
+    <a href="/2024/03/05/mysql%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql知识总结</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -321,6 +401,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#redis%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">redis缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="toc-number">1.1.</span> <span class="toc-text">缓存穿透</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="toc-number">1.2.</span> <span class="toc-text">缓存击穿</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="toc-number">1.3.</span> <span class="toc-text">缓存雪崩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">双写一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E4%B8%80%E8%87%B4%E5%89%8D%E6%8F%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">强一致前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E5%89%8D%E6%8F%90"><span class="toc-number">1.4.2.</span> <span class="toc-text">最终一致前提</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.5.</span> <span class="toc-text">redis持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-number">1.5.1.</span> <span class="toc-text">RDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-number">1.5.2.</span> <span class="toc-text">AOF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">1.5.3.</span> <span class="toc-text">区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis%E6%95%B0%E6%8D%AE%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5"><span class="toc-number">1.6.</span> <span class="toc-text">redis数据过期删除策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%B0%E6%80%A7%E5%88%A0%E9%99%A4"><span class="toc-number">1.6.1.</span> <span class="toc-text">惰性删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%9C%9F%E5%88%A0%E9%99%A4"><span class="toc-number">1.6.2.</span> <span class="toc-text">定期删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis%E6%95%B0%E6%8D%AE%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="toc-number">1.7.</span> <span class="toc-text">redis数据淘汰策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">1.8.</span> <span class="toc-text">redis分布式锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.8.1.</span> <span class="toc-text">本地锁的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.8.2.</span> <span class="toc-text">分布式锁实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redission%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="toc-number">1.8.3.</span> <span class="toc-text">redission可重入锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E4%B8%BB%E4%BB%8E%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">1.8.4.</span> <span class="toc-text">redis分布式锁主从一致性</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
