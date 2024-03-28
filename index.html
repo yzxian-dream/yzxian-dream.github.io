@@ -156,6 +156,80 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ConcurrentHashMap-Redis实现websocket" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/26/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/">ConcurrentHashMap+Redis实现websocket</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/26/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/" class="archive-article-date">
+  	<time datetime="2024-03-26T06:07:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-websocket"><a href="#1-websocket" class="headerlink" title="1.websocket"></a>1.websocket</h1><p>WebSocket是一种在单个TCP连接上进行全双工通信的协议，它允许客户端和服务器之间进行实时数据传输。相比传统的HTTP协议，WebSocket具有更低的延迟和更高的效率，适用于需要实时性的应用场景，如在线聊天、实时游戏等。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：注意啦，窝发起的是Websocket协议</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+
+<p>WebSocket和HTTP都是网络通信协议，但它们有一些重要的区别。</p>
+<ol>
+<li><strong>连接方式</strong>：HTTP是无状态的，请求-响应型的协议。客户端发起请求，服务器处理后返回响应，然后连接就关闭了。而WebSocket是全双工的，持久连接的协议。一旦连接建立，客户端和服务器就可以在任何时候发送消息，直到连接关闭。</li>
+<li><strong>数据传输</strong>：HTTP的数据传输效率较低，因为每个请求和响应都需要带有大量的头信息，并且每次数据交换都需要建立和断开连接。而WebSocket在连接建立后，数据是以帧的形式传输的，每个帧的头信息只有几个字节，所以数据传输效率较高。</li>
+<li><strong>用途</strong>：HTTP主要用于客户端和服务器之间的文档交换，比如浏览网页。而WebSocket主要用于需要实时数据交换的应用，比如在线聊天、游戏等。</li>
+<li><strong>兼容性</strong>：几乎所有的网络环境和设备都支持HTTP，但并非所有的网络环境和设备都支持WebSocket。比如一些老旧的代理服务器可能不支持WebSocket。</li>
+<li><strong>安全性</strong>：HTTP有安全的版本HTTPS，它使用SSL&#x2F;TLS来加密数据。WebSocket也有安全的版本WSS，它也使用SSL&#x2F;TLS来加密数据。</li>
+<li><strong>启动过程</strong>：WebSocket的连接启动过程是通过HTTP完成的。在建立WebSocket连接的握手过程中，首先由客户端向服务器发送一个HTTP请求，该请求包含一个”Upgrade: websocket”的头，请求将连接升级为WebSocket。如果服务器支持WebSocket，它会返回一个包含”101 Switching Protocols”的HTTP响应，表示同意升级连接</li>
+</ol>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/26/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-动态代理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -509,6 +583,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Ring-bell-Websocket"><a href="#Ring-bell-Websocket" class="headerlink" title="Ring bell &amp; Websocket"></a>Ring bell &amp; Websocket</h1><h2 id="1-Ring-bell-notifications"><a href="#1-Ring-bell-notifications" class="headerlink" title="1 Ring bell notifications"></a>1 Ring bell notifications</h2><p>ring bell notifications are to send real time notifications to users that are currently login to V1 console.</p>
+<p>当每个服务器记录连接，保存在内存ConcurrentHashMap当中<br>当需要推送websocket消息的时候，同时在redis发布一个消息<br>每个服务器订阅redis的消息，当监听到有消息时，每台服务器遍历自己内存当中的连接进行发送<br>这样我们就可以实现websocket的分布式部署，当然redis订阅和发布也可以用其他消息队列工具类实现<br>————————————————</p>
 <h3 id="1-1-Desgin"><a href="#1-1-Desgin" class="headerlink" title="1.1 Desgin"></a>1.1 Desgin</h3><p>The design is simple:</p>
 <ul>
 <li><p>store ring bell notification in mongoDB when it creates, and the ttl of each notification is 14 days.</p>
@@ -581,7 +656,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p> Service Platform是VisionOne的服务级中间件，它提供统一的入口点、认证方法和API节流，帮助对跨站点或跨云API调用的API和隧道服务进行认证和转换。</p>
-<p><img src="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/image-20240130105545744.png" alt="image-20240130105545744"></p>
+<p><img src="/2024/01/30/service-platform%E9%A1%B9%E7%9B%AE/eric_yao/blog/source/_posts/service-platform%E9%A1%B9%E7%9B%AE/image-20240324182644247.png" alt="image-20240324182644247"></p>
         
       
 
@@ -727,69 +802,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-rabbimq并发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/">rabbimq并发</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2024-01-27T14:34:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于rabbitmq消息堆积问题处理<br>消息堆积的主要原因有以下几种:<br>(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积<br>(2)消费者实例IO严重阻塞或者消费者所在服务器宕机<br>(3)消费者业务处理异常导致的消息堆积</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/">展开全文 >></a>
         </p>
       
 
