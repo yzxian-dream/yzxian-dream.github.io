@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
   <title>ConcurrentHashMap+Redis实现websocket | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.websocketWebSocket是一种在单个TCP连接上进行全双工通信的协议，它允许客户端和服务器之间进行实时数据传输。相比传统的HTTP协议，WebSocket具有更低的延迟和更高的效率，适用于需要实时性的应用场景，如在线聊天、实时游戏等。 123&#x2F;&#x2F;通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：注意啦，窝发起的是Webso">
+  <meta name="description" content="1.websocketWebSocket是一种在单个TCP连接上进行全双工通信的协议，它允许客户端和服务器之间进行实时数据传输。相比传统的HTTP协议，WebSocket具有更低的延迟和更高的效率，适用于需要实时性的应用场景，如在线聊天、实时游戏等。 123&#x2F;&#x2F;通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：已经发起的是Websocke">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ConcurrentHashMap+Redis实现websocket">
 <meta property="og:url" content="https://yao-zixian.gitee.io/2024/03/26/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="1.websocketWebSocket是一种在单个TCP连接上进行全双工通信的协议，它允许客户端和服务器之间进行实时数据传输。相比传统的HTTP协议，WebSocket具有更低的延迟和更高的效率，适用于需要实时性的应用场景，如在线聊天、实时游戏等。 123&#x2F;&#x2F;通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：注意啦，窝发起的是Webso">
+<meta property="og:description" content="1.websocketWebSocket是一种在单个TCP连接上进行全双工通信的协议，它允许客户端和服务器之间进行实时数据传输。相比传统的HTTP协议，WebSocket具有更低的延迟和更高的效率，适用于需要实时性的应用场景，如在线聊天、实时游戏等。 123&#x2F;&#x2F;通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：已经发起的是Websocke">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-03-26T06:07:43.000Z">
-<meta property="article:modified_time" content="2024-03-28T01:39:07.316Z">
+<meta property="article:modified_time" content="2024-03-28T02:07:08.002Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -177,7 +177,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="1-websocket"><a href="#1-websocket" class="headerlink" title="1.websocket"></a>1.websocket</h1><p>WebSocket是一种在单个TCP连接上进行全双工通信的协议，它允许客户端和服务器之间进行实时数据传输。相比传统的HTTP协议，WebSocket具有更低的延迟和更高的效率，适用于需要实时性的应用场景，如在线聊天、实时游戏等。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：注意啦，窝发起的是Websocket协议</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：已经发起的是Websocket协议</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
 
 <p>WebSocket和HTTP都是网络通信协议，但它们有一些重要的区别。</p>
 <ol>
@@ -204,7 +204,7 @@
 <h3 id="2、ConcurrentHashMap总结"><a href="#2、ConcurrentHashMap总结" class="headerlink" title="2、ConcurrentHashMap总结"></a><strong>2、ConcurrentHashMap总结</strong></h3><p>（1）HashMap 是线程不安全的，ConcurrentHashMap是线程安全的，但是线程安全仅仅指的是对容器操作的时候是线程安全的</p>
 <p>（2）ConcurrentHashMap 的public V get(Object key)不涉及到锁，也就是说获得对象时没有使用锁，它只对put,remove操作使用了同步操作</p>
 <p>（3）put 、remove方法，在jdk7使用锁，但多线程中并不一定有锁争用，原因在于ConcurrentHashMap将缓存的变量分到多个Segment，每个Segment上有一个锁，只要多个线程访问的不是一个Segment就没有锁争用，就没有堵塞，各线程用各自的锁，ConcurrentHashMap缺省情况下生成16个Segment，也就是允许16个线程并发的更新而尽量没有锁争用。而在jdk8中使用的CAS+Synchronized来保证线程安全，比加锁的性能更高</p>
-<p>（4）ConcurrentHashMap 线程安全的，允许一边更新、一边遍历，也就是说在对象遍历的时候，也可以进行remove,put操作，且遍历的数据会随着remove,put操作产出变化</p>
+<p>（4）ConcurrentHashMap 线程安全的，允许一边更新、一边遍历，也就是说在对象遍历的时候，也可以进行remove,put操作，且遍历的数据会随着remove,put操作产生变化</p>
 
       
 

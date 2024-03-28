@@ -177,7 +177,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="1-websocket"><a href="#1-websocket" class="headerlink" title="1.websocket"></a>1.websocket</h1><p>WebSocket是一种在单个TCP连接上进行全双工通信的协议，它允许客户端和服务器之间进行实时数据传输。相比传统的HTTP协议，WebSocket具有更低的延迟和更高的效率，适用于需要实时性的应用场景，如在线聊天、实时游戏等。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：注意啦，窝发起的是Websocket协议</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//通过在header里加上下面的信息，这个就是Websocket的核心了，告诉Apache、Nginx等服务器：已经发起的是Websocket协议</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
 
 <p>WebSocket和HTTP都是网络通信协议，但它们有一些重要的区别。</p>
 <ol>
