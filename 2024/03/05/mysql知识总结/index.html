@@ -81,7 +81,7 @@
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/05/mysql%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240312220728624.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/05/mysql%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240312221558673.png">
 <meta property="article:published_time" content="2024-03-05T13:10:13.000Z">
-<meta property="article:modified_time" content="2024-03-29T08:15:17.985Z">
+<meta property="article:modified_time" content="2024-04-14T14:32:05.206Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -270,6 +270,7 @@
 <p>undo log属于逻辑日志，它记录的是sql执行相关的信息。当发生回滚时，InnoDB会根据undo log的内容做与之前相反的工作：对于每个insert，回滚时会执行delete；对于每个delete，回滚时会执行insert；对于每个update，回滚时会执行一个相反的update，把数据改回去。</p>
 <p>以update操作为例：当事务执行update时，其生成的undo log中会包含被修改行的主键(以便知道修改了哪些行)、修改了哪些列、这些列在修改前后的值等信息，回滚时便可以使用这些信息将数据还原到update之前的状态。</p>
 </blockquote>
+<p><strong>redo log</strong> 通常是物理日志，记录的是数据页的物理修改，而不是某一行或某几行修改成怎样，它用来恢复提交后的物理数据页，且只能恢复到最后一次提交的位置。 undo log 用来回滚行记录到某个版本， undo log 一般是逻辑日志，根据每行记录进行记录。</p>
 <h3 id="持久性"><a href="#持久性" class="headerlink" title="持久性"></a>持久性</h3><p>实现原理：redo log</p>
 <blockquote>
 <p>redo log和undo log都属于InnoDB的事务日志。下面先聊一下redo log存在的背景。</p>
@@ -511,11 +512,11 @@
 <p><img src="/2024/03/05/mysql%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240306223651342.png" alt="image-20240306223651342"></p>
 <p>以上内容是对于 RC 级别来说，而对于 RR 级别，其实整个过程几乎一样，唯一不同的是生成 ReadView 的时机，RR 级别只在事务开始时生成一次，之后一直使用该 ReadView(<strong>这也就解释了可重复读下，同一个事务里两次读取的数据是一样的，因为两个readview是一样的，匹配规则也是一样的，在undolog版本链中查找的数据也是一样的</strong>)。而 RC 级别则在每次 select 时，都会生成一个 ReadView</p>
 <p>在连续快照读的事务里，ReadView会产生复用，没有幻读问题。特例：当两次快照读之间存在当前读</p>
-<h4 id="当前读的幻读解决"><a href="#当前读的幻读解决" class="headerlink" title="当前读的幻读解决"></a>当前读的幻读解决</h4><p>在RR的隔离级别下，但如果一个事务在执行过程中需要插入新的记录，并且这些记录的位置在已有的范围内，那么仍然可能出现幻读。这种情况下，可以使用”Next-Key Locks（行锁➕间隙锁）”锁定机制</p>
+<h4 id="当前读的幻读解决"><a href="#当前读的幻读解决" class="headerlink" title="当前读的幻读解决"></a>当前读的幻读解决</h4><p>在RR的隔离级别下，但如果另一个事务在执行过程中需要插入新的记录，并且这些记录的位置在已有的范围内，当前事务修改了另一个事务插入的数据，那么仍然可能出现幻读。这种情况下，可以使用”Next-Key Locks（行锁➕间隙锁）”锁定机制</p>
 <p>Next-Key Lock是MySQL InnoDB存储引擎中的一种锁定机制，它是行锁和间隙锁的组合，可以有效地解决幻读问题。</p>
 <p>在Next-Key Lock中，行锁是锁定记录本身，而间隙锁则是锁定记录之间的“间隙”。这样，不仅锁定了实际的记录，还锁定了它们之间的范围，防止其他事务在这个范围内插入新的记录，从而避免了幻读问题。</p>
 <p>具体来说，当一个事务需要读取或修改一段范围的记录时，它会在这段范围上设置Next-Key Lock。这个锁会持续到事务结束，期间其他事务不能在这个范围内插入新的记录。如果其他事务需要插入的记录恰好落在这个范围内，那么它必须等待锁被释放。</p>
-<p>需要注意的是，Next-Key Lock只在REPEATABLE READ和SERIALIZABLE这两个事务隔离级别下有效。在READ UNCOMMITTED和READ COMMITTED这两个隔离级别下，InnoDB只使用行锁，不使用间隙锁。</p>
+<p>需要注意的是，Next-Key Lock只在REPEATABLE READ和SERIALIZABLE这两个事务隔离级别下有效。在READ UNCOMMITTED和READ COMMITTED这两个隔离级别下，InnoDB只使用行锁，不使用间隙锁。　</p>
 <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7092056967216119845">https://juejin.cn/post/7092056967216119845</a></p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="/2024/03/05/mysql%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/image-20240312220503394.png" alt="image-20240312220503394"></p>
 <h1 id="索引性能优化"><a href="#索引性能优化" class="headerlink" title="索引性能优化"></a>索引性能优化</h1><h2 id="1-如何定位慢查询"><a href="#1-如何定位慢查询" class="headerlink" title="1.如何定位慢查询"></a>1.如何定位慢查询</h2><p>出现的情况</p>

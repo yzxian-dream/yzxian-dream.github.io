@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240202125433464.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/30/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/image-20240306142009917.png">
 <meta property="article:published_time" content="2024-01-30T04:37:17.000Z">
-<meta property="article:modified_time" content="2024-03-29T08:09:36.010Z">
+<meta property="article:modified_time" content="2024-04-17T14:53:42.848Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -224,6 +224,7 @@
 <p><strong>当客户端与服务端建立websocket连接后，会以当前cid为基础订阅一个channel(比如channelName为websocketChannel+cid), 并获取当前cid和其account信息填充到项目初始化时在内存中创建的用于保存每个account的webscoket信息的concurrenthashmap中。是当前登录的account会订阅redis channel，并开启线程consumeOne持续监测消费channel里的内容，对外提供一只发送小铃铛的api，当有消息publish到channel后，就会触发对应的task先获取先前存入concurrenthashmap中的当前cid下的所有online account,找到这个account对应的websocket连接，通过这个链接WriteMessage到前端，前端监控到onmessage事件进行处理，或者循环account进行广播发送</strong></p>
 </blockquote>
 <p>加入redis pub&#x2F;sub 的作用，使用这种机制，让所有节点的服务端都订阅同一个信道，然后当任意节点收到请求或消息后都可以触发发布机制，这样不管需要通知的用户在哪个节点上都可以收到消息，即使在不同的服务器中，两个用户之间也能互相收到消息，这样就完美的实现了多节点下的<code>websocket</code>通信，实现群发。</p>
+<p>1.原先的逻辑：项目启动的时候会让各个pod 订阅一个redis channel,用户在登录的时候默认就会建立websocket连接，这个连接是随机的建在notification的pod上的，所以要向某个user发送小铃铛消息的话，它需要进行一个广播，所以这边就采用了一个redis的pub&#x2F;sub机制，首先一个请求打过来，打到notification的其中一个pod上，pod会把这个message publish到channel中，所有订阅这个channel的pod都会拿到这个信息，然后再去找对应的user,找到了之后才会去发，因为一个user只会连在一个pod上，所以可以保证一个user只会发一次。</p>
 <p>This API returns the unread count of ring bell notifcations and the url to esatablish the websocket connection.</p>
 <p>After calling the API, UI will attempt to esatablish a new websocket connection to nc-v2. The websocket connection is disconnected when the tab is closed or refreshed.</p>
 <h2 id="3-Websocket-Enhancement"><a href="#3-Websocket-Enhancement" class="headerlink" title="3 Websocket Enhancement"></a>3 Websocket Enhancement</h2><h3 id="2-1-Background"><a href="#2-1-Background" class="headerlink" title="2.1 Background"></a>2.1 Background</h3><p>Currently, nc-v2 uses only one <strong>redis pub&#x2F;sub</strong> channel to publish and subscribe websocket messages of all connections. However, Pub&#x2F;Sub clients have a default hard limit of 32 megabytes and a soft limit of 8 megabytes per 60 seconds. There is a high chance nc-v2 would exceed this limit if websockets are used more frequently in the future. </p>

@@ -8,17 +8,19 @@
   <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
   <title>rabbimq并发 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
+  <meta name="description" content="消息堆积关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rabbimq并发">
 <meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
+<meta property="og:description" content="消息堆积关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
 <meta property="og:locale">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124356200.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124522287.png">
 <meta property="article:published_time" content="2024-01-27T14:34:13.000Z">
-<meta property="article:modified_time" content="2024-01-29T03:12:02.717Z">
+<meta property="article:modified_time" content="2024-04-09T06:50:15.997Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -179,9 +181,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于rabbitmq消息堆积问题处理<br>消息堆积的主要原因有以下几种:<br>(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积<br>(2)消费者实例IO严重阻塞或者消费者所在服务器宕机<br>(3)消费者业务处理异常导致的消息堆积</p>
+        <h1 id="消息堆积"><a href="#消息堆积" class="headerlink" title="消息堆积"></a>消息堆积</h1><p>关于rabbitmq消息堆积问题处理<br>消息堆积的主要原因有以下几种:<br>(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积<br>(2)消费者实例IO严重阻塞或者消费者所在服务器宕机<br>(3)消费者业务处理异常导致的消息堆积</p>
 <span id="more"></span>
 
+<h2 id="惰性队列"><a href="#惰性队列" class="headerlink" title="惰性队列"></a>惰性队列</h2><p>RabbitMQ呢是内存存储的，如果说在高并发的情况下消息量非常的大，这些消息我们如果都给它丢到内存当中，显然是不合适的，所以我们就要学习一个惰性队列来解决这个问题!</p>
+<p>从RabbitMQ的3.6.0版本开始，就增加了Lazy Queues的概念，也就是惰性队列。惰性队列的特征如下：</p>
+<p> 接收到消息后直接存入磁盘而非内存</p>
+<p> 消费者要消费消息时才会从磁盘中读取并加载到内存</p>
+<p> 支持数百万条的消息存储</p>
+<h2 id="concurrency"><a href="#concurrency" class="headerlink" title="concurrency"></a>concurrency</h2><p>这里concurrency的实现方式不看源码也能猜到，肯定是用多线程的方式来实现的，此时同一进程下打开的本地端口都是56278.下面看看listener-contaner对应的org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">解释</span><br><span class="line"><span class="keyword">protected</span> <span class="type">int</span> <span class="title function_">initializeConsumers</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">synchronized</span> (<span class="built_in">this</span>.consumersMonitor) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.consumers == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="built_in">this</span>.cancellationLock.reset();</span><br><span class="line">        <span class="built_in">this</span>.consumers = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;BlockingQueueConsumer, Boolean&gt;(<span class="built_in">this</span>.concurrentConsumers);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="built_in">this</span>.concurrentConsumers; i++) &#123;</span><br><span class="line">            <span class="type">BlockingQueueConsumer</span> <span class="variable">consumer</span> <span class="operator">=</span> createBlockingQueueConsumer();</span><br><span class="line">            <span class="built_in">this</span>.consumers.put(consumer, <span class="literal">true</span>);</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>container启动的时候会根据设置的concurrency的值（同时不超过最大值）创建n个BlockingQueueConsumer。</p>
 <p>消费端配置文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8990</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">admin</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">admin</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="attr">concurrency:</span> <span class="number">5</span> <span class="comment"># 消费端的监听个数(即@RabbitListener开启几个线程去处理数据。)</span></span><br><span class="line">        <span class="attr">max-concurrency:</span> <span class="number">10</span> <span class="comment"># 消费端开启处理q线程的数量，类似于worker</span></span><br><span class="line"><span class="string">）</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">10</span> <span class="comment">#每次线程取数据的数量</span></span><br><span class="line"><span class="comment">#??????</span></span><br><span class="line"><span class="attr">order-direct-exchange:</span> <span class="string">order-direct-ex</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c1??</span></span><br><span class="line"><span class="attr">order-direct-log-queue:</span> <span class="string">order-direct-log-queue</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c2??</span></span><br><span class="line"><span class="attr">order-direct-email-queue:</span> <span class="string">order-direct-email-queue</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#c3</span></span><br><span class="line"><span class="attr">order-direct-weixin-queue:</span> <span class="string">order-direct-weixin-queue</span></span><br></pre></td></tr></table></figure>
 
@@ -197,6 +208,9 @@
 <p>如上测试就是对email consumer开启了5个线程（channel）去监听也就是处理生产者这边发来的消息，每个线程每次读取10个消息。</p>
 <p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png" alt="image-20240127231209158"></p>
 <p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png" alt="image-20240127231817733"></p>
+<p>由上面的测试可见：在消费端，配置<code>prefetch</code>和<code>concurrency</code>参数便可以实现消费端<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MQ&spm=1001.2101.3001.7020">MQ</a>并发处理消息</p>
+<h2 id="prefetch"><a href="#prefetch" class="headerlink" title="prefetch"></a>prefetch</h2><p>那么prefetch的值意味着什么呢？其实从名字上大致能看出，BlockingQueueConsumer内部应该维护了一个阻塞队列BlockingQueue，prefetch应该是这个阻塞队列的长度，看下BlockingQueueConsumer内部有个queue，这个queue不是对应RabbitMQ的队列，而是Consumer自己维护的内存级别的队列，用来暂时存储从RabbitMQ中取出来的消息：</p>
+<p>每个customer会在MQ预取一些消息放入内存的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=LinkedBlockingQueue&spm=1001.2101.3001.7020">LinkedBlockingQueue</a>中，这个值越高，消息传递的越快，但非顺序处理消息的风险更高。如果ack模式为none，则忽略。如有必要，将增加此值以匹配txSize或messagePerAck。从2.0开始默认为250；设置为1将还原为以前的行为。</p>
 <p>项目中大部分使用@RabbitmqListener注解的方式处理业务代码中MQ的消费,这个注解用于监听指定的队列,如果containerFactory未指定,默认使用SimpleRabbitListenerContainerFactory实例对象创建一个消息监听容器(SimpleMessageListenerContainer)<br>默认情况下,rabbitmq的消费者为单线程串行消费,这也是队列的特性,我们可以看看SimpleMessageListenerContainer的源码,从图中可以看到设置并发消费属性concurrentConsumers&#x3D;1,从字面意义也可以分析出该字段是设置并发消费者的数量,默认为一个监听器设置一个消费者.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private volatile int concurrentConsumers = 1;</span><br></pre></td></tr></table></figure>
 
@@ -229,6 +243,76 @@
 <p>最后总结下rabbitmq并发消费的两个参数prefetchCount和concurrentConsumers<br>concurrentConsumers是设置并发消费者的个数,可以进行初始化-最大值动态调整,并发消费者可以提高消息的消费能力,防止消息的堆积<br>prefechCount是每个消费者一次性从broker中取出的消息个数,提高这个参数并不能对消息实现并发消费,仅仅是减少了网络传输的时间</p>
 <p>最优的prefetchCount设置可以参考这篇</p>
 <p><a target="_blank" rel="noopener" href="https://www.51cto.com/article/717280.html">https://www.51cto.com/article/717280.html</a></p>
+<h2 id="业务问题"><a href="#业务问题" class="headerlink" title="业务问题"></a>业务问题</h2><p>前面说过，设置并发的时候，要考虑具体的业务场景，对那种对消息的顺序有苛刻要求的场景不适合并发消费，而对于其他场景，比如用户注册后给用户发个提示短信，是不太在意哪个消息先被消费，哪个消息后被消费，因为每个消息是相对独立的，后注册的用户先收到短信也并没有太大影响。</p>
+<p>设置并发消费除了能提高消费的速度，还有另外一个好处：当某个消费者长期阻塞，此时在当前消费者内部的BlockingQueue的消息也会被一直阻塞，但是新来的消息仍然可以投递给其他消费者消费，这种情况顶多会导致prefetch个数目的消息消费有问题，而不至于单消费者情况下整个RabbitMQ的队列会因为一个消息有问题而全部堵死。所有在合适的业务场景下，需要合理设置concurrency和prefetch值。</p>
+<h1 id="消息丢失"><a href="#消息丢失" class="headerlink" title="消息丢失"></a>消息丢失</h1><p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124356200.png" alt="image-20240409124356200"></p>
+<p>当使用RabbitMQ时，消息丢失可能会发生在以下情况下：</p>
+<ol>
+<li>生产者发送消息时，网络故障导致消息未能成功发送到RabbitMQ服务器。</li>
+<li>RabbitMQ服务器在接收到消息后发生故障，导致消息丢失。</li>
+<li>消费者在处理消息时发生故障，导致消息未能成功消费。</li>
+</ol>
+<p>为了避免消息丢失，可以采取以下措施：</p>
+<ol>
+<li>使用生产者确认模式，确保消息成功发送到RabbitMQ服务器。</li>
+<li>使用消息持久化功能，确保消息在RabbitMQ服务器上持久化存储。</li>
+<li>使用消费者确认模式，确保消息成功被消费者处理。</li>
+</ol>
+<h2 id="生产者端"><a href="#生产者端" class="headerlink" title="生产者端"></a>生产者端</h2><p><strong>RabbitMQ</strong> 中提供了 <code>publisher confirm</code> 机制来避免消息发送到 MQ 的过程中丢失的问题。消息发送到 MQ 以后，会返回一个确认结果给生产者，用于表示消息是否确认成功。该确认结果存在两种请求：</p>
+<ul>
+<li><code>publisher-confirm</code></li>
+</ul>
+<p>该类型是 <em><strong>发送者确认</strong></em> ，存在两种情况</p>
+<ol>
+<li>消息成功投递到交换机，返回 <code>ack</code></li>
+<li>消息未投递到交换机，返回 <code>nack</code></li>
+</ol>
+<ul>
+<li><code>publisher-return</code></li>
+</ul>
+<p>该类型是 <em><strong>发送者回执</strong></em> ，存在两种情况</p>
+<ol>
+<li>消息投递到交换机，且成功分发到队列，返回 <code>ack</code></li>
+<li>消息投递到交换机，但未成功分发到队列，返回 <code>nack</code></li>
+</ol>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124522287.png" alt="image-20240409124522287"></p>
+<p>注意：确认机制发送消息时，需要给每个消息设置一个全局唯一ID，以区分不同消息，避免ack冲突</p>
+<p>我们可以通过 <code>publisher-confirm</code> 和 <code>publisher-return</code> 两种错误捕获机制，来避免 <code>生产者 -&gt; exchange -&gt; queue</code> 这条链路的消息丢失</p>
+<ul>
+<li><pre><code>publisher-confirm
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  1. 消息成功发送到 exchange，返回 ack</span><br><span class="line">  2. 消息未能成功发送到 exchange，返回 nack</span><br><span class="line">  3. 消息发送过程中出现异常，没有收到回执，则进入 **failureCallback** 回调</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  publisher-return</span><br></pre></td></tr></table></figure>
+
+1. 消息成功发送到 exchange，但没有路由到 queue，调用自定义回调函数 **returnCallback**
+</code></pre>
+</li>
+</ul>
+<h2 id="RabbitMq端"><a href="#RabbitMq端" class="headerlink" title="RabbitMq端"></a>RabbitMq端</h2><p>消息存储丢失是啥意思？其实就是<code>持久化</code> 的概念，当消息已经成功发送到 <strong>queue</strong> 时，这个时候如果消费者没有及时进行消费，rabbitMQ 又刚好宕机重启了，那么这个时候就会发现消息丢失了。</p>
+<p>这是因为 MQ 默认是内存存储消息，我们可以通过开启持久化的功能来确保在 MQ 中的消息不丢失</p>
+<h2 id="消费者端"><a href="#消费者端" class="headerlink" title="消费者端"></a>消费者端</h2><p>RabbitMQ 采取的机制是<code>当确认消息被消费者消费后就会立即删除</code></p>
+<p>那么如何确认消息已被消费者消费？那就还得依靠回执来确认，消费者获取消息后，需要向 RabbitMQ 发送 <code>ack</code> 回执，表明自己已经处理消息。其中 <code>ack</code> 在 AMQP 中有三种确认模式：</p>
+<ul>
+<li><strong>manual</strong>：手动 ack，需要在业务代码结束后，调用 api 发送 ack</li>
+<li><strong>auto</strong>：自动 ack，由 spring 监测 listener 代码是否出现异常，没有异常则返回 ack，反之返回 nack</li>
+<li><strong>none</strong>：关闭 ack，MQ 在消息投递后会立即删除消息</li>
+</ul>
+<p><strong>消费者自动ack配置情况下，业务代码异常或者其他故障消息并没有处理完成也会自动ack</strong>。 RabbitMq消息ack后就会丢弃，这就导致异常情况下的消息丢失了</p>
+<p>这个时候如果执行逻辑是正常的，那么在 RabbitMQ 上就会将该消息删除，但是如果执行的逻辑抛出了异常，没有进入到手动确认的环节，RabbitMQ 将会把该消息保留并进行重试机制：</p>
+<ul>
+<li>失败重试机制</li>
+</ul>
+<p>我们手动设置 <code>MessageResoverer</code>  为 <strong>RepublishMessageRecoverer</strong> 方式，将投递失败的消息转到异常（死性队列）队列中，交由人工处理</p>
+<h1 id="死性队列"><a href="#死性队列" class="headerlink" title="死性队列"></a>死性队列</h1><h2 id="死信队列应用场景"><a href="#死信队列应用场景" class="headerlink" title="死信队列应用场景"></a>死信队列应用场景</h2><p>通过上面的信息，我们已经知道如何使用死信队列了，那么死信队列一般在什么场景下使用呢？</p>
+<p>一般用在较为重要的业务队列中，确保未被正确消费的消息不被丢弃，一般发生消费异常可能原因主要有由于消息信息本身存在错误导致处理异常，处理过程中参数校验异常，或者因网络波动导致的查询异常等等，当发生异常时，当然不能每次通过日志来获取原消息，然后让运维帮忙重新投递消息（没错，以前就是这么干的&#x3D; &#x3D;）。通过配置死信队列，可以让未正确处理的消息暂存到另一个队列中，待后续排查清楚问题后，编写相应的处理代码来处理死信消息，这样比手工恢复数据要好太多了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>死信队列其实并没有什么神秘的地方，不过是绑定在死信交换机上的普通队列，而死信交换机也只是一个普通的交换机，不过是用来专门处理死信的交换机。</p>
+<p>总结一下死信消息的生命周期：</p>
+<ol>
+<li>业务消息被投入业务队列</li>
+<li>消费者消费业务队列的消息，由于处理过程中发生异常，于是进行了nck或者reject操作</li>
+<li>被nck或reject的消息由RabbitMQ投递到死信交换机中</li>
+<li>死信交换机将消息投入相应的死信队列</li>
+<li>死信队列的消费者消费死信消息</li>
+</ol>
+<p>死信消息是RabbitMQ为我们做的一层保证，其实我们也可以不使用死信队列，而是在消息消费异常时，将消息主动投递到另一个交换机中，当你明白了这些之后，这些Exchange和Queue想怎样配合就能怎么配合。比如从死信队列拉取消息，然后发送邮件、短信、钉钉通知来通知开发人员关注。或者将消息重新投递到一个队列然后设置过期时间，来进行延时消费。</p>
 
       
 
@@ -352,6 +436,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF"><span class="toc-number">1.</span> <span class="toc-text">消息堆积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97"><span class="toc-number">1.1.</span> <span class="toc-text">惰性队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#concurrency"><span class="toc-number">1.2.</span> <span class="toc-text">concurrency</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#prefetch"><span class="toc-number">1.3.</span> <span class="toc-text">prefetch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">业务问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1"><span class="toc-number">2.</span> <span class="toc-text">消息丢失</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E7%AB%AF"><span class="toc-number">2.1.</span> <span class="toc-text">生产者端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RabbitMq%E7%AB%AF"><span class="toc-number">2.2.</span> <span class="toc-text">RabbitMq端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E7%AB%AF"><span class="toc-number">2.3.</span> <span class="toc-text">消费者端</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%BB%E6%80%A7%E9%98%9F%E5%88%97"><span class="toc-number">3.</span> <span class="toc-text">死性队列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.</span> <span class="toc-text">死信队列应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>

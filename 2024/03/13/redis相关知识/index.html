@@ -23,6 +23,7 @@
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215817013.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/eric_yao/blog/source/_posts/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/image-20240331221631658.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220921979.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220951901.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314220501107.png">
@@ -47,7 +48,7 @@
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317231442988.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png">
 <meta property="article:published_time" content="2024-03-13T13:07:17.000Z">
-<meta property="article:modified_time" content="2024-03-23T13:55:40.076Z">
+<meta property="article:modified_time" content="2024-04-04T01:51:14.935Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -227,8 +228,9 @@
 <p>3.对于mysql集群，需要延时一会让主节点把数据同步到从节点，但是延时多少不好控制，在延时的过程中依然会有脏数据产生的风险</p>
 <p>以上都不能做完完全的强一致</p>
 <p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png" alt="image-20240313215627304"></p>
-<p>要保证强一致可以采用分布式锁，redis存的都是读多写少的数据，读操作上加读锁，写操作上加写锁，通过redission实现读写锁这样可以保证一致性，但是性能差</p>
+<p>要保证强一致的业务可以采用分布式锁，redis存的都是读多写少的数据，读操作上加读锁，写操作上加写锁，通过redission实现读写锁这样可以保证一致性，但是性能差</p>
 <p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png" alt="image-20240313220610386"></p>
+<p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/eric_yao/blog/source/_posts/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/image-20240331221631658.png" alt="image-20240331221631658"></p>
 <h3 id="最终一致前提"><a href="#最终一致前提" class="headerlink" title="最终一致前提"></a>最终一致前提</h3><p>大部分情况下允许短暂的不一致，可以采用异步通知</p>
 <p>1.使用mq中间件，更新数据之后，通知缓存删除，需要保证mq的可靠性</p>
 <p>2.利用canal中间件，不需要修改业务代码，伪装成mysql的一个从节点，canal通过读取binlog日志数据更新缓存，对代码无侵入</p>

@@ -40,11 +40,16 @@
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230309173043057.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230309172738106.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129165851287.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/d3cde729-30e3-43b3-a14a-e27ac357b50c.jpg">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425225758820.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425225939275.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425230057122.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425230124934.png">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/0c453225-b1ec-4a23-87c1-03851c479244.jpg">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425230349316.png">
+<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/d3cde729-30e3-43b3-a14a-e27ac357b50c.jpg">
 <meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/191ae9c6-ed85-4f4b-97ea-d6a336ea492e.jpg">
 <meta property="article:published_time" content="2024-01-29T03:13:53.000Z">
-<meta property="article:modified_time" content="2024-03-25T03:22:07.172Z">
+<meta property="article:modified_time" content="2024-04-25T15:08:55.161Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -341,15 +346,18 @@
 <td>1701</td>
 </tr>
 </tbody></table>
-<h2 id="1-Business-logic"><a href="#1-Business-logic" class="headerlink" title="1. Business logic"></a>1. Business logic</h2><p>notification这个微服务主要集成了各个service alert,每个service可以根据自己的业务特点配置在notification这边，支持通过email，we bhook,mobile向用户发送通知 ，客户可以通过ui来对各个service event进行配置。根据不同的service选择不同过滤条件，当各个service特定事件发生时，收件人或收件人组进行接受通知。后端还维护着每个service特定的消息模版，支持json,html,markdown等多种格式，且支持L10n 国际化。公司每个月的openapi的changelog也是从这里发出，还有就是实现了console上对用户进行实时推送的小铃铛，从后端向ui推送一些公司内部各个service的一些需要告知客户的实时消息。从技术的角度来说，采用redis实现了缓存存储token合热点数据，通过redis的计数器功能实现了发送量的限制，通过分布式锁保证线程执行的可靠性，以及通过pub&#x2F;sub和websocket实现刚才说的小铃铛实时推送的功能。使用mysql作为数据库，使用rabbitmq作为消息队列分发三种不同渠道的消息，当请求进入队列时，api立即回应，消息的处理与发送在队列里排队操作，这样大大加快了在高并发大数据量请求下api的响应的速度。后端还有一些自动化定时任务和消息埋点技术。去检测用户行为以便作为更好的优化。</p>
+<h2 id="1-Business-logic"><a href="#1-Business-logic" class="headerlink" title="1. Business logic"></a>1. Business logic</h2><p>notification这个微服务主要集成了公司内部各个service alert,目的是实现公司产品与用户之间的信息交互。每个service可以根据自己的业务特点配置在notification这边，支持通过email，we bhook,mobile向用户发送通知 ，客户可以通过ui来对各个service event进行配置。根据不同的service选择不同过滤条件，当各个service特定事件发生时，收件人或收件人组进行接受通知。后端还维护着每个service特定的消息模版，支持json,html,markdown等多种格式，且支持L10n 国际化。公司每个月的openapi的changelog也是从这里发出，还有就是实现了console上对用户进行实时推送的小铃铛，从后端向ui推送一些公司内部各个service的一些需要告知客户的实时消息。从技术的角度来说，采用redis实现了缓存存储token合热点数据，通过redis的计数器功能实现了发送量的限制，通过分布式锁保证线程执行的可靠性，以及通过pub&#x2F;sub和websocket实现刚才说的小铃铛实时推送的功能。使用mysql作为数据库，使用rabbitmq作为消息队列分发三种不同渠道的消息，当请求进入队列时，api立即回应，消息的处理与发送在队列里排队操作，这样大大加快了在高并发大数据量请求下api的响应的速度。后端还有一些自动化定时任务和消息埋点技术。去检测用户行为以便作为更好的优化。</p>
 <p>集成了若干service alerts和subscription,可以对期望的service，email,webhook,mobile进行配置，ui上还有小铃铛，小铃铛的数据是记录在nc-v2 mongodb中,后端定义数据ttl是7天，7天后所有到期的数据会自动清理掉，前端只能看，不能操作，每次给客户展示的是7天前至今的数据。</p>
-<p>schedule job：定期检查用户在各个event上的配置情况，接lifecycle实时purge无效company。</p>
+<p>schedule job：定期检查用户在各个event上的配置情况，接lifecycle实时purge无效company。是用了redis分布式锁，进行加锁，让定时任务在多台服务器的情况下只会执行一次，set nx ex</p>
 <p>dynamic schedule job: 根据用户在当前event上配置的frequency值周期性的去对应的app api取出taskList，完成notification的发送业务。</p>
+<p>updateconfiguration后线程池异步发送修改数据给对应的service</p>
 <p>公司的public api changelog 定期发送（每月一次），这个后端sever写在operation portal 上，会定期update 发送</p>
 <p>email channel business site 通过ses来发信，在adda上就是Office 365 的smtp.</p>
 <p>webhook内部集成了slack,teams,并且支持配置自己的第三方webhook.</p>
 <p>向公司的mobile团队发送消息，最后tregger到用户的mobile端.</p>
 <p>通过websocket向用户ui端进行实时消息推送，并根据用户的RBAC权限来做filter。</p>
+<p>多线程异步发送数据</p>
+<p>使用到的云服务技术（aws SNS,SES, Lambda，s3,cognito，RDs,ec2）</p>
 <p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129162006725.png" alt="image-20240129162006725"></p>
 <h3 id="Email-flow"><a href="#Email-flow" class="headerlink" title="Email flow"></a>Email flow</h3><p>包括整个产品的apichange log也是从这里发送</p>
 <p>This is 2 ways to assemble email content:</p>
@@ -361,7 +369,7 @@
 <h2 id="2-Email-Deliver-Status-Tracking"><a href="#2-Email-Deliver-Status-Tracking" class="headerlink" title="2. Email Deliver Status Tracking"></a>2. Email Deliver Status Tracking</h2><p>We track email deliver status using ses monitoring ability. </p>
 <h3 id="2-1-Design"><a href="#2-1-Design" class="headerlink" title="2.1 Design"></a>2.1 Design</h3><p>The flow is shown in the follow picture，and contains these steps:</p>
 <ol>
-<li>nc-v2 calls SES to send email and specifying a configuration set</li>
+<li>nc-v2 calls SES api to send email and specifying a configurationSet and set event destination to SNS</li>
 <li>ses delivers the email to customer’s email server</li>
 <li>email server return deliver status of the email to SES</li>
 <li>SES convey the deliver status to a SNS topic</li>
@@ -373,12 +381,16 @@
 <ul>
 <li><em>事件目的地</em>– 允许您发布电子邮件发送指标，包括您发送的每封电子邮件的发送次数、送达次数、打开次数、点击次数、退回次数和对其他 AWS 产品的投诉次数。例如，您可以将电子邮件指标发送到 Amazon Kinesis Data Firehose 目的地，然后使用 Amazon Kinesis Data Analytics 对其进行分析。或者，您可以向 Amazon SNS 发送退回邮件和投诉信息，并在这些事件发生时立即收到通知。</li>
 </ul>
+<p>SES配置集是Amazon Simple Email Service（SES）中的一个概念，用于管理和跟踪发送电子邮件的配置。配置集可以包括多个配置项，如发送限制、通知设置、事件跟踪等，帮助用户更好地管理和监控他们的邮件发送活动</p>
 <p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230308152536219.png" alt="image-20230308152536219"></p>
 <h4 id="2-1-2-Add-a-destination-for-the-set"><a href="#2-1-2-Add-a-destination-for-the-set" class="headerlink" title="2.1.2 Add a destination for the set"></a>2.1.2 Add a destination for the set</h4><ol>
 <li>Add a destination for the set, check the following event: Hard bounces, Clicks, Complaints, Deliveries, Delivery delays, Opens, Rejects, Rendering failures</li>
 <li>Select SNS as destination, and create a sns topic. e.g. ses_prod_topic</li>
 <li>Add the Lambda function to SNS topic subcription,Use lambda to write the mail sending status recorded by sns into the database, and create logs to write into kinesis</li>
 </ol>
+<p>Amazon SNS 是一项托管消息收发服务，可让您将发布者与订阅者解耦。这对于用于微服务、分布式系统和无服务器应用程序的应用程序到应用程序消息收发很有用</p>
+<p>aws ses本身就有监控用户open和click的操作，当时怎么不直接用这个monitor</p>
+<p>AWS会去埋点 用的是AWS自己的URL，可能会被用户的firewall拦截，所以最后就没用</p>
 <h2 id="3-Email-User-Behaviour-Tracking"><a href="#3-Email-User-Behaviour-Tracking" class="headerlink" title="3. Email User Behaviour Tracking"></a>3. Email User Behaviour Tracking</h2><p>We track behaviour when user opens an email or clicks a link in email.</p>
 <p>AWS会去埋点 用的是AWS自己的URL，可能会被用户的firewall拦截，所以最后就没用aws ses 自带的</p>
 <p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20230920172019443.png" alt="image-20230920172019443"></p>
@@ -491,14 +503,82 @@
 <h4 id="2-2-Built-in-webhook-Setting"><a href="#2-2-Built-in-webhook-Setting" class="headerlink" title="2.2. Built-in webhook Setting"></a>2.2. Built-in webhook Setting</h4><p>We have built-in webhook setting for Teams and Slack, which is identified by webhook url.</p>
 <p>Instead of using json string as payload, We use html and markdown format to make the webhook payload presented to user looks similar to email content.</p>
 <p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240129165851287.png" alt="image-20240129165851287"></p>
+<h3 id="3-webhook-limit"><a href="#3-webhook-limit" class="headerlink" title="3.webhook limit"></a>3.webhook limit</h3><h4 id="teams"><a href="#teams" class="headerlink" title="teams"></a>teams</h4><p>The webhooks are used as tools to track and notify. The webhooks provide a unique URL, to send a JSON payload with a message in card format(<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference">MessageCard</a>). Cards are user interface containers that include content and actions related to a single topic.The following points should be noted when using</p>
+<ul>
+<li>Currently it is not possible to send files using webhooks,. As of now, the only way of sending files is using Bots.</li>
+<li>According to Microsoft, the size limit for a message in chat is “<strong>Approximately 28 KB per post</strong>…an approximate limit because it includes the message itself (text, image links, etc.)</li>
+</ul>
+<p>If the size limit is exceeded, the Teams WebHook will display as follows</p>
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425225758820.png" alt="image-20240425225758820"></p>
+<h4 id="slack"><a href="#slack" class="headerlink" title="slack"></a>slack</h4><p>Incoming Webhooks are a simple way to post messages from apps into Slack. Creating an Incoming Webhook gives you a unique URL to which you send a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/JSON">JSON</a> payload with the message text and some options. You can use all the usual <a target="_blank" rel="noopener" href="https://api.slack.com/reference/surfaces/formatting">formatting</a> and <a target="_blank" rel="noopener" href="https://api.slack.com/messaging/composing/layouts">layout blocks</a> with Incoming Webhooks to make the messages stand out.</p>
+<p>In NCV2, the section block used by our message component, A <code>section</code> is one of the most flexible blocks available - it can be used as a simple text block, in combination with text fields, or side-by-side with any of the available <a target="_blank" rel="noopener" href="https://api.slack.com/reference/messaging/block-elements">block elements</a>.</p>
+<ul>
+<li>Currently it is not possible to send files using webhooks</li>
+<li>According to Slack api doc, the size limit for a message for blocks as follow</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Required?</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>type</code></td>
+<td align="left">String</td>
+<td align="left"><strong>Yes</strong></td>
+<td align="left">The type of block. For a section block, type will always be <code>section</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>text</code></td>
+<td align="left">Object</td>
+<td align="left"><strong>Preferred</strong></td>
+<td align="left">The text for the block, in the form of a <a target="_blank" rel="noopener" href="https://api.slack.com/reference/messaging/composition-objects#text">text object</a>. Maximum length for the <code>text</code> in this field is <strong>3000</strong> characters. This field is not <em>required</em> if a valid array of <code>fields</code> objects is provided instead.</td>
+</tr>
+<tr>
+<td align="left"><code>block_id</code></td>
+<td align="left">String</td>
+<td align="left">No</td>
+<td align="left">A string acting as a unique identifier for a block. If not specified, one will be generated. You can use this <code>block_id</code> when you receive an interaction payload to <a target="_blank" rel="noopener" href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Maximum length for this field is 255 characters. <code>block_id</code> should be unique for each message and each iteration of a message. If a message is updated, use a new <code>block_id</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>fields</code></td>
+<td align="left">Object[]</td>
+<td align="left"><em>Maybe</em></td>
+<td align="left">Required if no <code>text</code> is provided. An array of <a target="_blank" rel="noopener" href="https://api.slack.com/reference/messaging/composition-objects#text">text objects</a>. Any text objects included with <code>fields</code> will be rendered in a compact format that allows for <strong>2</strong> columns of side-by-side text. Maximum number of items is <strong>10</strong>. Maximum length for the <code>text</code> in each item is <strong>2000</strong> characters. [Click here for an example](<a target="_blank" rel="noopener" href="https://api.slack.com/tools/block-kit-builder?blocks=%5B">https://api.slack.com/tools/block-kit-builder?blocks=[</a> { 	“type”%3A “section”%2C 	“text”%3A { 		“text”%3A “A message *with some bold text* and _some italicized text_.”%2C 		“type”%3A “mrkdwn” 	}%2C 	“fields”%3A [ 		{ 			“type”%3A “mrkdwn”%2C 			“text”%3A “*Priority*” 		}%2C 		{ 			“type”%3A “mrkdwn”%2C 			“text”%3A “*Type*” 		}%2C 		{ 			“type”%3A “plain_text”%2C 			“text”%3A “High” 		}%2C 		{ 			“type”%3A “plain_text”%2C 			“text”%3A “String” 		} 	] } ]).</td>
+</tr>
+<tr>
+<td align="left"><code>accessory</code></td>
+<td align="left">Object</td>
+<td align="left">No</td>
+<td align="left">One of the available <a target="_blank" rel="noopener" href="https://api.slack.com/reference/messaging/block-elements">element objects</a>.</td>
+</tr>
+</tbody></table>
+<p><strong>for example:</strong></p>
+<p>A simple text section block:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;section&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;mrkdwn&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;A message *with some bold text* and _some italicized text_.&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425225939275.png" alt="image-20240425225939275"></p>
+<p>A section block containing text fields:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;section&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;A message *with some bold text* and _some italicized text_.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;mrkdwn&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;fields&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;mrkdwn&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;High&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;plain_text&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;emoji&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;String&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425230057122.png" alt="image-20240425230057122"></p>
+<p>If the size limit is exceeded,the Slack Webhook UI not show anything</p>
+<img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425230124934.png" alt="image-20240425230124934" style="zoom: 150%;">
+
 <h2 id="5-Mobile"><a href="#5-Mobile" class="headerlink" title="5. Mobile"></a>5. Mobile</h2><p>在调用通用接口createNotification发信时，对于mobile channel，先把各个app 发送的alert 数据by account的写进mongodb中，由于这是第一次进来的数据，肯定是未读的，所以记录一个字段unread :true,带进mongodb，ttl两周，记录unread数，存入redis,再用户后面一条一条读或成批读的时候，会根据更新unread 为false, 用户在list mobile notification的时候，这个时候要显示未读数量，后端首先会获得当前account的record，根据unread的状态判断该条notification用户是否已读。以此来记录unread数量，并存入redis中保存。这个时候，各个app的alert信息还在往这个account 的mobile里送，新送的消息还是未读的，但是需要先拉一把redis里存的之前的用户未读数（因为用户可能有读过的了），sync一下总的unread数在再存入redis中。</p>
 <center class="half">
-    <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/d3cde729-30e3-43b3-a14a-e27ac357b50c.jpg" width="300">
     <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/0c453225-b1ec-4a23-87c1-03851c479244.jpg" width="300">
-</center>
+    <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425230349316.png" width="300">
 
-<p><img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/191ae9c6-ed85-4f4b-97ea-d6a336ea492e.jpg" alt="image-20240306144437638"></p>
+ 
 
+<center class="half">
+    <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/d3cde729-30e3-43b3-a14a-e27ac357b50c.jpg" width="300">
+    <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/191ae9c6-ed85-4f4b-97ea-d6a336ea492e.jpg" width="300">
+</center></center>
       
 
       
@@ -629,7 +709,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Overview"><span class="toc-number">1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Project-architecture-drawing"><span class="toc-number">2.</span> <span class="toc-text">Project architecture drawing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Project-feature"><span class="toc-number">3.</span> <span class="toc-text">Project feature</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Notification-UI-Panel"><span class="toc-number">4.</span> <span class="toc-text">Notification UI Panel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#event-configuration"><span class="toc-number">4.1.</span> <span class="toc-text">event configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webhook-configuration"><span class="toc-number">4.2.</span> <span class="toc-text">webhook configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BellNotification"><span class="toc-number">4.3.</span> <span class="toc-text">BellNotification</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Notification-Technology-stack"><span class="toc-number">5.</span> <span class="toc-text">Notification Technology stack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#infra"><span class="toc-number">5.1.</span> <span class="toc-text">infra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">Grafana：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-search-by-Kibana"><span class="toc-number">5.3.</span> <span class="toc-text">ES search by Kibana:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-integrated-app"><span class="toc-number">5.4.</span> <span class="toc-text">The integrated app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Business-logic"><span class="toc-number">5.5.</span> <span class="toc-text">1. Business logic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Email-flow"><span class="toc-number">5.5.1.</span> <span class="toc-text">Email flow</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Email-Deliver-Status-Tracking"><span class="toc-number">5.6.</span> <span class="toc-text">2. Email Deliver Status Tracking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Design"><span class="toc-number">5.6.1.</span> <span class="toc-text">2.1 Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-Create-a-ses-configuration-set"><span class="toc-number">5.6.1.1.</span> <span class="toc-text">2.1.1 Create a ses configuration set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Add-a-destination-for-the-set"><span class="toc-number">5.6.1.2.</span> <span class="toc-text">2.1.2 Add a destination for the set</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Email-User-Behaviour-Tracking"><span class="toc-number">5.7.</span> <span class="toc-text">3. Email User Behaviour Tracking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Design"><span class="toc-number">5.7.1.</span> <span class="toc-text">3.1 Design</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-WebHooks"><span class="toc-number">5.8.</span> <span class="toc-text">4. WebHooks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-UI"><span class="toc-number">5.8.1.</span> <span class="toc-text">1. UI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Design"><span class="toc-number">5.8.2.</span> <span class="toc-text">2. Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-User-customized-webhook-setting"><span class="toc-number">5.8.2.1.</span> <span class="toc-text">2.1. User-customized webhook setting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Built-in-webhook-Setting"><span class="toc-number">5.8.2.2.</span> <span class="toc-text">2.2. Built-in webhook Setting</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Mobile"><span class="toc-number">5.9.</span> <span class="toc-text">5. Mobile</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Overview"><span class="toc-number">1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Project-architecture-drawing"><span class="toc-number">2.</span> <span class="toc-text">Project architecture drawing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Project-feature"><span class="toc-number">3.</span> <span class="toc-text">Project feature</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Notification-UI-Panel"><span class="toc-number">4.</span> <span class="toc-text">Notification UI Panel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#event-configuration"><span class="toc-number">4.1.</span> <span class="toc-text">event configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webhook-configuration"><span class="toc-number">4.2.</span> <span class="toc-text">webhook configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BellNotification"><span class="toc-number">4.3.</span> <span class="toc-text">BellNotification</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Notification-Technology-stack"><span class="toc-number">5.</span> <span class="toc-text">Notification Technology stack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#infra"><span class="toc-number">5.1.</span> <span class="toc-text">infra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">Grafana：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-search-by-Kibana"><span class="toc-number">5.3.</span> <span class="toc-text">ES search by Kibana:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-integrated-app"><span class="toc-number">5.4.</span> <span class="toc-text">The integrated app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Business-logic"><span class="toc-number">5.5.</span> <span class="toc-text">1. Business logic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Email-flow"><span class="toc-number">5.5.1.</span> <span class="toc-text">Email flow</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Email-Deliver-Status-Tracking"><span class="toc-number">5.6.</span> <span class="toc-text">2. Email Deliver Status Tracking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Design"><span class="toc-number">5.6.1.</span> <span class="toc-text">2.1 Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-Create-a-ses-configuration-set"><span class="toc-number">5.6.1.1.</span> <span class="toc-text">2.1.1 Create a ses configuration set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Add-a-destination-for-the-set"><span class="toc-number">5.6.1.2.</span> <span class="toc-text">2.1.2 Add a destination for the set</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Email-User-Behaviour-Tracking"><span class="toc-number">5.7.</span> <span class="toc-text">3. Email User Behaviour Tracking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Design"><span class="toc-number">5.7.1.</span> <span class="toc-text">3.1 Design</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-WebHooks"><span class="toc-number">5.8.</span> <span class="toc-text">4. WebHooks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-UI"><span class="toc-number">5.8.1.</span> <span class="toc-text">1. UI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Design"><span class="toc-number">5.8.2.</span> <span class="toc-text">2. Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-User-customized-webhook-setting"><span class="toc-number">5.8.2.1.</span> <span class="toc-text">2.1. User-customized webhook setting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Built-in-webhook-Setting"><span class="toc-number">5.8.2.2.</span> <span class="toc-text">2.2. Built-in webhook Setting</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-webhook-limit"><span class="toc-number">5.8.3.</span> <span class="toc-text">3.webhook limit</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#teams"><span class="toc-number">5.8.3.1.</span> <span class="toc-text">teams</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#slack"><span class="toc-number">5.8.3.2.</span> <span class="toc-text">slack</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Mobile"><span class="toc-number">5.9.</span> <span class="toc-text">5. Mobile</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
