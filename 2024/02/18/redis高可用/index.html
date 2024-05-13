@@ -5,36 +5,36 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://example.com">
+  <link rel="dns-prefetch" href="http://121.37.186.36">
   <title>redis高可用 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="redis哨兵机制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis高可用">
-<meta property="og:url" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/index.html">
+<meta property="og:url" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
 <meta property="og:description" content="redis哨兵机制">
 <meta property="og:locale">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218094103934.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/a6286053c6884cf58bf397d01674fe80.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218172939919.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240219101152083.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240219101840176.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218102112792.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218102202473.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218101956092.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218102936798.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218105645061.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218171256282.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218170953928.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218171854710.png">
-<meta property="og:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218172209617.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218094103934.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/a6286053c6884cf58bf397d01674fe80.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218172939919.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240219101152083.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240219101840176.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218102112792.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218102202473.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218101956092.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218102936798.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218105645061.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218171256282.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218170953928.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218171854710.png">
+<meta property="og:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218172209617.png">
 <meta property="article:published_time" content="2024-02-18T01:40:00.000Z">
 <meta property="article:modified_time" content="2024-04-01T05:32:39.984Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218094103934.png">
+<meta name="twitter:image" content="http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/image-20240218094103934.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -365,7 +365,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://example.com/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://121.37.186.36/2024/02/18/redis%E9%AB%98%E5%8F%AF%E7%94%A8/" alt="微信分享二维码">
     </div>
 </div>
 

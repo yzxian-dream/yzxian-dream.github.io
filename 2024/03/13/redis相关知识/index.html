@@ -5,54 +5,54 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://example.com">
+  <link rel="dns-prefetch" href="http://121.37.186.36">
   <title>redis相关知识 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="article">
 <meta property="og:title" content="redis相关知识">
-<meta property="og:url" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:url" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
 <meta property="og:locale">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212820119.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213542889.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213334923.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213905923.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214356656.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214802191.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215817013.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/eric_yao/blog/source/_posts/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/image-20240331221631658.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220921979.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220951901.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314220501107.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221159284.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221509720.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221300145.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221447415.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317182820056-0671306.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184325073-0672208.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184551396-0672354.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221419357.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221846943.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222454847.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222543741.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222656718-0685629.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222844502.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223117810.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223603812.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317224007246.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230108940.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230356923.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317231442988.png">
-<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212820119.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213542889.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213334923.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213905923.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214356656.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214802191.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215817013.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/eric_yao/blog/source/_posts/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/image-20240331221631658.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220921979.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220951901.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314220501107.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221159284.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221509720.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221300145.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221447415.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317182820056-0671306.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184325073-0672208.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184551396-0672354.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221419357.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221846943.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222454847.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222543741.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222656718-0685629.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222844502.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223117810.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223603812.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317224007246.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230108940.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230356923.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317231442988.png">
+<meta property="og:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png">
 <meta property="article:published_time" content="2024-03-13T13:07:17.000Z">
 <meta property="article:modified_time" content="2024-05-05T09:51:27.180Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
+<meta name="twitter:image" content="http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -361,7 +361,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://121.37.186.36/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
     </div>
 </div>
 
