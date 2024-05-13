@@ -5,54 +5,54 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
+  <link rel="dns-prefetch" href="https://example.com">
   <title>redis相关知识 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="article">
 <meta property="og:title" content="redis相关知识">
-<meta property="og:url" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:url" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
 <meta property="og:locale">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212820119.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213542889.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213334923.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213905923.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214356656.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214802191.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215817013.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/eric_yao/blog/source/_posts/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/image-20240331221631658.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220921979.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220951901.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314220501107.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221159284.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221509720.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221300145.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221447415.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317182820056-0671306.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184325073-0672208.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184551396-0672354.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221419357.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221846943.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222454847.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222543741.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222656718-0685629.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222844502.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223117810.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223603812.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317224007246.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230108940.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230356923.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317231442988.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212820119.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213542889.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213334923.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313213905923.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214356656.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313214802191.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215817013.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313215627304.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220610386.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/eric_yao/blog/source/_posts/ConcurrentHashMap-Redis%E5%AE%9E%E7%8E%B0websocket/image-20240331221631658.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220921979.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313220951901.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314220501107.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221159284.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221509720.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221300145.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240314221447415.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317182820056-0671306.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184325073-0672208.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317184551396-0672354.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221419357.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317221846943.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222454847.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222543741.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222656718-0685629.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317222844502.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223117810.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317223603812.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317224007246.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230108940.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230356923.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317231442988.png">
+<meta property="og:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png">
 <meta property="article:published_time" content="2024-03-13T13:07:17.000Z">
-<meta property="article:modified_time" content="2024-04-04T01:51:14.935Z">
+<meta property="article:modified_time" content="2024-05-05T09:51:27.180Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
+<meta name="twitter:image" content="https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240313212434752.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -269,7 +269,7 @@
 <p>如果有第二个线程来加锁，会被while循环来不断尝试去加锁，如果在很短的时间内线程1释放了锁，线程2就可以获得锁执行任务，当然这个while有个阈值，当到达一定的等待时间，会直接结束，线程2获取锁失败。加入这个等待机制（重试机制）的好处就是在高并发的情况下，可以很大程度的增加redis分布式锁的使用性能</p>
 </blockquote>
 <p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317224007246.png" alt="image-20240317224007246"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">redisLock</span><span class="params">()</span> <span class="keyword">throw</span> InterruptedException&#123;</span><br><span class="line">		<span class="comment">//获取锁（重入锁），执行锁的名称</span></span><br><span class="line">		<span class="type">RLock</span> <span class="variable">lock</span> <span class="operator">=</span> redissionClient.getLock(<span class="string">&quot;taskLock&quot;</span>);</span><br><span class="line">  <span class="comment">//尝试获取锁，参数分别为获取锁的最大等待时间（期间会重试），锁的自动释放时间，时间单位</span></span><br><span class="line">  <span class="comment">//如果有这个30，就没有这个watchdog了，redission认为你可以控制当前锁的失效时间，就不会开启监听续期了，没有30这个参数，就会开启看门狗模式</span></span><br><span class="line">  	<span class="type">boolean</span> <span class="variable">isLock</span> <span class="operator">=</span> lock.tryLock(<span class="number">10</span>,<span class="number">30</span>,TimeUnit.SECONDS);</span><br><span class="line">  <span class="comment">//判断是否获取成功,加锁、设置过期时间等操作都是基于lua脚本完成，可以保证redis命令执行的原子性。</span></span><br><span class="line">  <span class="keyword">if</span>(isLock)&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;执行业务&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">      <span class="comment">//释放锁</span></span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">redisLock</span><span class="params">()</span> <span class="keyword">throw</span> InterruptedException&#123;</span><br><span class="line">		<span class="comment">//获取锁（重入锁），执行锁的名称</span></span><br><span class="line">		<span class="type">RLock</span> <span class="variable">lock</span> <span class="operator">=</span> redissionClient.getLock(<span class="string">&quot;taskLock&quot;</span>);</span><br><span class="line">  <span class="comment">//尝试获取锁，参数分别为获取锁的最大等待时间（期间会重试），锁的自动释放时间，时间单位</span></span><br><span class="line">  <span class="comment">//如果有这个30，就没有这个watchdog了，redission认为你可以控制当前锁的失效时间，就不会开启监听续期了，没有30这个参数，就会开启看门狗模式</span></span><br><span class="line">  <span class="comment">//建议应尽量使用tryLock()，且携带参数，因为可设置最大等待时间以及可及时获取加锁返回值，后续可做一些其他加锁失败的业务</span></span><br><span class="line">  	<span class="type">boolean</span> <span class="variable">isLock</span> <span class="operator">=</span> lock.tryLock(<span class="number">10</span>,<span class="number">30</span>,TimeUnit.SECONDS);</span><br><span class="line">  <span class="comment">//判断是否获取成功,加锁、设置过期时间等操作都是基于lua脚本完成，可以保证redis命令执行的原子性。</span></span><br><span class="line">  <span class="keyword">if</span>(isLock)&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;执行业务&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">      <span class="comment">//释放锁</span></span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="redission可重入锁"><a href="#redission可重入锁" class="headerlink" title="redission可重入锁"></a>redission可重入锁</h3><p>redission支持对同一个线程获取可重入锁</p>
 <p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240317230108940.png" alt="image-20240317230108940"></p>
@@ -280,6 +280,8 @@
 <p>使用redission实现的分布式锁，底层是setnx和lua脚步（保证原子性）</p>
 <p>在redission的分布式锁种，提供了一个watchdog，一个线程获取锁成功后，watchdog会给持有锁的线程续期（默认是每隔10s续期一次），从而合理控制锁的有效时长</p>
 <p><img src="/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/image-20240323215425946.png" alt="image-20240323215425946"></p>
+<p>在Notification分布式系统中，开启了定时任务每天回去check一次用户在ui上的一些行为分析， 这个任务会根据cronspec在特定的时间点执行，0 * * * * *，每天0点执行一次。 但是，在分布式环境下，由于各个节点的时间可能存在差异，直接在每个节点上设置定时任务可能会导致任务执行时间不一致。 此外，如果多个节点同时触发任务，还可能导致任务重复执行的问题。 因此，我们需要一种机制来确保定时任务的准确性和唯一性。 <strong>分布式锁</strong>是一种协调分布式系统中的并发操作的机制。 它可以确保在任何给定时间只有一个节点可以执行特定的操作或任务。 通过使用分布式锁，我们可以准确地控制定时任务的执行时间，并避免任务重复执行的问题。</p>
+<p>当使用多节点WebSocket来推送消息给一个用户时，需要确保在调用<code>WriteMessage</code>方法时加锁，以避免并发写入导致数据混乱或丢失。</p>
 
       
 
@@ -359,7 +361,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://example.com/2024/03/13/redis%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
     </div>
 </div>
 

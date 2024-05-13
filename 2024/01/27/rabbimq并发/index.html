@@ -5,26 +5,53 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://yao-zixian.gitee.io">
+  <link rel="dns-prefetch" href="https://example.com">
   <title>rabbimq并发 | LEO&#39;S NOTE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="消息堆积关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rabbimq并发">
-<meta property="og:url" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/index.html">
+<meta property="og:url" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
 <meta property="og:description" content="消息堆积关于rabbitmq消息堆积问题处理消息堆积的主要原因有以下几种:(1)消费者的速度大大慢于生产者的速度,速度不匹配引起的堆积(2)消费者实例IO严重阻塞或者消费者所在服务器宕机(3)消费者业务处理异常导致的消息堆积">
 <meta property="og:locale">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124356200.png">
-<meta property="og:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124522287.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231817733.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124356200.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240409124522287.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103959356.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103333143.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103713926.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103959356.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505104704331.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505104408701.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505113118906.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505105401129.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110256406.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110022817.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110142651.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110508109.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505113007920.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110541523.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110912741.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505111524203.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505111814501.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505112247504.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505112404149.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505112926503.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505113500606.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505114335506.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505115059653.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505120143460.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505141506196.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505141900885.png">
+<meta property="og:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505142449038.png">
 <meta property="article:published_time" content="2024-01-27T14:34:13.000Z">
-<meta property="article:modified_time" content="2024-04-09T06:50:15.997Z">
+<meta property="article:modified_time" content="2024-05-05T08:27:55.684Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
+<meta name="twitter:image" content="https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240127231209158.png">
   
     <link rel="alternative" href="/atom.xml" title="LEO&#39;S NOTE" type="application/atom+xml">
   
@@ -286,6 +313,7 @@
 </code></pre>
 </li>
 </ul>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103959356.png" alt="image-20240505103959356"></p>
 <h2 id="RabbitMq端"><a href="#RabbitMq端" class="headerlink" title="RabbitMq端"></a>RabbitMq端</h2><p>消息存储丢失是啥意思？其实就是<code>持久化</code> 的概念，当消息已经成功发送到 <strong>queue</strong> 时，这个时候如果消费者没有及时进行消费，rabbitMQ 又刚好宕机重启了，那么这个时候就会发现消息丢失了。</p>
 <p>这是因为 MQ 默认是内存存储消息，我们可以通过开启持久化的功能来确保在 MQ 中的消息不丢失</p>
 <h2 id="消费者端"><a href="#消费者端" class="headerlink" title="消费者端"></a>消费者端</h2><p>RabbitMQ 采取的机制是<code>当确认消息被消费者消费后就会立即删除</code></p>
@@ -313,6 +341,41 @@
 <li>死信队列的消费者消费死信消息</li>
 </ol>
 <p>死信消息是RabbitMQ为我们做的一层保证，其实我们也可以不使用死信队列，而是在消息消费异常时，将消息主动投递到另一个交换机中，当你明白了这些之后，这些Exchange和Queue想怎样配合就能怎么配合。比如从死信队列拉取消息，然后发送邮件、短信、钉钉通知来通知开发人员关注。或者将消息重新投递到一个队列然后设置过期时间，来进行延时消费。</p>
+<h1 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h1><h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103333143.png" alt="image-20240505103333143"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103713926.png" alt="image-20240505103713926"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505103959356.png" alt="image-20240505103959356"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505104704331.png" alt="image-20240505104704331"></p>
+<p>每一次发消息都会出发confirm callback机制</p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505104408701.png" alt="image-20240505104408701"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505113118906.png" alt="image-20240505113118906"></p>
+<p>注意；生产者确认机制会影响消息投递性能，会降低投递速率，一般不开启</p>
+<h2 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h2><p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505105401129.png" alt="image-20240505105401129"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110256406.png" alt="image-20240505110256406"></p>
+<p>发送非持久化消息</p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110022817.png" alt="image-20240505110022817"></p>
+<p>发送持久化消息，不会出现阻塞的情况。</p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110142651.png" alt="image-20240505110142651"></p>
+<h3 id="lazy-queue"><a href="#lazy-queue" class="headerlink" title="lazy queue"></a>lazy queue</h3><p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110508109.png" alt="image-20240505110508109"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505113007920.png" alt="image-20240505113007920"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110541523.png" alt="image-20240505110541523"></p>
+<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><h3 id="消费者确认机制"><a href="#消费者确认机制" class="headerlink" title="消费者确认机制"></a>消费者确认机制</h3><p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505110912741.png" alt="image-20240505110912741"></p>
+<blockquote>
+<p>这里实际spring也是使用了动态代理技术，类似于事务处理，当spring接收到消息的时候，就会调用方法增强，先调用你的消息处理逻辑，如果处理成功，自动ack，如果处理过程中出现了异常就会根据异常类型决定抛出nack还是reject</p>
+</blockquote>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505111524203.png" alt="image-20240505111524203"></p>
+<h3 id="失败重试机制"><a href="#失败重试机制" class="headerlink" title="失败重试机制"></a>失败重试机制</h3><p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505111814501.png" alt="image-20240505111814501"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505112247504.png" alt="image-20240505112247504"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505112404149.png" alt="image-20240505112404149"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505112926503.png" alt="image-20240505112926503"></p>
+<h3 id="业务幂等性"><a href="#业务幂等性" class="headerlink" title="业务幂等性"></a>业务幂等性</h3><p>由于开启了消息重试机制，可能会出现消息重复消费的幂等性问题，常见的业务幂等性问题如表单重复提交，我们可以在服务端生成一个唯一的token发送给前端，前端下次提交带着这个token,执行完表单提交后就删除这个token，下次在来已经匹配不到这个token，就不会重复处理了</p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505113500606.png" alt="image-20240505113500606"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505114335506.png" alt="image-20240505114335506"></p>
+<p>这种方法有一定的问题存在，它需要在业务方法之外做一些额外的操作，本来拿到消息之后直接处理自己的业务即可，现在拿到了messageId还要保存到数据库，将来还要比较Id是否重复，对业务代码有一定的侵入性，还涉及到数据库操作，对性能来说有影响。但是一般情况业务下，这是一种通用做法</p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505115059653.png" alt="image-20240505115059653"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505120143460.png" alt="image-20240505120143460"></p>
+<h2 id="延迟消息"><a href="#延迟消息" class="headerlink" title="延迟消息"></a>延迟消息</h2><p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505141506196.png" alt="image-20240505141506196"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505141900885.png" alt="image-20240505141900885"></p>
+<p><img src="/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/image-20240505142449038.png" alt="image-20240505142449038"></p>
 
       
 
@@ -392,7 +455,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yao-zixian.gitee.io/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://example.com/2024/01/27/rabbimq%E5%B9%B6%E5%8F%91/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -444,7 +507,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF"><span class="toc-number">1.</span> <span class="toc-text">消息堆积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97"><span class="toc-number">1.1.</span> <span class="toc-text">惰性队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#concurrency"><span class="toc-number">1.2.</span> <span class="toc-text">concurrency</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#prefetch"><span class="toc-number">1.3.</span> <span class="toc-text">prefetch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">业务问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1"><span class="toc-number">2.</span> <span class="toc-text">消息丢失</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E7%AB%AF"><span class="toc-number">2.1.</span> <span class="toc-text">生产者端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RabbitMq%E7%AB%AF"><span class="toc-number">2.2.</span> <span class="toc-text">RabbitMq端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E7%AB%AF"><span class="toc-number">2.3.</span> <span class="toc-text">消费者端</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%BB%E6%80%A7%E9%98%9F%E5%88%97"><span class="toc-number">3.</span> <span class="toc-text">死性队列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.</span> <span class="toc-text">死信队列应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF"><span class="toc-number">1.</span> <span class="toc-text">消息堆积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97"><span class="toc-number">1.1.</span> <span class="toc-text">惰性队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#concurrency"><span class="toc-number">1.2.</span> <span class="toc-text">concurrency</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#prefetch"><span class="toc-number">1.3.</span> <span class="toc-text">prefetch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">业务问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1"><span class="toc-number">2.</span> <span class="toc-text">消息丢失</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E7%AB%AF"><span class="toc-number">2.1.</span> <span class="toc-text">生产者端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RabbitMq%E7%AB%AF"><span class="toc-number">2.2.</span> <span class="toc-text">RabbitMq端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E7%AB%AF"><span class="toc-number">2.3.</span> <span class="toc-text">消费者端</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%BB%E6%80%A7%E9%98%9F%E5%88%97"><span class="toc-number">3.</span> <span class="toc-text">死性队列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.</span> <span class="toc-text">死信队列应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">可靠性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="toc-number">4.1.</span> <span class="toc-text">生产者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MQ"><span class="toc-number">4.2.</span> <span class="toc-text">MQ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lazy-queue"><span class="toc-number">4.2.1.</span> <span class="toc-text">lazy queue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="toc-number">4.3.</span> <span class="toc-text">消费者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6"><span class="toc-number">4.3.1.</span> <span class="toc-text">消费者确认机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="toc-number">4.3.2.</span> <span class="toc-text">失败重试机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E5%B9%82%E7%AD%89%E6%80%A7"><span class="toc-number">4.3.3.</span> <span class="toc-text">业务幂等性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF"><span class="toc-number">4.4.</span> <span class="toc-text">延迟消息</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
