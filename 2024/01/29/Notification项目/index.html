@@ -49,7 +49,7 @@
 <meta property="og:image" content="http://121.37.186.36/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/d3cde729-30e3-43b3-a14a-e27ac357b50c.jpg">
 <meta property="og:image" content="http://121.37.186.36/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/191ae9c6-ed85-4f4b-97ea-d6a336ea492e.jpg">
 <meta property="article:published_time" content="2024-01-29T03:13:53.000Z">
-<meta property="article:modified_time" content="2024-04-25T15:08:55.161Z">
+<meta property="article:modified_time" content="2025-02-23T18:49:00.437Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="程序猿">
 <meta name="twitter:card" content="summary">
@@ -346,7 +346,8 @@
 <td>1701</td>
 </tr>
 </tbody></table>
-<h2 id="1-Business-logic"><a href="#1-Business-logic" class="headerlink" title="1. Business logic"></a>1. Business logic</h2><p>notification这个微服务主要集成了公司内部各个service alert,目的是实现公司产品与用户之间的信息交互。每个service可以根据自己的业务特点配置在notification这边，支持通过email，we bhook,mobile向用户发送通知 ，客户可以通过ui来对各个service event进行配置。根据不同的service选择不同过滤条件，当各个service特定事件发生时，收件人或收件人组进行接受通知。后端还维护着每个service特定的消息模版，支持json,html,markdown等多种格式，且支持L10n 国际化。公司每个月的openapi的changelog也是从这里发出，还有就是实现了console上对用户进行实时推送的小铃铛，从后端向ui推送一些公司内部各个service的一些需要告知客户的实时消息。从技术的角度来说，采用redis实现了缓存存储token合热点数据，通过redis的计数器功能实现了发送量的限制，通过分布式锁保证线程执行的可靠性，以及通过pub&#x2F;sub和websocket实现刚才说的小铃铛实时推送的功能。使用mysql作为数据库，使用rabbitmq作为消息队列分发三种不同渠道的消息，当请求进入队列时，api立即回应，消息的处理与发送在队列里排队操作，这样大大加快了在高并发大数据量请求下api的响应的速度。后端还有一些自动化定时任务和消息埋点技术。去检测用户行为以便作为更好的优化。</p>
+<h2 id="1-Business-logic"><a href="#1-Business-logic" class="headerlink" title="1. Business logic"></a>1. Business logic</h2><p>notification center作为一个通知中心，他会把公司各个需要对外通知的service集成到一起，会根据各个service自己的业务特点提供不同配置，比如一些过滤条件，开关，发送频率，收件人等信息，用户可以针对各个service配置的不同场景来获取他们想要接收到的消息内容，然后notification会提供三种发信渠道，分别是email、webhook和mobile将各个service的alert发送给客户。其中后端这边维护了各个service所依赖的消息模版，支持html和markdown格式，并且消息支持L10N国际化。每日发送量达到百万封，qps可以达到500，除此之外，还会在一个小铃铛消息实时推送业务，实现公司内部各个service向客户端推送消息，比如项目新功能上线，模块迁移等通知</p>
+<p>这个微服务主要集成了公司内部各个service alert,目的是实现公司产品与用户之间的信息交互。每个service可以根据自己的业务特点配置在notification这边，支持通过email，we bhook,mobile向用户发送通知 ，客户可以通过ui来对各个service event进行配置。根据不同的service选择不同过滤条件，当各个service特定事件发生时，收件人或收件人组进行接受通知。后端还维护着每个service特定的消息模版，支持json,html,markdown等多种格式，且支持L10n 国际化。公司每个月的openapi的changelog也是从这里发出，还有就是实现了console上对用户进行实时推送的小铃铛，从后端向ui推送一些公司内部各个service的一些需要告知客户的实时消息。从技术的角度来说，采用redis实现了缓存存储token合热点数据，通过redis的计数器功能实现了发送量的限制，通过分布式锁保证线程执行的可靠性，以及通过pub&#x2F;sub和websocket实现刚才说的小铃铛实时推送的功能。使用mysql作为数据库，使用rabbitmq作为消息队列分发三种不同渠道的消息，当请求进入队列时，api立即回应，消息的处理与发送在队列里排队操作，这样大大加快了在高并发大数据量请求下api的响应的速度。后端还有一些自动化定时任务和消息埋点技术。去检测用户行为以便作为更好的优化。</p>
 <p>集成了若干service alerts和subscription,可以对期望的service，email,webhook,mobile进行配置，ui上还有小铃铛，小铃铛的数据是记录在nc-v2 mongodb中,后端定义数据ttl是7天，7天后所有到期的数据会自动清理掉，前端只能看，不能操作，每次给客户展示的是7天前至今的数据。</p>
 <p>schedule job：定期检查用户在各个event上的配置情况，接lifecycle实时purge无效company。是用了redis分布式锁，进行加锁，让定时任务在多台服务器的情况下只会执行一次，set nx ex</p>
 <p>dynamic schedule job: 根据用户在当前event上配置的frequency值周期性的去对应的app api取出taskList，完成notification的发送业务。</p>
@@ -573,7 +574,7 @@
     <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/0c453225-b1ec-4a23-87c1-03851c479244.jpg" width="300">
     <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/image-20240425230349316.png" width="300">
 
- 
+
 
 <center class="half">
     <img src="/2024/01/29/Notification%E9%A1%B9%E7%9B%AE/d3cde729-30e3-43b3-a14a-e27ac357b50c.jpg" width="300">
@@ -738,7 +739,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2024 zerozone
+    		&copy; 2025 zerozone
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
