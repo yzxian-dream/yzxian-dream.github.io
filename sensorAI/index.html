@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sensors AI 整体技术架构 · 企业要的不是软件，而是一支 AI Growth Team</title>
+  <style>
+    :root {
+      --bg: #f3f6f4;
+      --ink: #14241c;
+      --muted: #5a6e63;
+      --line: #d0ddd4;
+      --accent: #1f8a5a;
+      --accent-soft: #e6f4ec;
+      --card: #fff;
+      --side: #0f1f18;
+      --side-text: #c5d6cc;
+      --side-active: #3dca86;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    .sidenav {
+      position: sticky; top: 0; height: 100vh; overflow: auto;
+      background: var(--side); color: var(--side-text); padding: 22px 14px 28px;
+    }
+    .sidenav .logo { font-size: 11px; letter-spacing: 0.1em; color: var(--side-active); font-weight: 700; margin-bottom: 6px; }
+    .sidenav h2 { margin: 0 0 16px; font-size: 14px; color: #fff; line-height: 1.4; }
+    .sidenav a {
+      display: block; color: var(--side-text); text-decoration: none; font-size: 12px;
+      padding: 7px 9px; border-radius: 8px; border-left: 2px solid transparent; margin-bottom: 2px; line-height: 1.4;
+    }
+    .sidenav a:hover { background: rgba(61,202,134,0.1); color: #fff; }
+    .sidenav a.active { color: var(--side-active); border-left-color: var(--side-active); background: rgba(61,202,134,0.12); }
+    .sidenav .hint { margin-top: 16px; font-size: 11px; color: #6f8679; line-height: 1.5; padding: 0 8px; }
+
+    .main {
+      padding: 32px 40px 64px;
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+    }
+    .hero {
+      background: linear-gradient(155deg, #143428 0%, #1f8a5a 100%);
+      color: #fff; border-radius: 16px; padding: 32px 28px; margin-bottom: 18px;
+    }
+    .hero .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: .85; margin-bottom: 10px; }
+    .hero h1 { margin: 0 0 12px; font-size: clamp(24px, 3.6vw, 32px); line-height: 1.28; }
+    .hero p { margin: 0; font-size: 14.5px; opacity: .93; max-width: 760px; }
+    .hero .meta { margin-top: 14px; font-size: 12px; opacity: .75; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); }
+
+    section.block {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 26px 26px 22px; margin-bottom: 16px; scroll-margin-top: 18px;
+    }
+    .sec-no { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--accent); margin-bottom: 6px; }
+    section.block > h2 { margin: 0 0 8px; font-size: 19px; line-height: 1.35; }
+    .lead { color: var(--muted); font-size: 14.5px; margin: 0 0 14px; }
+    section.block p { margin: 0 0 11px; font-size: 14.5px; }
+    section.block ul { margin: 0 0 12px; padding-left: 18px; }
+    section.block li { margin-bottom: 5px; font-size: 14.5px; }
+    .quote {
+      border-left: 3px solid var(--accent); background: var(--accent-soft);
+      padding: 11px 13px; border-radius: 0 10px 10px 0; margin: 12px 0; color: var(--muted); font-size: 14.5px;
+    }
+    .quote strong { color: var(--ink); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin: 12px 0; }
+    .card { background: #f7faf8; border: 1px solid var(--line); border-radius: 10px; padding: 13px; }
+    .card h3 { margin: 0 0 6px; font-size: 14px; color: var(--accent); }
+    .card p, .card li { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .card ul { padding-left: 16px; margin: 0; }
+    .card li { margin-bottom: 3px; }
+    .card .big { font-size: 20px; font-weight: 750; color: var(--ink); margin-bottom: 4px; }
+
+    .fig {
+      margin: 14px 0 6px; background: #111; border: 1px solid var(--line);
+      border-radius: 12px; padding: 6px; overflow: hidden;
+    }
+    .fig.light { background: #fff; }
+    .fig img { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; border-radius: 6px; margin: 0 auto; background: #0a0a0a; }
+    .fig.light img { background: #fff; max-height: 420px; }
+    .fig-cap { font-size: 12px; color: var(--muted); margin: 0 0 6px; line-height: 1.5; }
+
+    .levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+    .lvl { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: #f7faf8; }
+    .lvl.on { border-color: rgba(31,138,90,.55); background: var(--accent-soft); }
+    .lvl .n { font-size: 22px; font-weight: 750; color: var(--ink); }
+    .lvl.on .n { color: var(--accent); }
+    .lvl h3 { margin: 4px 0 6px; font-size: 14px; }
+    .lvl p { margin: 0; font-size: 12.5px; color: var(--muted); }
+
+    .arch { display: grid; grid-template-columns: minmax(0,1fr) 170px; gap: 10px; margin-top: 10px; }
+    .layers { display: flex; flex-direction: column; gap: 6px; }
+    .layer { border: 1px solid var(--line); border-radius: 9px; padding: 9px 11px; background: #eef6f1; }
+    .layer.core { background: var(--accent); color: #fff; border-color: #176b45; }
+    .layer .lid { font-size: 11px; font-weight: 700; color: var(--accent); }
+    .layer.core .lid { color: rgba(255,255,255,.85); }
+    .layer .lt { font-size: 13px; font-weight: 700; margin: 2px 0 3px; }
+    .layer .ld { font-size: 12px; opacity: .9; }
+    .sides { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; }
+    .side { background: #eaf2ee; border: 1px solid var(--line); border-radius: 9px; padding: 10px; }
+    .side h4 { margin: 0 0 6px; font-size: 12px; color: var(--accent); }
+    .side li { font-size: 12px; margin-bottom: 3px; }
+
+    .flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0; }
+    .flow span {
+      background: var(--accent-soft); border: 1px solid #b8dcc8; color: var(--accent);
+      border-radius: 7px; padding: 6px 9px; font-size: 11.5px; font-weight: 700;
+    }
+    .flow .arr { background: transparent; border: none; color: var(--muted); padding: 0; font-weight: 400; }
+
+    .cmp { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .cmp th, .cmp td { border-bottom: 1px solid var(--line); padding: 9px 7px; text-align: left; vertical-align: top; }
+    .cmp th { color: var(--muted); font-size: 11px; }
+    .cmp td:first-child { color: var(--accent); font-weight: 700; white-space: nowrap; width: 16%; }
+
+    .footer-note { margin-top: 6px; font-size: 12px; color: var(--muted); }
+    .src { font-size: 11px; color: #809387; margin-top: 10px; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidenav { position: relative; height: auto; }
+      .main { padding: 18px 14px 40px; }
+      .grid-2, .grid-3, .arch, .levels { grid-template-columns: 1fr; }
+      .sides { grid-template-rows: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidenav" id="toc">
+      <div class="logo">SENSORS AI · ARCH REPORT</div>
+      <h2>企业要的不是软件，是 AI Growth Team</h2>
+      <a href="#s0" class="active">开篇判断</a>
+      <a href="#s1">一、数据驱动不是增长充分条件</a>
+      <a href="#s2">二、缺的是可持续增长工作流</a>
+      <a href="#s3">三、L2→L4 与交付升级</a>
+      <a href="#s4">四、AI 重构增长工作流</a>
+      <a href="#s5">五、三大支柱 · 能上岗</a>
+      <a href="#s6">六、五类资产与核心单元</a>
+      <a href="#s7">七、任务如何被执行</a>
+      <a href="#s8">八、企业上下文与记忆工程</a>
+      <a href="#s9">九、六层技术底座</a>
+      <a href="#s10">十、算得准 · ML Agent</a>
+      <a href="#s11">十一、安全与结语</a>
+    </nav>
+
+    <div class="main">
+      <header class="hero" id="s0">
+        <div class="eyebrow">Sensors AI 1.0 · Architecture Briefing</div>
+        <h1>企业要的不是软件，而是一支 AI Growth Team</h1>
+        <p>
+          2026 年 7 月 10 日 Sensors AI 1.0 发布。对企业而言，真正需要的从来不是软件本身，而是增长。
+          AI 不会只是让软件多一个对话入口，而会推动企业从「使用软件」走向「雇佣增长团队」；
+          神策也不再只是交付软件，而是从交付软件走向交付工作量，并最终走向交付结果。
+        </p>
+        <div class="tags">
+          <span class="tag">L4 AI Growth Team</span>
+          <span class="tag">AI Growth Workflow</span>
+          <span class="tag">懂业务 · 算得准 · 可沉淀 · 能落地</span>
+        </div>
+        <p class="meta">本页在架构报告基础上，按桑文锋公开文战略叙事重组；技术细节结合架构分享与会现场图。</p>
+      </header>
+
+      <section class="block" id="s1">
+        <div class="sec-no">SECTION 01</div>
+        <h2>数据驱动，不是增长的充分条件</h2>
+        <p class="lead">使命没变，但对「数据如何真正创造业务增长」的理解在迭代。</p>
+        <p>2015：先解决数据源与 Event-User 模型，重构数据根基，企业能够采集数据、分析数据、建设标签体系，并将数据接入运营流程。围绕分析、画像、标签、分群、运营计划、营销画布等场景，企业已经具备了更完整的数据工具体系。2020：进入营销云，提出 SDAF（感知—决策—行动—反馈），让数据从「被看见」走向「被使用」。</p>
+        <p>当时相信「完整闭环 → 增长自然发生」。实践却表明：数据驱动更像放大器——能放大正确策略，也可能放大不成熟策略。企业真正关心的是用户是否增长、转化是否提升、复购是否改善。</p>
+        <div class="quote">关键判断：<strong>数据驱动的天花板，本质是组织能力的天花板</strong>。使命因此升级为：帮助客户实现数据驱动，并用数据驱动业务增长——数据驱动是方法，业务增长才是目的。</div>
+      </section>
+
+      <section class="block" id="s2">
+        <div class="sec-no">SECTION 02</div>
+        <h2>企业不缺增长想法，缺的是持续运行的增长工作流</h2>
+        <p>企业内部往往已有判断与有效策略，但因人力、排期、跨团队协同，很多动作难长期、稳定、成体系地跑起来：知道该做什么却做不持续；知道有效却难复制；跑通过却沉淀不成组织能力。</p>
+        <p>神策要解决的，不是替代业务判断，而是把<strong>客户业务经验 + 神策数据能力 + AI Agent 执行力</strong>结合起来，让「已知但尚未持续落地」的增长工作流真正跑起来。</p>
+        <figure class="fig light">
+          <img src="assets/product-capability-map.png" alt="神策产品能力地图" />
+        </figure>
+        <p class="fig-cap">产品能力地图：增长数字为北极星 → 场景 Agent 承载方案 → Sensors AI 平台（感知→决策→行动→反馈）→ 数据产品 → 数据基建。</p>
+      </section>
+
+      <section class="block" id="s3">
+        <div class="sec-no">SECTION 03</div>
+        <h2>增长也能「自动驾驶」：L2 → L4，交付软件 → 工作量 → 结果</h2>
+        <div class="levels">
+          <div class="lvl"><div class="n">L2</div><h3>Copilot 辅助</h3><p>AI 给建议，人判断并执行</p></div>
+          <div class="lvl on"><div class="n">L3</div><h3>AI 主导部分任务</h3><p>当前重点：AI 推进，关键节点人确认（国内成熟业态优先）</p></div>
+          <div class="lvl"><div class="n">L4</div><h3>限定场景端到端</h3><p>三年方向：人定目标与边界，AI 自主完成可复用增长工作</p></div>
+        </div>
+        <div class="grid-3">
+          <div class="card"><div class="big">①</div><h3>交付软件</h3><p>把工具交给客户，能力依赖客户自己的团队</p></div>
+          <div class="card"><div class="big">②</div><h3>交付工作量</h3><p>Agent 替客户完成分析、圈人、策略、配置、追踪、复盘</p></div>
+          <div class="card"><div class="big">③</div><h3>交付结果</h3><p>进一步对增长结果负责，按效果衡量价值</p></div>
+        </div>
+        <div class="quote">企业和软件商的关系会变：过去买的是增长软件，未来更像<strong>雇佣一支由 Agent 组成的 AI Growth Team</strong>——可上岗、可协作、逐步对结果负责。</div>
+      </section>
+
+      <section class="block" id="s4">
+        <div class="sec-no">SECTION 04</div>
+        <h2>AI 不是对话入口，而是增长工作流的重构</h2>
+        <p>ChatBI / Copilot / 通用 Agent 平台很多，但对增长而言，仅回答问题远远不够。增长是围绕目标持续运行的完整工作流：目标设定、诊断、分析、策略、执行、评估、优化。</p>
+        <table class="cmp">
+          <thead><tr><th>对比</th><th>人工 SDAF / 对话框</th><th>AI Growth Workflow</th></tr></thead>
+          <tbody>
+            <tr><td>推动力</td><td>专家接力，门槛高、难持续复制</td><td>场景化 Agent 从目标出发持续编排</td></tr>
+            <tr><td>形态</td><td>短问答、文本建议</td><td>分析→策略→执行→复盘闭环</td></tr>
+            <tr><td>创造性</td><td>全靠人脑 token</td><td>可选择何时用人脑、何时用模型 token</td></tr>
+            <tr><td>价值</td><td>GUI 换成 LUI 往往只是交互升级</td><td>把做不起来/做不持续的工作流真正建起来</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="block" id="s5">
+        <div class="sec-no">SECTION 05</div>
+        <h2>真正能上岗的 Agent：三大核心支柱</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>① 完整 AI Growth Workflow</h3>
+            <p>覆盖目标—分析—策略—执行—复盘。先把「已知但未持续做好」的工作流跑起来；再随场景积累发现未知增长机会。</p>
+          </div>
+          <div class="card">
+            <h3>② 真实执行力 · Skills</h3>
+            <p>CDP / CJA / CJO 经 OpenAPI 封装为增长 Skill。Agent 不只会「说」，还能查数、圈人、生成策略、编排触达、追效果。</p>
+          </div>
+          <div class="card">
+            <h3>③ 理解客户 · CWM</h3>
+            <p>从给人用的 CDP 走向给 Agent 用的 Customer World Model：业务知识、运营经验、成败案例与行为预测，都要能被 Agent 理解。</p>
+          </div>
+        </div>
+        <p>配套角色 <strong>Growth Agent Builder（GAB）</strong>：一端理解业务并抽象场景，一端在平台上落地为可运行、可优化的增长 Agent——输出从 PPT/陪跑，转向可持续运行的增长智能体。</p>
+      </section>
+
+      <section class="block" id="s6">
+        <div class="sec-no">SECTION 06</div>
+        <h2>把增长经验变成智能资产：五库 + 三层核心单元</h2>
+        <p class="lead">相对通用大模型的「生成」，更显著的优势是 2500+ 客户实践沉淀为可复用资产体系。</p>
+        <figure class="fig light">
+          <img src="assets/five-asset-pillars.png" alt="五类能力资产" />
+        </figure>
+        <p class="fig-cap">01 行业知识库 CONTEXT 懂业务 · 02 场景 Mode WHAT 解决什么 · 03 Playbook HOW 怎么解决 · 04 Skill 用什么做 · 05 Eval 做得怎么样。</p>
+        <figure class="fig light">
+          <img src="assets/core-units.png" alt="主 Agent / 场景 Agent / 技能" />
+        </figure>
+        <p class="fig-cap">主 Agent（统一中枢）调度场景化 Agent（专业承接），场景 Agent 挂载 Skills（执行手册/原子能力）完成交付。</p>
+        <figure class="fig">
+          <img src="assets/scenario-agent-ui.png" alt="场景化 Agent 界面" />
+        </figure>
+        <p class="fig-cap">产品侧：官方 + 自定义场景 Agent；资产库 / 定时任务 / 历史任务承接沉淀与复用。</p>
+      </section>
+
+      <section class="block" id="s7">
+        <div class="sec-no">SECTION 07</div>
+        <h2>一个经营任务如何被执行：产品八环节 × 技术接线</h2>
+        <p class="lead">
+          同一件事有两套视角：产品视角讲「经营任务怎么闭环」；技术视角讲「一次提问里，记忆、沙箱、数据平台与模型如何被主 Agent 编排」。
+          后者即现场页《任务运行全貌 · 一次提问怎么被回答》——复杂任务还会在三类路径间灵活组合。
+        </p>
+
+        <h3 style="font-size:15px;margin:16px 0 8px;color:var(--accent)">一、产品视角：经营任务的八环节</h3>
+        <p>从用户提出业务目标到结果沉淀，通常经过「理解与规划 → 调度与执行 → 交付与沉淀」三阶段；关键决策（预算、触达、发布等）保留人工确认。</p>
+        <div class="flow">
+          <span>01 提出目标</span><span class="arr">→</span><span>02 理解任务</span><span class="arr">→</span>
+          <span>03 任务规划</span><span class="arr">→</span><span>04 场景承接</span><span class="arr">→</span>
+          <span>05 执行推进</span><span class="arr">→</span><span>06 过程透明</span><span class="arr">→</span>
+          <span>07 人工确认</span><span class="arr">→</span><span>08 结果沉淀</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>理解与规划（01–03）</h3>
+            <ul>
+              <li>自然语言表达经营目标</li>
+              <li>识别业务上下文与所需能力</li>
+              <li>复杂任务生成结构化待办/计划，可按中间结果动态增删步骤</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>调度执行与沉淀（04–08）</h3>
+            <ul>
+              <li>交给合适的场景 Agent，调用技能推进</li>
+              <li>进度、依据、引用全程可见</li>
+              <li>关键节点人审；报告/分群/画布等写入资产库，经验可再进记忆</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="font-size:15px;margin:18px 0 8px;color:var(--accent)">二、技术视角：一次提问怎么被回答（E2E）</h3>
+        <p>
+          产品八环节描述的是「经营动作长什么样」；下面这条技术链路描述的是「系统内部怎么接线」——
+          主 Agent 统一编排记忆、沙箱、神策数据产品与大模型，保证可执行、可引用、可沉淀。
+        </p>
+        <figure class="fig">
+          <img src="assets/tech-how-question.jpg" alt="任务运行全貌 · 一次提问怎么被回答" />
+        </figure>
+        <p class="fig-cap">现场架构页：TECHNICAL THREAD · END-TO-END；下方三类典型路径；底部 GROUNDED &amp; CITED。</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>01–03 · 进场与装配</h3>
+            <ul>
+              <li><strong>用户提问</strong>：自然语言进入统一入口</li>
+              <li><strong>启用沙箱</strong>：复杂任务先隔离运行环境（安全、出网、依赖可控）</li>
+              <li><strong>调配主/子 Agent</strong>：主 Agent 判断是否自办、委派场景 Agent 或挂子 Agent</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>04–06 · 推理与执行</h3>
+            <ul>
+              <li><strong>召回记忆/知识</strong>：注入口径、规则、行业知识、会话经验</li>
+              <li><strong>规划推理</strong>：拆步骤、选路径、决定调什么能力</li>
+              <li><strong>沙箱执行</strong>：生成并运行查询/脚本/中间计算，过程可审计</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>07–08 · 取数与输出</h3>
+            <ul>
+              <li><strong>查询神策数据产品</strong>：分析模型、标签分群、画布等，经 OpenAPI/工具真实取数</li>
+              <li><strong>流式回答（引用标记）</strong>：边生成边标注来自记忆/知识/数据的引用</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>09 · 沉淀</h3>
+            <ul>
+              <li><strong>沉淀记忆</strong>：可复用的口径、偏好、确认过的定义写回记忆体系</li>
+              <li>高质量产物还可进入资产库，供后续任务直接引用</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="font-size:15px;margin:18px 0 8px;color:var(--accent)">三、三类典型路径（复杂任务可组合）</h3>
+        <p>主 Agent 不会只走一条死流程：按目标是否清晰、是否需要多步专家闭环，在路径间灵活切换甚至穿插。</p>
+        <div class="grid-3">
+          <div class="card">
+            <h3>PATH 01 · 直调预置技能</h3>
+            <p><strong>何时</strong>：目标明确、单步/短链路即可完成。</p>
+            <p style="margin-top:8px"><strong>怎么走</strong>：主 Agent → 官方预置 Skill → Tools/OpenAPI → 汇总输出。适合「一句话查指标 / 建标签」这类硬任务。</p>
+          </div>
+          <div class="card">
+            <h3>PATH 02 · 委派场景 Agent（最常用）</h3>
+            <p><strong>何时</strong>：目标开放、多步推进、需要专业判断与行业方法。</p>
+            <p style="margin-top:8px"><strong>怎么走</strong>：主 Agent 规划后委派场景专家（策略/报告/深度分析等）→ 专家再挂载多项技能与工具闭环交付。增长类经营任务多数走这里。</p>
+          </div>
+          <div class="card">
+            <h3>PATH 03 · 直调基础工具</h3>
+            <p><strong>何时</strong>：需要补上下文、局部协同，而非完整业务场景。</p>
+            <p style="margin-top:8px"><strong>怎么走</strong>：主 Agent 直接调知识检索、记忆、资产、定时调度等；常嵌在路径 1/2 的任意阶段反复出现。</p>
+          </div>
+        </div>
+
+        <div class="quote">
+          <strong>GROUNDED &amp; CITED（可追溯）</strong>：召回的记忆与知识会注入推理上下文；最终流式回答对引用处标注来源（记忆 / 知识 / 数据），结论可核验、可审计——这是企业级 Agent 相对「纯生成对话框」的关键差别：不是只给一段话，而是给<strong>连得上依据、沉得下资产</strong>的回答。
+        </div>
+      </section>
+
+      <section class="block" id="s8">
+        <div class="sec-no">SECTION 08</div>
+        <h2>企业上下文：知识 · 记忆 · 资产，以及记忆工程</h2>
+        <p>不追求开箱极聪明，而追求随时间复利：会话产物沉淀为资产，优质经验进入企业记忆，下一轮任务再被引用。</p>
+        <figure class="fig">
+          <img src="assets/enterprise-context.jpg" alt="企业上下文：知识·记忆·资产" />
+        </figure>
+        <p class="fig-cap">知识库（基础对象 + 文档知识 + 语义检索）· 长记忆（个人→审核→企业，企业优先）· 资产库（报告/分群标签/画布/模型结果）。</p>
+        <figure class="fig">
+          <img src="assets/memory-engineering.jpg" alt="长记忆的工程实现" />
+        </figure>
+        <p class="fig-cap">写入个人记忆（抽取分类 / 校验 / 冲突判断）→ 提炼企业记忆（聚类 / 门槛 / 审核发布）→ 召回使用（企业&gt;个人优先级，注入并引用可追溯）。主库强一致可审计 + 向量语义召回。</p>
+      </section>
+
+      <section class="block" id="s9">
+        <div class="sec-no">SECTION 09</div>
+        <h2>工程化底座：六层架构决定「能不能上路」</h2>
+        <p>企业级 Agent 的差距不在模型口号，而在工程化：把模型变成可执行、可信、可控的生产力。主 Agent 为中枢，向上接目标，向下调度场景、技能、工具与神策底座。</p>
+        <div class="arch">
+          <div class="layers">
+            <div class="layer"><div class="lid">L1</div><div class="lt">经营任务与用户目标</div><div class="ld">激活 / 转化 / 留存 / 预警 / LTV…</div></div>
+            <div class="layer core"><div class="lid">L2</div><div class="lt">主 Agent 智能中枢</div><div class="ld">理解 · 规划 · 调度 · 整合 · OpenAPI/Skills</div></div>
+            <div class="layer"><div class="lid">L3</div><div class="lt">场景化 Agent</div><div class="ld">官方预置 + 企业定制</div></div>
+            <div class="layer"><div class="lid">L4</div><div class="lt">预置技能与工具</div><div class="ld">指标/策略/分群/ML · 知识·记忆·资产·定时</div></div>
+            <div class="layer"><div class="lid">L5</div><div class="lt">Agent 基础框架</div><div class="ld">编排 · 子Agent · Tools · 沙箱 · SDK</div></div>
+            <div class="layer"><div class="lid">L6</div><div class="lt">神策业务与数据底座</div><div class="ld">分析/标签/画布 · OpenAPI/CLI/MCP · thinking/medium/flash/lite</div></div>
+          </div>
+          <div class="sides">
+            <div class="side"><h4>知识与上下文</h4><ul><li>知识库</li><li>长短记忆</li><li>资产库</li><li>历史会话</li></ul></div>
+            <div class="side"><h4>Guardrails</h4><ul><li>权限审计溯源</li><li>人机协同</li><li>消耗与边界</li></ul></div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card"><h3>模型分级调度</h3><p>规划/仲裁用 thinking；加载执行用 flash/lite；确定性动作走规则与代码。</p></div>
+          <div class="card"><h3>沙箱 + 预热池</h3><p>代码隔离、可复现、可审计；预热依赖包实现秒级启动。</p></div>
+        </div>
+      </section>
+
+      <section class="block" id="s10">
+        <div class="sec-no">SECTION 10</div>
+        <h2>「算得准」举例：指标分析与全自动 ML</h2>
+        <p>设计原则：大模型负责判断与生成；系统负责边界、执行与验收——自动化，而不是自由发挥。</p>
+        <figure class="fig">
+          <img src="assets/metric-analysis.jpg" alt="指标分析链路" />
+        </figure>
+        <p class="fig-cap">指标分析：自然语言 → 加载上下文 → 双路检索 → 可信度仲裁 → 生成查询参数 → 查神策产品 → 结果自检 → 结论+引用。不猜字段、不乱口径，不确定就澄清并写入记忆。</p>
+        <figure class="fig">
+          <img src="assets/ml-agent.jpg" alt="全自动机器学习" />
+        </figure>
+        <p class="fig-cap">ML Agent：问题理解→数据探索→特征工程→模型训练→交付报告→后验评估。ML 主 Agent 编排，子 Agent 分阶段执行，Skills 固化方法论，Tools 保证确定性产物。</p>
+      </section>
+
+      <section class="block" id="s11">
+        <div class="sec-no">SECTION 11</div>
+        <h2>安全是入场券，结语：打造企业自己的 AI Growth Team</h2>
+        <div class="grid-2">
+          <div class="card"><h3>安全可控</h3><p>关键动作人审；权限不可旁路神策体系；过程可审计；敏感数据可屏蔽。安全不是加分项，是进入经营主流程的前提。</p></div>
+          <div class="card"><h3>战略递进</h3><p>2015 数据根基 → 2020 数据闭环 → 今天 AI Growth Team。不是简单产品升级，而是产品战略与交付方式的升级。</p></div>
+        </div>
+        <div class="quote">
+          企业真正需要的不是更多软件，而是能够持续创造结果的新型团队。
+          Sensors AI 1.0 是打造 <strong>L4 级 AI Growth Team</strong> 的第一步：进入业务流程、承接真实工作量、沉淀行业与场景能力，并最终面向业务结果创造价值。
+        </div>
+      
+        <p class="src">本地页：Sensors-AI-整体技术架构.html · 刷新 127.0.0.1:5501 即可查看</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const links = Array.from(document.querySelectorAll(".sidenav a[href^='#']"));
+      const sections = links.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+      function setActive() {
+        let cur = sections[0];
+        const y = window.scrollY + 90;
+        for (const s of sections) if (s.offsetTop <= y) cur = s;
+        links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + cur.id));
+      }
+      window.addEventListener("scroll", setActive, { passive: true });
+      setActive();
+    })();
+  </script>
+</body>
+</html>
