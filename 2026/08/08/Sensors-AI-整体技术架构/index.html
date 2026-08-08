@@ -19,20 +19,30 @@
   <meta name="author" content="zerozone">
   <meta name="keywords" content="程序猿">
   
-    <meta name="description" content="Sensors AI 1.0 整体技术架构简报：企业要的不是软件，而是一支 AI Growth Team。 阅读方式 在线阅读 HTML 版 下载 PDF（约 19MB）  内容概要围绕神策 AI Growth Team 战略叙事，覆盖：  数据驱动不是增长充分条件 可持续增长工作流 L2 → L4 交付升级 AI 重构增长工作流 三大支柱与五类资产 任务执行、企业上下文与记忆工程 六层技术底座与">
+    <meta name="description" content="Sensors AI 1.0 · Architecture Briefing企业要的不是软件，而是一支 AI Growth Team  2026 年 7 月 10 日 Sensors AI 1.0 发布。对企业而言，真正需要的从来不是软件本身，而是增长。AI 不会只是让软件多一个对话入口，而会推动企业从「使用软件」走向「雇佣增长团队」；神策也不再只是交付软件，而是从交付软件走向交付工作量，并最终">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sensors AI 整体技术架构">
 <meta property="og:url" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="LEO&#39;S NOTE">
-<meta property="og:description" content="Sensors AI 1.0 整体技术架构简报：企业要的不是软件，而是一支 AI Growth Team。 阅读方式 在线阅读 HTML 版 下载 PDF（约 19MB）  内容概要围绕神策 AI Growth Team 战略叙事，覆盖：  数据驱动不是增长充分条件 可持续增长工作流 L2 → L4 交付升级 AI 重构增长工作流 三大支柱与五类资产 任务执行、企业上下文与记忆工程 六层技术底座与">
+<meta property="og:description" content="Sensors AI 1.0 · Architecture Briefing企业要的不是软件，而是一支 AI Growth Team  2026 年 7 月 10 日 Sensors AI 1.0 发布。对企业而言，真正需要的从来不是软件本身，而是增长。AI 不会只是让软件多一个对话入口，而会推动企业从「使用软件」走向「雇佣增长团队」；神策也不再只是交付软件，而是从交付软件走向交付工作量，并最终">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-08-08T14:30:00.000Z">
-<meta property="article:modified_time" content="2026-08-08T14:31:04.166Z">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/product-capability-map.png">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/five-asset-pillars.png">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/core-units.png">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/scenario-agent-ui.png">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/tech-how-question.jpg">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/enterprise-context.jpg">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/memory-engineering.jpg">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/metric-analysis.jpg">
+<meta property="og:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ml-agent.jpg">
+<meta property="article:published_time" content="2026-08-08T14:46:00.000Z">
+<meta property="article:modified_time" content="2026-08-08T14:47:06.315Z">
 <meta property="article:author" content="zerozone">
 <meta property="article:tag" content="Sensors AI">
 <meta property="article:tag" content="架构">
 <meta property="article:tag" content="AI Growth Team">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yzxian-dream.github.io/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/product-capability-map.png">
   
   
   
@@ -274,7 +284,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-08-08 22:30" pubdate>
+        <time datetime="2026-08-08 22:46" pubdate>
           2026年8月8日 晚上
         </time>
       </span>
@@ -286,7 +296,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          181 字
+          4.7k 字
         
       </span>
     
@@ -297,7 +307,7 @@
         
         
         
-          2 分钟
+          40 分钟
         
       </span>
     
@@ -341,22 +351,208 @@
             
               <div class="markdown-body">
                 
-                <p>Sensors AI 1.0 整体技术架构简报：<strong>企业要的不是软件，而是一支 AI Growth Team</strong>。</p>
-<h2 id="阅读方式"><a href="#阅读方式" class="headerlink" title="阅读方式"></a>阅读方式</h2><ul>
-<li><a href="/sensorAI/">在线阅读 HTML 版</a></li>
-<li><a href="/downloads/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.pdf">下载 PDF</a>（约 19MB）</li>
+                <blockquote>
+<p>Sensors AI 1.0 · Architecture Briefing<br><strong>企业要的不是软件，而是一支 AI Growth Team</strong></p>
+</blockquote>
+<p>2026 年 7 月 10 日 Sensors AI 1.0 发布。对企业而言，真正需要的从来不是软件本身，而是增长。AI 不会只是让软件多一个对话入口，而会推动企业从「使用软件」走向「雇佣增长团队」；神策也不再只是交付软件，而是从交付软件走向交付工作量，并最终走向交付结果。</p>
+<ul>
+<li>L4 AI Growth Team</li>
+<li>AI Growth Workflow</li>
+<li>懂业务 · 算得准 · 可沉淀 · 能落地</li>
 </ul>
-<h2 id="内容概要"><a href="#内容概要" class="headerlink" title="内容概要"></a>内容概要</h2><p>围绕神策 AI Growth Team 战略叙事，覆盖：</p>
+<p>本页在架构报告基础上，按桑文锋公开文战略叙事重组；技术细节结合架构分享与会现场图。</p>
+<h2 id="一、数据驱动，不是增长的充分条件"><a href="#一、数据驱动，不是增长的充分条件" class="headerlink" title="一、数据驱动，不是增长的充分条件"></a>一、数据驱动，不是增长的充分条件</h2><p>使命没变，但对「数据如何真正创造业务增长」的理解在迭代。</p>
+<p>2015：先解决数据源与 Event-User 模型，重构数据根基，企业能够采集数据、分析数据、建设标签体系，并将数据接入运营流程。围绕分析、画像、标签、分群、运营计划、营销画布等场景，企业已经具备了更完整的数据工具体系。2020：进入营销云，提出 SDAF（感知—决策—行动—反馈），让数据从「被看见」走向「被使用」。</p>
+<p>当时相信「完整闭环 → 增长自然发生」。实践却表明：数据驱动更像放大器——能放大正确策略，也可能放大不成熟策略。企业真正关心的是用户是否增长、转化是否提升、复购是否改善。</p>
+<blockquote>
+<p><strong>关键判断：数据驱动的天花板，本质是组织能力的天花板。</strong> 使命因此升级为：帮助客户实现数据驱动，并用数据驱动业务增长——数据驱动是方法，业务增长才是目的。</p>
+</blockquote>
+<h2 id="二、企业不缺增长想法，缺的是持续运行的增长工作流"><a href="#二、企业不缺增长想法，缺的是持续运行的增长工作流" class="headerlink" title="二、企业不缺增长想法，缺的是持续运行的增长工作流"></a>二、企业不缺增长想法，缺的是持续运行的增长工作流</h2><p>企业内部往往已有判断与有效策略，但因人力、排期、跨团队协同，很多动作难长期、稳定、成体系地跑起来：知道该做什么却做不持续；知道有效却难复制；跑通过却沉淀不成组织能力。</p>
+<p>神策要解决的，不是替代业务判断，而是把 <strong>客户业务经验 + 神策数据能力 + AI Agent 执行力</strong> 结合起来，让「已知但尚未持续落地」的增长工作流真正跑起来。</p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/product-capability-map.png" srcset="/img/loading.gif" lazyload alt="神策产品能力地图"></p>
+<p><em>产品能力地图：增长数字为北极星 → 场景 Agent 承载方案 → Sensors AI 平台（感知→决策→行动→反馈）→ 数据产品 → 数据基建。</em></p>
+<h2 id="三、增长也能「自动驾驶」：L2-→-L4，交付软件-→-工作量-→-结果"><a href="#三、增长也能「自动驾驶」：L2-→-L4，交付软件-→-工作量-→-结果" class="headerlink" title="三、增长也能「自动驾驶」：L2 → L4，交付软件 → 工作量 → 结果"></a>三、增长也能「自动驾驶」：L2 → L4，交付软件 → 工作量 → 结果</h2><table>
+<thead>
+<tr>
+<th>级别</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L2</td>
+<td>Copilot 辅助</td>
+<td>AI 给建议，人判断并执行</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>AI 主导部分任务</td>
+<td>当前重点：AI 推进，关键节点人确认（国内成熟业态优先）</td>
+</tr>
+<tr>
+<td>L4</td>
+<td>限定场景端到端</td>
+<td>三年方向：人定目标与边界，AI 自主完成可复用增长工作</td>
+</tr>
+</tbody></table>
+<p>交付升级三阶段：</p>
 <ol>
-<li>数据驱动不是增长充分条件</li>
-<li>可持续增长工作流</li>
-<li>L2 → L4 交付升级</li>
-<li>AI 重构增长工作流</li>
-<li>三大支柱与五类资产</li>
-<li>任务执行、企业上下文与记忆工程</li>
-<li>六层技术底座与 ML Agent</li>
-<li>安全与结语</li>
+<li><strong>交付软件</strong>：把工具交给客户，能力依赖客户自己的团队  </li>
+<li><strong>交付工作量</strong>：Agent 替客户完成分析、圈人、策略、配置、追踪、复盘  </li>
+<li><strong>交付结果</strong>：进一步对增长结果负责，按效果衡量价值</li>
 </ol>
+<blockquote>
+<p>企业和软件商的关系会变：过去买的是增长软件，未来更像 <strong>雇佣一支由 Agent 组成的 AI Growth Team</strong>——可上岗、可协作、逐步对结果负责。</p>
+</blockquote>
+<h2 id="四、AI-不是对话入口，而是增长工作流的重构"><a href="#四、AI-不是对话入口，而是增长工作流的重构" class="headerlink" title="四、AI 不是对话入口，而是增长工作流的重构"></a>四、AI 不是对话入口，而是增长工作流的重构</h2><p>ChatBI &#x2F; Copilot &#x2F; 通用 Agent 平台很多，但对增长而言，仅回答问题远远不够。增长是围绕目标持续运行的完整工作流：目标设定、诊断、分析、策略、执行、评估、优化。</p>
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th>人工 SDAF &#x2F; 对话框</th>
+<th>AI Growth Workflow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>推动力</td>
+<td>专家接力，门槛高、难持续复制</td>
+<td>场景化 Agent 从目标出发持续编排</td>
+</tr>
+<tr>
+<td>形态</td>
+<td>短问答、文本建议</td>
+<td>分析→策略→执行→复盘闭环</td>
+</tr>
+<tr>
+<td>创造性</td>
+<td>全靠人脑 token</td>
+<td>可选择何时用人脑、何时用模型 token</td>
+</tr>
+<tr>
+<td>价值</td>
+<td>GUI 换成 LUI 往往只是交互升级</td>
+<td>把做不起来&#x2F;做不持续的工作流真正建起来</td>
+</tr>
+</tbody></table>
+<h2 id="五、真正能上岗的-Agent：三大核心支柱"><a href="#五、真正能上岗的-Agent：三大核心支柱" class="headerlink" title="五、真正能上岗的 Agent：三大核心支柱"></a>五、真正能上岗的 Agent：三大核心支柱</h2><h3 id="①-完整-AI-Growth-Workflow"><a href="#①-完整-AI-Growth-Workflow" class="headerlink" title="① 完整 AI Growth Workflow"></a>① 完整 AI Growth Workflow</h3><p>覆盖目标—分析—策略—执行—复盘。先把「已知但未持续做好」的工作流跑起来；再随场景积累发现未知增长机会。</p>
+<h3 id="②-真实执行力-·-Skills"><a href="#②-真实执行力-·-Skills" class="headerlink" title="② 真实执行力 · Skills"></a>② 真实执行力 · Skills</h3><p>CDP &#x2F; CJA &#x2F; CJO 经 OpenAPI 封装为增长 Skill。Agent 不只会「说」，还能查数、圈人、生成策略、编排触达、追效果。</p>
+<h3 id="③-理解客户-·-CWM"><a href="#③-理解客户-·-CWM" class="headerlink" title="③ 理解客户 · CWM"></a>③ 理解客户 · CWM</h3><p>从给人用的 CDP 走向给 Agent 用的 Customer World Model：业务知识、运营经验、成败案例与行为预测，都要能被 Agent 理解。</p>
+<p>配套角色 <strong>Growth Agent Builder（GAB）</strong>：一端理解业务并抽象场景，一端在平台上落地为可运行、可优化的增长 Agent——输出从 PPT&#x2F;陪跑，转向可持续运行的增长智能体。</p>
+<h2 id="六、把增长经验变成智能资产：五库-三层核心单元"><a href="#六、把增长经验变成智能资产：五库-三层核心单元" class="headerlink" title="六、把增长经验变成智能资产：五库 + 三层核心单元"></a>六、把增长经验变成智能资产：五库 + 三层核心单元</h2><p>相对通用大模型的「生成」，更显著的优势是 2500+ 客户实践沉淀为可复用资产体系。</p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/five-asset-pillars.png" srcset="/img/loading.gif" lazyload alt="五类能力资产"></p>
+<p><em>01 行业知识库 CONTEXT 懂业务 · 02 场景 Mode WHAT 解决什么 · 03 Playbook HOW 怎么解决 · 04 Skill 用什么做 · 05 Eval 做得怎么样。</em></p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/core-units.png" srcset="/img/loading.gif" lazyload alt="主 Agent / 场景 Agent / 技能"></p>
+<p><em>主 Agent（统一中枢）调度场景化 Agent（专业承接），场景 Agent 挂载 Skills（执行手册&#x2F;原子能力）完成交付。</em></p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/scenario-agent-ui.png" srcset="/img/loading.gif" lazyload alt="场景化 Agent 界面"></p>
+<p><em>产品侧：官方 + 自定义场景 Agent；资产库 &#x2F; 定时任务 &#x2F; 历史任务承接沉淀与复用。</em></p>
+<h2 id="七、一个经营任务如何被执行：产品八环节-×-技术接线"><a href="#七、一个经营任务如何被执行：产品八环节-×-技术接线" class="headerlink" title="七、一个经营任务如何被执行：产品八环节 × 技术接线"></a>七、一个经营任务如何被执行：产品八环节 × 技术接线</h2><p>同一件事有两套视角：产品视角讲「经营任务怎么闭环」；技术视角讲「一次提问里，记忆、沙箱、数据平台与模型如何被主 Agent 编排」。后者即现场页《任务运行全貌 · 一次提问怎么被回答》——复杂任务还会在三类路径间灵活组合。</p>
+<h3 id="产品视角：经营任务的八环节"><a href="#产品视角：经营任务的八环节" class="headerlink" title="产品视角：经营任务的八环节"></a>产品视角：经营任务的八环节</h3><p>从用户提出业务目标到结果沉淀，通常经过「理解与规划 → 调度与执行 → 交付与沉淀」三阶段；关键决策（预算、触达、发布等）保留人工确认。</p>
+<p><code>01 提出目标 → 02 理解任务 → 03 任务规划 → 04 场景承接 → 05 执行推进 → 06 过程透明 → 07 人工确认 → 08 结果沉淀</code></p>
+<p><strong>理解与规划（01–03）</strong></p>
+<ul>
+<li>自然语言表达经营目标</li>
+<li>识别业务上下文与所需能力</li>
+<li>复杂任务生成结构化待办&#x2F;计划，可按中间结果动态增删步骤</li>
+</ul>
+<p><strong>调度执行与沉淀（04–08）</strong></p>
+<ul>
+<li>交给合适的场景 Agent，调用技能推进</li>
+<li>进度、依据、引用全程可见</li>
+<li>关键节点人审；报告&#x2F;分群&#x2F;画布等写入资产库，经验可再进记忆</li>
+</ul>
+<h3 id="技术视角：一次提问怎么被回答（E2E）"><a href="#技术视角：一次提问怎么被回答（E2E）" class="headerlink" title="技术视角：一次提问怎么被回答（E2E）"></a>技术视角：一次提问怎么被回答（E2E）</h3><p>产品八环节描述的是「经营动作长什么样」；下面这条技术链路描述的是「系统内部怎么接线」——主 Agent 统一编排记忆、沙箱、神策数据产品与大模型，保证可执行、可引用、可沉淀。</p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/tech-how-question.jpg" srcset="/img/loading.gif" lazyload alt="任务运行全貌 · 一次提问怎么被回答"></p>
+<p><em>现场架构页：TECHNICAL THREAD · END-TO-END；下方三类典型路径；底部 GROUNDED &amp; CITED。</em></p>
+<p><strong>01–03 · 进场与装配</strong></p>
+<ul>
+<li><strong>用户提问</strong>：自然语言进入统一入口</li>
+<li><strong>启用沙箱</strong>：复杂任务先隔离运行环境（安全、出网、依赖可控）</li>
+<li><strong>调配主&#x2F;子 Agent</strong>：主 Agent 判断是否自办、委派场景 Agent 或挂子 Agent</li>
+</ul>
+<p><strong>04–06 · 推理与执行</strong></p>
+<ul>
+<li><strong>召回记忆&#x2F;知识</strong>：注入口径、规则、行业知识、会话经验</li>
+<li><strong>规划推理</strong>：拆步骤、选路径、决定调什么能力</li>
+<li><strong>沙箱执行</strong>：生成并运行查询&#x2F;脚本&#x2F;中间计算，过程可审计</li>
+</ul>
+<p><strong>07–08 · 取数与输出</strong></p>
+<ul>
+<li><strong>查询神策数据产品</strong>：分析模型、标签分群、画布等，经 OpenAPI&#x2F;工具真实取数</li>
+<li><strong>流式回答（引用标记）</strong>：边生成边标注来自记忆&#x2F;知识&#x2F;数据的引用</li>
+</ul>
+<p><strong>09 · 沉淀</strong></p>
+<ul>
+<li><strong>沉淀记忆</strong>：可复用的口径、偏好、确认过的定义写回记忆体系</li>
+<li>高质量产物还可进入资产库，供后续任务直接引用</li>
+</ul>
+<h3 id="三类典型路径（复杂任务可组合）"><a href="#三类典型路径（复杂任务可组合）" class="headerlink" title="三类典型路径（复杂任务可组合）"></a>三类典型路径（复杂任务可组合）</h3><p>主 Agent 不会只走一条死流程：按目标是否清晰、是否需要多步专家闭环，在路径间灵活切换甚至穿插。</p>
+<p><strong>PATH 01 · 直调预置技能</strong><br>何时：目标明确、单步&#x2F;短链路即可完成。<br>怎么走：主 Agent → 官方预置 Skill → Tools&#x2F;OpenAPI → 汇总输出。适合「一句话查指标 &#x2F; 建标签」这类硬任务。</p>
+<p><strong>PATH 02 · 委派场景 Agent（最常用）</strong><br>何时：目标开放、多步推进、需要专业判断与行业方法。<br>怎么走：主 Agent 规划后委派场景专家（策略&#x2F;报告&#x2F;深度分析等）→ 专家再挂载多项技能与工具闭环交付。增长类经营任务多数走这里。</p>
+<p><strong>PATH 03 · 直调基础工具</strong><br>何时：需要补上下文、局部协同，而非完整业务场景。<br>怎么走：主 Agent 直接调知识检索、记忆、资产、定时调度等；常嵌在路径 1&#x2F;2 的任意阶段反复出现。</p>
+<blockquote>
+<p><strong>GROUNDED &amp; CITED（可追溯）</strong>：召回的记忆与知识会注入推理上下文；最终流式回答对引用处标注来源（记忆 &#x2F; 知识 &#x2F; 数据），结论可核验、可审计——这是企业级 Agent 相对「纯生成对话框」的关键差别：不是只给一段话，而是给 <strong>连得上依据、沉得下资产</strong> 的回答。</p>
+</blockquote>
+<h2 id="八、企业上下文：知识-·-记忆-·-资产，以及记忆工程"><a href="#八、企业上下文：知识-·-记忆-·-资产，以及记忆工程" class="headerlink" title="八、企业上下文：知识 · 记忆 · 资产，以及记忆工程"></a>八、企业上下文：知识 · 记忆 · 资产，以及记忆工程</h2><p>不追求开箱极聪明，而追求随时间复利：会话产物沉淀为资产，优质经验进入企业记忆，下一轮任务再被引用。</p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/enterprise-context.jpg" srcset="/img/loading.gif" lazyload alt="企业上下文：知识·记忆·资产"></p>
+<p><em>知识库（基础对象 + 文档知识 + 语义检索）· 长记忆（个人→审核→企业，企业优先）· 资产库（报告&#x2F;分群标签&#x2F;画布&#x2F;模型结果）。</em></p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/memory-engineering.jpg" srcset="/img/loading.gif" lazyload alt="长记忆的工程实现"></p>
+<p><em>写入个人记忆（抽取分类 &#x2F; 校验 &#x2F; 冲突判断）→ 提炼企业记忆（聚类 &#x2F; 门槛 &#x2F; 审核发布）→ 召回使用（企业&gt;个人优先级，注入并引用可追溯）。主库强一致可审计 + 向量语义召回。</em></p>
+<h2 id="九、工程化底座：六层架构决定「能不能上路」"><a href="#九、工程化底座：六层架构决定「能不能上路」" class="headerlink" title="九、工程化底座：六层架构决定「能不能上路」"></a>九、工程化底座：六层架构决定「能不能上路」</h2><p>企业级 Agent 的差距不在模型口号，而在工程化：把模型变成可执行、可信、可控的生产力。主 Agent 为中枢，向上接目标，向下调度场景、技能、工具与神策底座。</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>名称</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L1</td>
+<td>经营任务与用户目标</td>
+<td>激活 &#x2F; 转化 &#x2F; 留存 &#x2F; 预警 &#x2F; LTV…</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>主 Agent 智能中枢</td>
+<td>理解 · 规划 · 调度 · 整合 · OpenAPI&#x2F;Skills</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>场景化 Agent</td>
+<td>官方预置 + 企业定制</td>
+</tr>
+<tr>
+<td>L4</td>
+<td>预置技能与工具</td>
+<td>指标&#x2F;策略&#x2F;分群&#x2F;ML · 知识·记忆·资产·定时</td>
+</tr>
+<tr>
+<td>L5</td>
+<td>Agent 基础框架</td>
+<td>编排 · 子Agent · Tools · 沙箱 · SDK</td>
+</tr>
+<tr>
+<td>L6</td>
+<td>神策业务与数据底座</td>
+<td>分析&#x2F;标签&#x2F;画布 · OpenAPI&#x2F;CLI&#x2F;MCP · thinking&#x2F;medium&#x2F;flash&#x2F;lite</td>
+</tr>
+</tbody></table>
+<p>旁路能力：</p>
+<ul>
+<li><strong>知识与上下文</strong>：知识库、长短记忆、资产库、历史会话</li>
+<li><strong>Guardrails</strong>：权限审计溯源、人机协同、消耗与边界</li>
+</ul>
+<p><strong>模型分级调度</strong>：规划&#x2F;仲裁用 thinking；加载执行用 flash&#x2F;lite；确定性动作走规则与代码。<br><strong>沙箱 + 预热池</strong>：代码隔离、可复现、可审计；预热依赖包实现秒级启动。</p>
+<h2 id="十、「算得准」举例：指标分析与全自动-ML"><a href="#十、「算得准」举例：指标分析与全自动-ML" class="headerlink" title="十、「算得准」举例：指标分析与全自动 ML"></a>十、「算得准」举例：指标分析与全自动 ML</h2><p>设计原则：大模型负责判断与生成；系统负责边界、执行与验收——自动化，而不是自由发挥。</p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/metric-analysis.jpg" srcset="/img/loading.gif" lazyload alt="指标分析链路"></p>
+<p><em>指标分析：自然语言 → 加载上下文 → 双路检索 → 可信度仲裁 → 生成查询参数 → 查神策产品 → 结果自检 → 结论+引用。不猜字段、不乱口径，不确定就澄清并写入记忆。</em></p>
+<p><img src="/2026/08/08/Sensors-AI-%E6%95%B4%E4%BD%93%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ml-agent.jpg" srcset="/img/loading.gif" lazyload alt="全自动机器学习"></p>
+<p><em>ML Agent：问题理解→数据探索→特征工程→模型训练→交付报告→后验评估。ML 主 Agent 编排，子 Agent 分阶段执行，Skills 固化方法论，Tools 保证确定性产物。</em></p>
+<h2 id="十一、安全是入场券，结语：打造企业自己的-AI-Growth-Team"><a href="#十一、安全是入场券，结语：打造企业自己的-AI-Growth-Team" class="headerlink" title="十一、安全是入场券，结语：打造企业自己的 AI Growth Team"></a>十一、安全是入场券，结语：打造企业自己的 AI Growth Team</h2><p><strong>安全可控</strong><br>关键动作人审；权限不可旁路神策体系；过程可审计；敏感数据可屏蔽。安全不是加分项，是进入经营主流程的前提。</p>
+<p><strong>战略递进</strong><br>2015 数据根基 → 2020 数据闭环 → 今天 AI Growth Team。不是简单产品升级，而是产品战略与交付方式的升级。</p>
+<blockquote>
+<p>企业真正需要的不是更多软件，而是能够持续创造结果的新型团队。<br>Sensors AI 1.0 是打造 <strong>L4 级 AI Growth Team</strong> 的第一步：进入业务流程、承接真实工作量、沉淀行业与场景能力，并最终面向业务结果创造价值。</p>
+</blockquote>
 
                 
               </div>
